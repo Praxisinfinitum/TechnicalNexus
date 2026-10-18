@@ -1,6 +1,6 @@
 # TechnicalNexus — living academic draft
 
-**Status:** phase-3 living draft, 2026-10-17. Not the completed Advance 1 or final report.
+**Status:** phase-4 review draft, 2026-10-17. Not the completed Advance 1 or final report.
 This file accumulates architecture, decisions and evidence for the eventual
 15–20-page final document. Phase 2 adds bounded rules-based maintenance answers. This does not claim trained-model performance, repair success or benefits measured with users.
 
@@ -84,9 +84,8 @@ case, rather than appear in a disconnected demonstration.
 1. Foundation: pinned Python/uv dependencies, PostgreSQL schema and migration,
    PDF inventory/import, interface catalog, explicit contract and initial tests.
 2. Rules engine and reviewed knowledge: implemented for Brother; seven reviewed responses, source-restricted PostgreSQL access and a CLI demonstration. Phase 2 owner validation is accepted; two equipment models remain pending.
-3. Streamlit conversations: implemented for Brother; shared rules engine, explicit per-session state, selector/history/reset, references and controlled errors. Owner validation pending.
-4. Advance-1 validation/package: pending; ten or more distinct conversations,
-   limitations, improvements and reviewed GitHub materials.
+3. Streamlit conversations: implemented for Brother; shared rules engine, explicit per-session state, selector/history/reset, references and controlled errors. Owner validation accepted; all three phase-3 checks were reported successful.
+4. Advance-1 validation/package: prepared for Brother; 17 independent GUI conversations, 40 turns, reproducible fresh-schema source import, clean-environment tests and review materials. Package owner acceptance and two further printer models remain pending.
 
 See `docs/phase1-evidence.md` for executed checks and `docs/user-validation.md`
 for the recorded owner acceptance and observed manual checks.
@@ -100,7 +99,7 @@ for the recorded owner acceptance and observed manual checks.
 | All intent entry → identification → response flows | docs/intents-and-flows.md |
 | Python 3.10+ and functional NLTK rules chatbot | Python 3.12.14; NLTK RegexpTokenizer and rules engine, available through CLI |
 | GitHub | Phase-1 source versioned in private repository; phase-2 commit recorded in Git history |
-| Ten conversations and analysis | Pending phase 4 |
+| Ten conversations and analysis | 17 independent AppTest GUI conversations, 40 turns; docs/advance1-validation.md and analysis below; single-model scope |
 
 Advance 2 (week 5): tokenization, normalization, stopwords, stemming/lemmatization;
 TF-IDF or BoW; Naive Bayes or SVM; CNN transfer learning with ResNet50 or EfficientNet;
@@ -172,7 +171,7 @@ understand arbitrary paraphrases, mixed topics or negation. Missing/unrecognized
 wording may require reformulation, and untested cases can still be misclassified.
 Improve using observed regression failures and the required Advance-2 intent
 dataset/classifier while preserving the repository's independent source gates.
-Owner accepted this phase and supplied a successful CLI transcript; see docs/phase2-owner-validation.md. Ten final GUI conversations remain pending.
+Owner accepted this phase and supplied a successful CLI transcript; see docs/phase2-owner-validation.md. At phase-2 acceptance, final GUI evaluation was pending; phase 4 now records 17 independent GUI conversations below.
 
 ## Phase 3 implemented web integration
 
@@ -205,4 +204,74 @@ Data-access failures produce a Spanish controlled error, keep history/model and
 allow retry after recovery. Tests simulate the failure without stopping development
 PostgreSQL. Synthetic reviewed records in isolated test schemas keep GUI tests
 independent of private manual files. Owner validation is a separate three-step check,
-recorded in docs/user-validation.md. Final ten-conversation evaluation is phase 4.
+recorded in docs/user-validation.md. Phase 4 now supplies the recorded 17-conversation evaluation below.
+
+## Phase 4 — implemented-scope evaluation and review material
+
+### Why an intelligent assistant is appropriate
+
+Users describe problems with different wording and may omit the model or mix
+procedures. The problem calls for managing conversational context and selecting
+applicable technical knowledge, with a later role for interpreting visual evidence.
+Advance 1 uses a controlled symbolic baseline: NLTK tokenization, explicit intent
+rules and reviewed responses. It does not learn from manuals or infer repairs.
+Subsequent trained NLP and CNN components address broader language/visual variation
+while retaining independent source/applicability checks. This justifies the AI
+project direction without calling the current rules engine a trained model.
+
+### Architecture artifact
+
+![Implemented architecture](docs/architecture/current.svg)
+
+Editable Mermaid source: docs/architecture/current.mmd. The diagram shows actual
+user, chatbot, knowledge base and flow relationships; the earlier final target
+diagram remains future work, including Flask, CNN, agent and public hosting.
+
+### Method and results
+
+Seventeen conversation cases with expected results were written before execution.
+Each starts an independent Streamlit AppTest session against a fresh PostgreSQL
+schema reconstructed from migrations, the original supplied PDFs and reviewed
+knowledge. The validation imported 10 documents/169 pages and 7 reviewed answers.
+All 17 conversations and all 40 turns passed the predefined intent, status, active
+equipment, physical source-page and visible-reference checks. Full actual inputs
+and replies appear in docs/advance1-validation.md and docs/advance1-conversations.json.
+
+A separately reconstructed Python 3.12.14 environment using uv.lock passed the
+66 accumulated tests. Integration tests and evaluation use PostgreSQL, not SQLite.
+The generated validation schema was removed after execution; development data was
+not cleaned. This documents reproducibility of setup and the tested behavior, not
+production portability, universal language understanding or successful physical
+repairs. Source manifest/code hashes and run metadata identify the evaluated state.
+
+### Observed functioning, limitation and related improvement
+
+The assistant requested missing equipment and resumed the topic after selection.
+It answered reviewed ink/paper/normal-cleaning topics with source pages, pointed to
+jam diagrams instead of inventing steps, refused unsupported norms and HR queries,
+cleared context for an unapproved printer, and recovered after a simulated DB failure.
+The measured failure turn took 9042.73 ms, while the other 39 AppTest turns averaged
+140.11 ms (range 101.2–276.4 ms). These are UI/framework test durations, not isolated
+inference latency or real-network production measurements. Multiple catalog/answer
+connection attempts during reruns are a plausible contributor to the slow failure
+path; reducing repeated checks and reviewing timeouts is a concrete next improvement
+to validate with the same case. An unavailable database must still never trigger
+an invented technical answer.
+
+Only one model is currently available. Unknown-model rejection and session reset
+are tested, but switching between two admitted printers is not. Incorporate the
+other two models and reviewed sources, then extend those cases before declaring
+the planned three-model scope complete. Finite phrase rules remain limited even
+though these fixed cases pass; the later intent dataset needs independent evaluation,
+not reuse of this functional pass rate as classifier accuracy. A complete improvement
+plan is in docs/improvement-plan.md.
+
+### Submission boundary
+
+The evidence package and rubric map are in docs/advance1-review-package.md. Phases
+1–3 are owner accepted; phase-4 package review is pending. The student must confirm
+instructor access to the private repository or an allowed code export and personally
+review/submit in Canvas. Colab's original published mention and the student's later
+local-only clarification remain explicitly distinguished. This Markdown draft is
+material for the final technical document, not a claim that its 15–20 pages, video,
+public URL or trained-model metrics have already been produced.

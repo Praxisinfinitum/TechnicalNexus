@@ -74,8 +74,8 @@ actual results; no fabricated executions, metrics or screenshots.
 |---|---|---|---|---|
 | 1. Foundation, scope, architecture | Implemented for Brother; models 2/3 deferred | Passed in development and clean environment | Accepted | docs/phase1-evidence.md; docs/user-validation.md |
 | 2. Rules engine and approved knowledge | Implemented for Brother; models 2/3 deferred | 58 passed; see docs/phase2-evidence.md | Accepted | Seven reviewed answers; CLI and five real demo conversations |
-| 3. Streamlit conversations | Implemented for Brother | 66 passed; see docs/phase3-evidence.md | Pending | Spanish chat, per-session state, selector/reset and visible references |
-| 4. Advance 1 validation/package | Pending | Pending | Pending | 10+ conversations, analysis and GitHub evidence |
+| 3. Streamlit conversations | Implemented for Brother | 66 passed; see docs/phase3-evidence.md | Accepted | Spanish chat, per-session state, selector/reset and visible references |
+| 4. Advance 1 validation/package | Ready for available Brother scope; models 2/3 deferred | 17/17 conversations, 40/40 turns; 66 tests in clean environment | Pending | docs/advance1-review-package.md and docs/phase4-evidence.md |
 
 ### Phase 1 — Foundation, reproducible environment and source scope
 
@@ -260,9 +260,9 @@ Text/image metrics are future work; no model accuracy or measured time benefit e
 
 ## 8. Immediate next action and acceptance
 
-Phases 1 and 2 are owner-validated for the implemented Brother scope; see docs/phase2-owner-validation.md.
+Phases 1–3 are owner-validated for the implemented Brother scope. Phase-4 package review is pending; see docs/user-validation.md.
 Two models, source applicability approval, detailed online user guide and visual dataset
-remain pending; none should be fabricated. Next implementation is phase 4 after owner feedback, maintaining source approval and evidence boundaries. Do not silently begin
+remain pending; none should be fabricated. Next actions are the three phase-4 owner checks, then incorporating models 2/3 when supplied, maintaining source approval and evidence boundaries. Do not silently begin
 all later phases based solely on this plan.
 
 ## 9. Phase 2 implementation record
@@ -288,5 +288,21 @@ Button/typed reset clear history and model; selector changes start a clean techn
 context. Unsupported-model chat replies keep history for traceability but clear
 active model/pending state. Every technical response displays file/page/section.
 Connection failures preserve history and support retry without exposing credentials.
-No new model, API, image service or public deployment was introduced. Owner checks
-are pending in docs/user-validation.md; phase 4 has not started.
+No new model, API, image service or public deployment was introduced. Owner confirmed all three phase-3 checks successful. Phase 4 validation/package work is ready for owner review for Brother; the other two models remain deferred.
+
+## 11. Phase 4 validation/package record
+
+A predefined 17-conversation set executed through real Streamlit AppTest against
+a freshly migrated PostgreSQL test schema containing the actual supplied PDFs and
+reviewed answers. All 40 turns passed expected status/intent/equipment/source-page
+and visible-reference checks. The schema was removed afterward; no development
+cleanup occurred. A separate clean environment rebuilt from uv.lock passed all
+66 accumulated tests. Evidence, analysis, source hashes and code/input fingerprint
+are in docs/advance1-validation.md and docs/advance1-conversations.json.
+
+The review package maps every rubric criterion to evidence and documents limitations,
+including only one supported printer and a roughly nine-second simulated DB failure.
+The academic note remains a living draft, not the final 15–20-page report. Package
+acceptance by the owner, two models and instructor access to the private repository
+remain pending. No Canvas delivery or later-coursework development is authorized
+by marking this validation work prepared.

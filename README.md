@@ -3,7 +3,7 @@
 Equipment-scoped technical assistance grounded in authorized documents.
 Development and documentation are in English; the initial GUI is in Spanish.
 
-## Current milestone
+## Current milestone — Advance 1 review package
 
 Phase 3 integrates the **rules-based maintenance engine into a Spanish Streamlit chat**.
 The same engine remains available through the CLI; it is not duplicated in the GUI. Only Brother DCP-T430W is selected; two other models
@@ -11,7 +11,7 @@ remain owner decisions. Seven reviewed responses include exact source pages and
 conditions. Unknown regulations, unsupported equipment, unreviewed procedures and
 missing knowledge produce explicit limits or clarification.
 
-Phases 1 and 2 are owner-validated for the implemented Brother scope. Phase 3 owner validation is pending. No LLM,
+Phases 1–3 are owner-validated for the implemented Brother scope. Phase 4 has a prepared validation/review package; owner package acceptance and the other two models remain pending. No LLM,
 RAG, embeddings, trained intent/image model, Flask or public deployment exists yet.
 
 ## Prerequisites
@@ -142,6 +142,28 @@ Python against the same test command. Environment-specific secrets stay in `.env
 If automatic Python installation fails, supply the full path to an existing
 Python 3.12.14 using `uv sync --frozen --link-mode=copy --python <path>`.
 
+## Advance 1 validation package
+
+- [Review route and rubric mapping](docs/advance1-review-package.md)
+- [17 conversations with actual responses](docs/advance1-validation.md)
+- [Machine-readable results](docs/advance1-conversations.json)
+- [Current architecture](docs/architecture/current.svg) and [editable Mermaid](docs/architecture/current.mmd)
+- [Limitations and continuation](docs/improvement-plan.md)
+
+Reproduce the GUI conversation evidence after normal setup:
+
+```powershell
+.\.venv\Scripts\python.exe scripts/validate_advance1.py
+```
+
+The script requires the exact local PDF originals and a separate `_test` database.
+It creates/migrates a unique schema, imports real sources, seeds the seven reviewed
+answers and executes 17 independent AppTest conversations. It records expected vs
+actual outputs and removes only its own schema afterward. It does not modify the
+running development database. All predefined checks passed in the recorded run;
+this is functional acceptance evidence, not arbitrary-language accuracy or a
+physical printer trial. Two-model switching remains pending additional equipment.
+
 ## Structure
 
 | Path | Responsibility |
@@ -171,4 +193,4 @@ agent coordination and Flask. Streamlit Community Cloud will host the GUI and
 Cloudflare Tunnel will expose the later Flask service; a tunnel is not hosting.
 
 Repository: https://github.com/Praxisinfinitum/TechnicalNexus (private).
-See `docs/user-validation.md` for the three phase-3 owner checks.
+See [the review package](docs/advance1-review-package.md) and `docs/user-validation.md` for the three phase-4 owner checks.

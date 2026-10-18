@@ -1,6 +1,6 @@
 # Phase 3 — Spanish web chat integration
 
-Status: implemented for Brother DCP-T430W, owner validation pending. No additional
+Status: implemented for Brother DCP-T430W, owner validation accepted. No additional
 model has been invented or added. This is phase 3 of Advance 1 development, not
 the course's Advance 2 or the final deployed product.
 
@@ -61,3 +61,5 @@ authentication, authorization between users or production multi-tenant isolation
 Rules still recognize bounded wording and can require reformulation. Final ten
 conversations, broader analysis and final packaging are phase 4; Flask, visual
 classification, agent coordination and cloud deployment remain later coursework.
+
+Owner acceptance: the owner explicitly reported all three phase-3 checks successful. This is reported user validation, distinct from the agent browser interaction above.

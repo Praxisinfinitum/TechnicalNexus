@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="840" viewBox="0 0 1100 840" role="img" aria-labelledby="title desc">
+<title id="title">TechnicalNexus — implemented Advance 1 architecture</title>
+<desc id="desc">Spanish Streamlit UI, per-session state, application service, NLTK rules, reviewed repository and PostgreSQL. Original PDFs and explicit review manifests feed the database separately. No API, LLM or visual model is implemented.</desc>
+<defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10Z" fill="#46617b"/></marker></defs>
+<rect width="1100" height="840" fill="#f6f8fb"/>
+<g font-family="Arial, sans-serif" fill="#17324d">
+<text x="550" y="32" text-anchor="middle" font-size="23" font-weight="bold">TechnicalNexus — implemented architecture</text>
+<text x="550" y="57" text-anchor="middle" font-size="14">One supported printer: Brother DCP-T430W · local deployment · Spanish GUI</text>
+<rect x="380" y="90" width="400" height="60" rx="10" fill="#ffffff" stroke="#91a5b8" stroke-width="1.5"/>
+<text x="580.0" y="125.0" text-anchor="middle" font-size="16">User: query / equipment selection</text>
+<rect x="380" y="180" width="400" height="60" rx="10" fill="#e8f2fa" stroke="#91a5b8" stroke-width="1.5"/>
+<text x="580.0" y="215.0" text-anchor="middle" font-size="16">Streamlit chat and source catalog</text>
+<rect x="380" y="270" width="400" height="60" rx="10" fill="#ffffff" stroke="#91a5b8" stroke-width="1.5"/>
+<text x="580.0" y="305.0" text-anchor="middle" font-size="16">Per-session context and history</text>
+<rect x="380" y="360" width="400" height="60" rx="10" fill="#ffffff" stroke="#91a5b8" stroke-width="1.5"/>
+<text x="580.0" y="395.0" text-anchor="middle" font-size="16">Application service: request / response</text>
+<rect x="380" y="450" width="400" height="60" rx="10" fill="#e8f2fa" stroke="#91a5b8" stroke-width="1.5"/>
+<text x="580.0" y="485.0" text-anchor="middle" font-size="16">NLTK rules and scope gates</text>
+<rect x="380" y="540" width="400" height="60" rx="10" fill="#ffffff" stroke="#91a5b8" stroke-width="1.5"/>
+<text x="580.0" y="575.0" text-anchor="middle" font-size="16">Reviewed knowledge repository</text>
+<rect x="380" y="660" width="400" height="75" rx="10" fill="#e8f2fa" stroke="#91a5b8" stroke-width="1.5"/>
+<text x="580.0" y="692.5" text-anchor="middle" font-size="16">PostgreSQL 18</text>
+<text x="580.0" y="713.5" text-anchor="middle" font-size="16">Sources, applicability and approved answers</text>
+<path d="M580 154 L580 176" stroke="#46617b" stroke-width="2" fill="none" marker-end="url(#arrow)" marker-start="url(#arrow)"/>
+<path d="M580 244 L580 266" stroke="#46617b" stroke-width="2" fill="none" marker-end="url(#arrow)" marker-start="url(#arrow)"/>
+<path d="M580 334 L580 356" stroke="#46617b" stroke-width="2" fill="none" marker-end="url(#arrow)" marker-start="url(#arrow)"/>
+<path d="M580 424 L580 446" stroke="#46617b" stroke-width="2" fill="none" marker-end="url(#arrow)" marker-start="url(#arrow)"/>
+<path d="M580 514 L580 536" stroke="#46617b" stroke-width="2" fill="none" marker-end="url(#arrow)" marker-start="url(#arrow)"/>
+<path d="M580 604 L580 656" stroke="#46617b" stroke-width="2" fill="none" marker-end="url(#arrow)" marker-start="url(#arrow)"/>
+<rect x="25" y="270" width="275" height="64" rx="10" fill="#ffffff" stroke="#91a5b8" stroke-width="1.5"/>
+<text x="162.5" y="297.0" text-anchor="middle" font-size="16">Original PDFs</text>
+<text x="162.5" y="318.0" text-anchor="middle" font-size="16">Preserved outside the database</text>
+<rect x="25" y="390" width="275" height="64" rx="10" fill="#ffffff" stroke="#91a5b8" stroke-width="1.5"/>
+<text x="162.5" y="417.0" text-anchor="middle" font-size="16">Page extraction and normalization</text>
+<text x="162.5" y="438.0" text-anchor="middle" font-size="16">Not automatic approval</text>
+<path d="M162 338 L162 385" stroke="#46617b" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+<path d="M300 423 L375 694" stroke="#46617b" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+<rect x="25" y="535" width="275" height="64" rx="10" fill="#ffffff" stroke="#91a5b8" stroke-width="1.5"/>
+<text x="162.5" y="562.0" text-anchor="middle" font-size="16">Explicit review manifest</text>
+<text x="162.5" y="583.0" text-anchor="middle" font-size="16">Hash and page/section checks</text>
+<path d="M300 568 L375 694" stroke="#46617b" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+<rect x="25" y="690" width="275" height="64" rx="10" fill="#ffffff" stroke="#91a5b8" stroke-width="1.5"/>
+<text x="162.5" y="717.0" text-anchor="middle" font-size="16">Alembic migrations</text>
+<text x="162.5" y="738.0" text-anchor="middle" font-size="16">Reproducible schema and seed</text>
+<path d="M300 722 L375 710" stroke="#46617b" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+<rect x="825" y="270" width="250" height="95" rx="10" fill="#ffffff" stroke="#91a5b8" stroke-width="1.5"/>
+<text x="950.0" y="302.5" text-anchor="middle" font-size="16">Reset / equipment changes</text>
+<text x="950.0" y="323.5" text-anchor="middle" font-size="16">Clear technical context</text>
+<text x="950.0" y="344.5" text-anchor="middle" font-size="16">Session-local history</text>
+<path d="M825 318 L785 300" stroke="#46617b" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+<text x="550" y="795" text-anchor="middle" font-size="14">Double arrows: request and result. Side arrows: preparation and state controls.</text>
+<text x="550" y="819" text-anchor="middle" font-size="14">Later coursework: NLP classifier, CNN, agent, Flask, public deployment. RAG remains optional.</text>
+</g></svg>

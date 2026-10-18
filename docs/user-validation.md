@@ -34,17 +34,30 @@ no need to rerun the automated suite manually.
 
 Owner reported “Todo bien” and supplied the successful interactive CLI transcript. Summary: docs/phase2-owner-validation.md. Acceptance applies to the implemented Brother scope, not the two pending models or future GUI.
 
-## Phase 3 — three owner checks (pending)
+## Phase 3 — accepted by owner
 
 Use http://localhost:8501. No CLI required for these checks.
 
 | Check | Actions | Expected result | Owner result |
 |---|---|---|---|
-| 1. Referenced conversation | Send `Nivel de tinta` without selecting equipment. Then select Brother DCP-T430W or type the model. | Requests a model, resumes the question and shows Spanish answer, conditions and reference-guide page 3 below the reply. | Pending |
-| 2. Reset and separate sessions | Click `Reiniciar conversación`. Open a new tab/session, select Brother in only one, and ask `Nivel de tinta` in the other. | Reset removes history/selection. The other tab independently requests a model; its selection/history do not change the first tab. | Pending |
-| 3. Scope and recovery wording | In chat ask `¿Qué norma ISO aplica?`, then `Epson L3250`, then `Limpieza normal del cabezal`. | Clear Spanish limits; unsupported equipment clears selector/context; cleaning requires an admitted model again. No invented steps. | Pending |
+| 1. Referenced conversation | Send `Nivel de tinta` without selecting equipment. Then select Brother DCP-T430W or type the model. | Requests a model, resumes the question and shows Spanish answer, conditions and reference-guide page 3 below the reply. | Accepted; owner reported all three checks successful. |
+| 2. Reset and separate sessions | Click `Reiniciar conversación`. Open a new tab/session, select Brother in only one, and ask `Nivel de tinta` in the other. | Reset removes history/selection. The other tab independently requests a model; its selection/history do not change the first tab. | Accepted; owner reported all three checks successful. |
+| 3. Scope and recovery wording | In chat ask `¿Qué norma ISO aplica?`, then `Epson L3250`, then `Limpieza normal del cabezal`. | Clear Spanish limits; unsupported equipment clears selector/context; cleaning requires an admitted model again. No invented steps. | Accepted; owner reported all three checks successful. |
 
 Automatic tests already cover a database connection failure and successful retry;
 you do not need to stop PostgreSQL manually. Switching between two supported models
 remains deferred until the other equipment is selected. Report accepted or a check
 number plus observed issue; no need to rerun all unit tests yourself.
+
+## Phase 4 — three owner checks (pending)
+
+Approximately 5–10 minutes total; no need to rerun all 17 conversations manually.
+
+| Check | Actions | Expected result | Owner result |
+|---|---|---|---|
+| 1. Conversation evidence | Review the case table and a few transcripts in advance1-validation.md. The basic web demo was already accepted in phase 3; no need to repeat it. | Report clearly lists 17 distinct conversations and actual outputs for Brother only. | Pending |
+| 2. Academic accuracy | Read NotaAcademica.md and the limits in advance1-review-package.md. | Architecture, real stages and limitations match your understanding; two additional printers and future models/deployment are not falsely claimed complete. | Pending |
+| 3. Access and review package | Open the private GitHub repository and verify README, architecture and validation evidence. | Owner can access the material; identify how the instructor will receive access before submission. Do not change privacy or submit automatically. | Pending |
+
+Final acceptance applies only to available Brother validation. Additional supported
+models and their evidence remain an explicit follow-up, not an implicit approval.

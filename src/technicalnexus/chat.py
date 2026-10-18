@@ -13,6 +13,7 @@ class ChatMessage:
     text: str
     references: tuple[SourceReference, ...] = ()
     status: str | None = None
+    intent_id: str | None = None
 
 @dataclass(frozen=True)
 class ChatState:
@@ -24,10 +25,11 @@ Responder = Callable[[QueryRequest], EngineResponse]
 def submit_message(state: ChatState, text: str, responder: Responder) -> ChatState:
     response = responder(QueryRequest(text, state.context))
     if response.intent_id == "reset":
-        return ChatState(response.context, (ChatMessage("assistant", translate("ui_reset_done")),))
+        return ChatState(response.context, (ChatMessage("assistant", translate("ui_reset_done"),
+            status=response.status.value, intent_id="reset"),))
     return ChatState(response.context, state.messages + (
         ChatMessage("user", text),
-        ChatMessage("assistant", response.text, response.references, response.status.value),
+        ChatMessage("assistant", response.text, response.references, response.status.value, response.intent_id),
     ))
 
 def choose_equipment(state: ChatState, equipment_id: str | None, responder: Responder) -> ChatState:
