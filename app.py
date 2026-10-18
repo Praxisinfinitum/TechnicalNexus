@@ -3,7 +3,7 @@ import streamlit as st
 from sqlalchemy.orm import Session
 from technicalnexus.application import respond_to_query
 from technicalnexus.chat import ChatState, EQUIPMENT_LABELS, choose_equipment, submit_message
-from technicalnexus.config import ROOT, Settings
+from technicalnexus.config import Settings
 from technicalnexus.database import engine_for
 from technicalnexus.documents import catalog_rows
 from technicalnexus.i18n import translate as t
@@ -12,6 +12,11 @@ from technicalnexus.knowledge import KnowledgeRepository
 from technicalnexus.scope import INSTANCE_ID
 
 st.set_page_config(page_title="TechnicalNexus", page_icon="📚", layout="wide")
+st.markdown("""
+<style>
+[data-testid="stChatMessageAvatarUser"] { background-color: #2563eb; }
+</style>
+""", unsafe_allow_html=True)
 
 def reset_chat():
     st.session_state["conversation"] = ChatState()
@@ -92,8 +97,7 @@ st.caption(t("guide_free_text"))
 if not state.messages:
     st.write(t("ui_welcome"))
 for message in state.messages:
-    with st.chat_message(message.role,
-            avatar=str(ROOT / "assets/user-avatar.svg") if message.role == "user" else None):
+    with st.chat_message(message.role):
         if message.status == "error":
             st.error(message.text)
         else:
