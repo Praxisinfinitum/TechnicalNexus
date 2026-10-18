@@ -1,4 +1,4 @@
-"""Stable engine boundary; the phase-2 conversation engine is not implemented."""
+"""Stable conversation boundary independent of the GUI and database driver."""
 from dataclasses import dataclass, field
 from enum import StrEnum
 from typing import Protocol
@@ -26,6 +26,9 @@ class QueryRequest:
 class SourceReference:
     document_id: str
     page_number: int
+    filename: str = ""
+    title: str = ""
+    section: str = ""
 
 @dataclass(frozen=True)
 class EngineResponse:

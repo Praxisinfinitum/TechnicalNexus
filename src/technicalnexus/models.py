@@ -64,8 +64,12 @@ class Answer(Base):
     language: Mapped[str] = mapped_column(String(10), default="es")
     text: Mapped[str] = mapped_column(Text)
     approved: Mapped[bool] = mapped_column(Boolean, default=False)
+    conditions: Mapped[str] = mapped_column(Text, default="")
+    review_note: Mapped[str] = mapped_column(Text, default="")
+    __table_args__ = (UniqueConstraint("equipment_id", "intent_id", "language", name="uq_answer_scope"),)
 
 class AnswerSource(Base):
     __tablename__ = "answer_sources"
     answer_id: Mapped[int] = mapped_column(ForeignKey("answers.id"), primary_key=True)
     page_id: Mapped[int] = mapped_column(ForeignKey("document_pages.id"), primary_key=True)
+    section: Mapped[str] = mapped_column(Text, default="")

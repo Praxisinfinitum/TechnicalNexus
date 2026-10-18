@@ -1,0 +1,232 @@
+{
+  "kind": "agent_executed_cli_demo",
+  "date": "2026-10-17",
+  "scenarios": [
+    {
+      "scenario": "clarify_and_resume",
+      "turns": [
+        {
+          "input": "¿Cómo compruebo el nivel de tinta?",
+          "status": "clarification",
+          "intent": "select_equipment",
+          "response": "¿Qué marca y modelo utilizas? Por ahora sólo está disponible Brother DCP-T430W.",
+          "equipment_id": null,
+          "references": []
+        },
+        {
+          "input": "Brother DCP-T430W",
+          "status": "answer",
+          "intent": "ink_level",
+          "response": "Comprueba visualmente el nivel en los tanques. Si alcanza la línea inferior, la guía indica rellenar pronto. Al rellenar, no superes la marca máxima.\n\nAlcance y condiciones: Orientación sobre nivel de tinta, no instrucciones completas de rellenado ni una estimación de tinta mediante software.",
+          "equipment_id": "brother_dcp_t430w",
+          "references": [
+            {
+              "document": "DCP-T430W_1.pdf",
+              "sha256": "b89a37b5913d6181bb7354a79d3eaad601fa5e8f35fe07070cbe7611e0bf757a",
+              "page": 3,
+              "section": "Comprobar el volumen de tinta"
+            }
+          ]
+        },
+        {
+          "input": "Ya rellené la tinta",
+          "status": "answer",
+          "intent": "after_refill",
+          "response": "Si ya terminaste de rellenar la tinta en la DCP-T430W, pulsa a la vez Papel y Atajo Copia durante tres segundos. Si el LED de tinta está encendido o parpadea, la guía indica pulsar Detener.\n\nAlcance y condiciones: Sólo aplica después del rellenado, no a la limpieza inicial de una impresora nueva. No sustituye las instrucciones de llenado.",
+          "equipment_id": "brother_dcp_t430w",
+          "references": [
+            {
+              "document": "DCP-T430W_1.pdf",
+              "sha256": "b89a37b5913d6181bb7354a79d3eaad601fa5e8f35fe07070cbe7611e0bf757a",
+              "page": 3,
+              "section": "Comprobar el volumen de tinta — después del rellenado"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "scenario": "normal_maintenance",
+      "turns": [
+        {
+          "input": "DCP-T430W",
+          "status": "answer",
+          "intent": "select_equipment",
+          "response": "Equipo seleccionado: Brother DCP-T430W. ¿Qué consulta de mantenimiento tienes?",
+          "equipment_id": "brother_dcp_t430w",
+          "references": []
+        },
+        {
+          "input": "Limpieza normal del cabezal",
+          "status": "answer",
+          "intent": "print_quality",
+          "response": "Para la limpieza normal indicada en la guía: pulsa simultáneamente Detener y Atajo Copia. Cuando parpadee el LED de tinta, pulsa Copia Negro para limpiar sólo el negro o Copia Color para todos los colores. Al terminar, el equipo imprime una hoja de comprobación de calidad.\n\nAlcance y condiciones: Orientación limitada a la limpieza normal del panel; no determina la causa de rayas o bandas ni cubre limpieza especial. Si la calidad no mejora, revisa la guía completa o consulta soporte.",
+          "equipment_id": "brother_dcp_t430w",
+          "references": [
+            {
+              "document": "DCP-T430W_1.pdf",
+              "sha256": "b89a37b5913d6181bb7354a79d3eaad601fa5e8f35fe07070cbe7611e0bf757a",
+              "page": 4,
+              "section": "Mejorar la calidad de impresión — limpieza normal"
+            }
+          ]
+        },
+        {
+          "input": "No hay papel",
+          "status": "answer",
+          "intent": "no_paper",
+          "response": "Si confirmaste que no hay papel cargado, coloca papel en la bandeja y pulsa Copia Negro o Copia Color.\n\nAlcance y condiciones: No es un diagnóstico de cualquier indicador LED. Si sí hay papel o el problema continúa, consulta la guía del usuario o soporte.",
+          "equipment_id": "brother_dcp_t430w",
+          "references": [
+            {
+              "document": "DCP-T430W_1.pdf",
+              "sha256": "b89a37b5913d6181bb7354a79d3eaad601fa5e8f35fe07070cbe7611e0bf757a",
+              "page": 2,
+              "section": "Indicadores LED — no hay papel cargado"
+            }
+          ]
+        },
+        {
+          "input": "Bandeja no detectada",
+          "status": "answer",
+          "intent": "tray_not_detected",
+          "response": "Para la condición de bandeja no detectada, la guía indica introducirla lentamente hasta que quede completamente dentro del equipo.\n\nAlcance y condiciones: No fuerces la bandeja si ofrece resistencia. No identifica por sí solo una pieza averiada; si persiste, consulta soporte.",
+          "equipment_id": "brother_dcp_t430w",
+          "references": [
+            {
+              "document": "DCP-T430W_1.pdf",
+              "sha256": "b89a37b5913d6181bb7354a79d3eaad601fa5e8f35fe07070cbe7611e0bf757a",
+              "page": 2,
+              "section": "Indicadores LED — bandeja no detectada"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "scenario": "scope_boundaries",
+      "turns": [
+        {
+          "input": "DCP-T430W",
+          "status": "answer",
+          "intent": "select_equipment",
+          "response": "Equipo seleccionado: Brother DCP-T430W. ¿Qué consulta de mantenimiento tienes?",
+          "equipment_id": "brother_dcp_t430w",
+          "references": []
+        },
+        {
+          "input": "¿Qué ISO aplica?",
+          "status": "no_evidence",
+          "intent": "unavailable_regulation",
+          "response": "No tengo normatividad autorizada para responder esa consulta. No aplicaré normas de otro equipo, industria o área.",
+          "equipment_id": "brother_dcp_t430w",
+          "references": []
+        },
+        {
+          "input": "¿Cómo calculo la nómina?",
+          "status": "out_of_scope",
+          "intent": "outside_scope",
+          "response": "Esta instancia sólo atiende mantenimiento de las impresoras admitidas; esa consulta queda fuera de su alcance.",
+          "equipment_id": "brother_dcp_t430w",
+          "references": []
+        },
+        {
+          "input": "Cambiar a Epson L3250",
+          "status": "out_of_scope",
+          "intent": "unsupported_equipment",
+          "response": "Ese equipo no está admitido o la consulta mezcla modelos. He descartado el contexto técnico anterior. Por ahora sólo está disponible Brother DCP-T430W.",
+          "equipment_id": null,
+          "references": []
+        },
+        {
+          "input": "Nivel de tinta",
+          "status": "clarification",
+          "intent": "select_equipment",
+          "response": "¿Qué marca y modelo utilizas? Por ahora sólo está disponible Brother DCP-T430W.",
+          "equipment_id": null,
+          "references": []
+        }
+      ]
+    },
+    {
+      "scenario": "source_navigation",
+      "turns": [
+        {
+          "input": "DCP-T430W",
+          "status": "answer",
+          "intent": "select_equipment",
+          "response": "Equipo seleccionado: Brother DCP-T430W. ¿Qué consulta de mantenimiento tienes?",
+          "equipment_id": "brother_dcp_t430w",
+          "references": []
+        },
+        {
+          "input": "Hay un atasco de papel",
+          "status": "answer",
+          "intent": "paper_jam",
+          "response": "La página 4 de la Guía de consulta muestra con diagramas cómo retirar un atasco y advierte evitar mancharse las manos de tinta. Consulta esos diagramas y la guía del usuario online para el procedimiento completo; no sustituiré los dibujos por pasos no revisados.\n\nAlcance y condiciones: Es una orientación a la fuente, no una secuencia completa de reparación ni autorización para desmontar el equipo.",
+          "equipment_id": "brother_dcp_t430w",
+          "references": [
+            {
+              "document": "DCP-T430W_1.pdf",
+              "sha256": "b89a37b5913d6181bb7354a79d3eaad601fa5e8f35fe07070cbe7611e0bf757a",
+              "page": 4,
+              "section": "Retirar atasco de papel"
+            }
+          ]
+        },
+        {
+          "input": "¿Dónde está el manual?",
+          "status": "answer",
+          "intent": "manual_location",
+          "response": "La Guía de consulta remite a https://support.brother.com/manuals para operaciones detalladas y solución de problemas. Selecciona el modelo DCP-T430W y el idioma correspondiente.\n\nAlcance y condiciones: El contenido enlazado no se ha incorporado automáticamente al conocimiento aprobado de esta versión.",
+          "equipment_id": "brother_dcp_t430w",
+          "references": [
+            {
+              "document": "DCP-T430W_1.pdf",
+              "sha256": "b89a37b5913d6181bb7354a79d3eaad601fa5e8f35fe07070cbe7611e0bf757a",
+              "page": 1,
+              "section": "Referencia a la Guía del usuario online"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "scenario": "reset_and_close",
+      "turns": [
+        {
+          "input": "DCP-T430W",
+          "status": "answer",
+          "intent": "select_equipment",
+          "response": "Equipo seleccionado: Brother DCP-T430W. ¿Qué consulta de mantenimiento tienes?",
+          "equipment_id": "brother_dcp_t430w",
+          "references": []
+        },
+        {
+          "input": "reiniciar",
+          "status": "answer",
+          "intent": "reset",
+          "response": "Caso reiniciado. Indica el modelo antes de una consulta técnica.",
+          "equipment_id": null,
+          "references": []
+        },
+        {
+          "input": "No hay papel",
+          "status": "clarification",
+          "intent": "select_equipment",
+          "response": "¿Qué marca y modelo utilizas? Por ahora sólo está disponible Brother DCP-T430W.",
+          "equipment_id": null,
+          "references": []
+        },
+        {
+          "input": "adiós",
+          "status": "answer",
+          "intent": "goodbye",
+          "response": "Conversación terminada. Se ha eliminado el contexto del equipo.",
+          "equipment_id": null,
+          "references": []
+        }
+      ]
+    }
+  ]
+}

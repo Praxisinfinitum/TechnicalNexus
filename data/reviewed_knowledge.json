@@ -1,0 +1,134 @@
+{
+  "instance_id": "office_printer_maintenance",
+  "equipment_id": "brother_dcp_t430w",
+  "review_note": "Codex technical source review, 2026-10-17: reference guide pages 1–4 read and visually inspected. Spanish paraphrases and conditions reviewed against text/diagrams. Owner acceptance of phase 2 pending; not a manufacturer certification.",
+  "applicability_review": "DCP-T430W explicitly listed on cover; Spanish instructions and DCP-T430W panel reviewed. Confirmed only for the linked answer sections; no authorization for other devices or unreviewed procedures.",
+  "answers": [
+    {
+      "intent_id": "ink_level",
+      "description": "Check the visible ink volume before deciding to refill.",
+      "text": "Comprueba visualmente el nivel en los tanques. Si alcanza la línea inferior, la guía indica rellenar pronto. Al rellenar, no superes la marca máxima.",
+      "conditions": "Orientación sobre nivel de tinta, no instrucciones completas de rellenado ni una estimación de tinta mediante software.",
+      "sources": [
+        {
+          "filename": "DCP-T430W_1.pdf",
+          "sha256": "b89a37b5913d6181bb7354a79d3eaad601fa5e8f35fe07070cbe7611e0bf757a",
+          "page": 3,
+          "section": "Comprobar el volumen de tinta",
+          "anchors": [
+            "Comprobar el volumen de tinta",
+            "línea inferior"
+          ]
+        }
+      ]
+    },
+    {
+      "intent_id": "after_refill",
+      "description": "Explain the documented panel action after refilling.",
+      "text": "Si ya terminaste de rellenar la tinta en la DCP-T430W, pulsa a la vez Papel y Atajo Copia durante tres segundos. Si el LED de tinta está encendido o parpadea, la guía indica pulsar Detener.",
+      "conditions": "Sólo aplica después del rellenado, no a la limpieza inicial de una impresora nueva. No sustituye las instrucciones de llenado.",
+      "sources": [
+        {
+          "filename": "DCP-T430W_1.pdf",
+          "sha256": "b89a37b5913d6181bb7354a79d3eaad601fa5e8f35fe07070cbe7611e0bf757a",
+          "page": 3,
+          "section": "Comprobar el volumen de tinta — después del rellenado",
+          "anchors": [
+            "Después de rellenar",
+            "durante tres segundos"
+          ]
+        }
+      ]
+    },
+    {
+      "intent_id": "no_paper",
+      "description": "Respond to an explicitly reported absence of loaded paper.",
+      "text": "Si confirmaste que no hay papel cargado, coloca papel en la bandeja y pulsa Copia Negro o Copia Color.",
+      "conditions": "No es un diagnóstico de cualquier indicador LED. Si sí hay papel o el problema continúa, consulta la guía del usuario o soporte.",
+      "sources": [
+        {
+          "filename": "DCP-T430W_1.pdf",
+          "sha256": "b89a37b5913d6181bb7354a79d3eaad601fa5e8f35fe07070cbe7611e0bf757a",
+          "page": 2,
+          "section": "Indicadores LED — no hay papel cargado",
+          "anchors": [
+            "No hay papel cargado",
+            "Copia Negro"
+          ]
+        }
+      ]
+    },
+    {
+      "intent_id": "tray_not_detected",
+      "description": "Respond to the explicitly reported tray-not-detected condition.",
+      "text": "Para la condición de bandeja no detectada, la guía indica introducirla lentamente hasta que quede completamente dentro del equipo.",
+      "conditions": "No fuerces la bandeja si ofrece resistencia. No identifica por sí solo una pieza averiada; si persiste, consulta soporte.",
+      "sources": [
+        {
+          "filename": "DCP-T430W_1.pdf",
+          "sha256": "b89a37b5913d6181bb7354a79d3eaad601fa5e8f35fe07070cbe7611e0bf757a",
+          "page": 2,
+          "section": "Indicadores LED — bandeja no detectada",
+          "anchors": [
+            "Bandeja no detectada",
+            "lentamente"
+          ]
+        }
+      ]
+    },
+    {
+      "intent_id": "print_quality",
+      "description": "Explain normal print-head cleaning shown in the reviewed diagram.",
+      "text": "Para la limpieza normal indicada en la guía: pulsa simultáneamente Detener y Atajo Copia. Cuando parpadee el LED de tinta, pulsa Copia Negro para limpiar sólo el negro o Copia Color para todos los colores. Al terminar, el equipo imprime una hoja de comprobación de calidad.",
+      "conditions": "Orientación limitada a la limpieza normal del panel; no determina la causa de rayas o bandas ni cubre limpieza especial. Si la calidad no mejora, revisa la guía completa o consulta soporte.",
+      "sources": [
+        {
+          "filename": "DCP-T430W_1.pdf",
+          "sha256": "b89a37b5913d6181bb7354a79d3eaad601fa5e8f35fe07070cbe7611e0bf757a",
+          "page": 4,
+          "section": "Mejorar la calidad de impresión — limpieza normal",
+          "anchors": [
+            "Mejorar la calidad de impresión",
+            "Limpiar solo el"
+          ]
+        }
+      ]
+    },
+    {
+      "intent_id": "paper_jam",
+      "description": "Locate reviewed jam-removal diagrams without inventing textual steps.",
+      "text": "La página 4 de la Guía de consulta muestra con diagramas cómo retirar un atasco y advierte evitar mancharse las manos de tinta. Consulta esos diagramas y la guía del usuario online para el procedimiento completo; no sustituiré los dibujos por pasos no revisados.",
+      "conditions": "Es una orientación a la fuente, no una secuencia completa de reparación ni autorización para desmontar el equipo.",
+      "sources": [
+        {
+          "filename": "DCP-T430W_1.pdf",
+          "sha256": "b89a37b5913d6181bb7354a79d3eaad601fa5e8f35fe07070cbe7611e0bf757a",
+          "page": 4,
+          "section": "Retirar atasco de papel",
+          "anchors": [
+            "Retirar atasco de papel",
+            "Evite mancharse"
+          ]
+        }
+      ]
+    },
+    {
+      "intent_id": "manual_location",
+      "description": "Locate manufacturer documentation for the selected equipment.",
+      "text": "La Guía de consulta remite a https://support.brother.com/manuals para operaciones detalladas y solución de problemas. Selecciona el modelo DCP-T430W y el idioma correspondiente.",
+      "conditions": "El contenido enlazado no se ha incorporado automáticamente al conocimiento aprobado de esta versión.",
+      "sources": [
+        {
+          "filename": "DCP-T430W_1.pdf",
+          "sha256": "b89a37b5913d6181bb7354a79d3eaad601fa5e8f35fe07070cbe7611e0bf757a",
+          "page": 1,
+          "section": "Referencia a la Guía del usuario online",
+          "anchors": [
+            "Guía del usuario online",
+            "support.brother.com/manuals"
+          ]
+        }
+      ]
+    }
+  ]
+}

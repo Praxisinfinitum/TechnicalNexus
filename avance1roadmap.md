@@ -72,8 +72,8 @@ actual results; no fabricated executions, metrics or screenshots.
 
 | Phase | Implementation | Automated tests | Owner validation | Evidence / next action |
 |---|---|---|---|---|
-| 1. Foundation, scope, architecture | Implemented for Brother; models 2/3 deferred | Passed in development and clean environment | Checks 1–2 accepted; check 3 partial | docs/phase1-evidence.md; docs/user-validation.md |
-| 2. Rules engine and approved knowledge | Pending | Pending | Pending | Review source applicability and compose approved answers |
+| 1. Foundation, scope, architecture | Implemented for Brother; models 2/3 deferred | Passed in development and clean environment | Accepted | docs/phase1-evidence.md; docs/user-validation.md |
+| 2. Rules engine and approved knowledge | Implemented for Brother; models 2/3 deferred | 58 passed; see docs/phase2-evidence.md | Pending | Seven reviewed answers; CLI and five real demo conversations |
 | 3. Streamlit conversations | Pending | Pending | Pending | Integrate engine with session state and references |
 | 4. Advance 1 validation/package | Pending | Pending | Pending | 10+ conversations, analysis and GitHub evidence |
 
@@ -97,7 +97,7 @@ Automated validation:
 - Smoke: Spanish Streamlit catalog and controlled unavailable-DB message.
 - Reconstruct a second environment from uv.lock and execute the same full suite.
 
-Owner validation (pending): review Brother/catalog and missing models; read objective/
+Owner validation accepted: reviewed Brother/catalog and missing models; read objective/
 architecture; open the initial Spanish app and verify its catalog and phase status.
 Detailed instructions: docs/user-validation.md.
 
@@ -252,8 +252,20 @@ Text/image metrics are future work; no model accuracy or measured time benefit e
 
 ## 8. Immediate next action and acceptance
 
-Phase 1 implementation and automated validation are ready for the three owner checks.
+Phase 1 is owner-validated. Phase 2 engine/knowledge implementation for Brother is ready for the three owner checks in docs/user-validation.md.
 Two models, source applicability approval, detailed online user guide and visual dataset
-remain pending; none should be fabricated. Next implementation is phase 2 after owner
-feedback, maintaining source approval and evidence boundaries. Do not silently begin
+remain pending; none should be fabricated. Next implementation is phase 3 after owner feedback, maintaining source approval and evidence boundaries. Do not silently begin
 all later phases based solely on this plan.
+
+## 9. Phase 2 implementation record
+
+Seven reviewed answers/navigation responses use reference-guide physical pages 1–4.
+PostgreSQL migration 0002 records review notes, conditions and section references.
+`data/reviewed_knowledge.json` is an explicit import record, not runtime retrieval.
+The repository fails closed if any required source is unapproved or inapplicable.
+NLTK tokenization and deterministic rules preserve negation and need no corpus download.
+The engine is available through CLI `chat`/`ask`; Streamlit remains a catalog until
+phase 3. Intents and all input → identification → response flows are documented in
+docs/intents-and-flows.md; five real CLI scenarios are in docs/phase2-demo.json.
+Owner validation is pending. No universal scope/semantic-safety guarantee is claimed.
+Two models remain deferred, so the three-model Advance 1 is not complete.

@@ -5,12 +5,15 @@ Development and documentation are in English; the initial GUI is in Spanish.
 
 ## Current milestone
 
-Phase 1 is a foundation and source catalog, **not a working maintenance chatbot**.
-It provides a Streamlit catalog, PostgreSQL schema and migrations, repeatable PDF
-import, a language-independent conversation contract, and automated tests.
-Only Brother DCP-T430W is selected. Two additional models remain owner decisions.
-No extracted paragraph is approved automatically. No LLM, RAG, embeddings,
-image model, Flask API or public deployment has been implemented.
+Phase 2 implements a **rules-based maintenance engine accessible through the CLI**.
+The Spanish Streamlit page currently remains a catalog/status page; conversational
+GUI integration is phase 3. Only Brother DCP-T430W is selected; two other models
+remain owner decisions. Seven reviewed responses include exact source pages and
+conditions. Unknown regulations, unsupported equipment, unreviewed procedures and
+missing knowledge produce explicit limits or clarification.
+
+Phase 1 foundation is owner-validated. Phase 2 owner validation is pending. No LLM,
+RAG, embeddings, trained intent/image model, Flask or public deployment exists yet.
 
 ## Prerequisites
 
@@ -32,6 +35,7 @@ uv sync --frozen --link-mode=copy
 .\.venv\Scripts\python.exe scripts/local_postgres.py start
 .\.venv\Scripts\python.exe -m alembic upgrade head
 .\.venv\Scripts\python.exe -m technicalnexus.cli import-manuals
+.\.venv\Scripts\python.exe -m technicalnexus.cli seed-knowledge
 .\.venv\Scripts\python.exe -m streamlit run app.py --server.address 127.0.0.1
 ```
 
@@ -43,7 +47,7 @@ PostgreSQL 18 installation. The helper uses short Windows paths where available
 to handle accented workspace directory names. If startup fails, inspect the
 ignored `work/postgres.log`; do not initialize over an existing cluster.
 
-If no manuals are available, replace the import command with
+If no manuals are available, omit seed-knowledge and replace the import command with
 `python -m technicalnexus.cli seed`; the GUI can show an empty catalog.
 
 For an existing server or another OS, create dedicated development and test
@@ -72,6 +76,34 @@ an explicit owner-reviewed type correction during import without approving pages
 or equipment applicability. Individual source download
 URLs were not supplied; provenance records say so instead of inventing URLs.
 
+## Try the phase-2 engine
+
+```powershell
+.\.venv\Scripts\python.exe -m technicalnexus.cli chat
+```
+
+Try `Nivel de tinta`, then `Brother DCP-T430W`. The engine asks for the model
+and resumes the pending topic with a physical page citation. Other examples:
+`Ya rellené la tinta`, `Limpieza normal del cabezal`, `No hay papel`,
+`¿Qué norma ISO aplica?`, `cambiar impresora`, `reiniciar`, `adiós`.
+
+Single query with explicit model:
+
+```powershell
+.\.venv\Scripts\python.exe -m technicalnexus.cli ask --equipment brother_dcp_t430w --text "¿Cómo compruebo el nivel de tinta?"
+```
+
+Run `python scripts/demo_engine.py` using the project environment to reproduce five
+real PostgreSQL-backed conversations in `docs/phase2-demo.json`. These are not ten
+final GUI conversations or user acceptance. The full [intent/flow catalog](docs/intents-and-flows.md)
+describes the supported input patterns and response limits.
+
+Knowledge setup is explicit: apply migrations, import the exact PDFs, then seed the
+reviewed manifest. It verifies original hashes, page anchors and applicability, and
+upserts the same seven scoped answers. Other pages remain unapproved. Review notes
+identify agent source review and pending owner acceptance; they do not claim
+manufacturer certification or approval of every paragraph on a referenced page.
+
 ## Tests — one command
 
 ```powershell
@@ -82,8 +114,8 @@ The full suite requires the project PostgreSQL server and `TEST_DATABASE_URL`.
 Tests reject a database without a `_test` suffix or one matching development.
 Each integration test migrates a unique schema and removes only that schema.
 Unit and scope regression tests do not use the development database. UI tests use
-Streamlit AppTest. Real free-text intent detection and ten maintenance conversations
-belong to later phases; scope tests currently validate explicit equipment selection.
+Streamlit AppTest. Free-text rules now have unit/regression coverage. This validates tested phrases,
+not universal semantic isolation. Ten final GUI conversations remain phase-4 work.
 
 For a fresh environment verification, create another environment using the same
 lock (`UV_PROJECT_ENVIRONMENT=work/repro-venv` with `uv sync --frozen --link-mode=copy`) and run its
@@ -96,7 +128,7 @@ Python 3.12.14 using `uv sync --frozen --link-mode=copy --python <path>`.
 | Path | Responsibility |
 |---|---|
 | `app.py` | Spanish Streamlit catalog |
-| `src/technicalnexus/` | Configuration, contracts, scope, PDF extraction, DB access |
+| `src/technicalnexus/` | Configuration, rules engine, scope, PDF extraction and reviewed knowledge repository |
 | `migrations/` | Immutable Alembic schema revisions |
 | `data/document_manifest.json` | Proposed titles, editions and applicability notes |
 | `tests/` | Unit, selection regression, PostgreSQL integration and UI checks |
@@ -120,4 +152,4 @@ agent coordination and Flask. Streamlit Community Cloud will host the GUI and
 Cloudflare Tunnel will expose the later Flask service; a tunnel is not hosting.
 
 Repository: https://github.com/Praxisinfinitum/TechnicalNexus (private).
-See `docs/user-validation.md` for three owner checks before accepting this phase.
+See `docs/user-validation.md` for the three phase-2 owner checks.

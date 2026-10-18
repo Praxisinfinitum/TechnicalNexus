@@ -1,6 +1,6 @@
 # Source inventory — phase 1
 
-All originals are user-provided local PDFs. Exact download URLs were not supplied. Titles and editions below were transcribed from cover text; software, regional and safety applicability still requires review. Original filenames have not changed. No pages or answers have been approved.
+All originals are user-provided local PDFs. Exact download URLs were not supplied. Titles and editions below were transcribed from cover text; software, regional and safety applicability still requires review. Original filenames have not changed. That phase-1 baseline had no approved pages or answers. Phase 2 now adds seven reviewed responses against selected sections on physical pages 1–4 of the reference guide; other manuals remain outside approved answer retrieval.
 
 | Original file | Title | Physical pages | Proposed type |
 |---|---|---:|---|
