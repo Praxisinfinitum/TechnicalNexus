@@ -12,7 +12,7 @@ remain owner decisions. Seven reviewed responses include exact source pages and
 conditions. Unknown regulations, unsupported equipment, unreviewed procedures and
 missing knowledge produce explicit limits or clarification.
 
-Phase 1 foundation is owner-validated. Phase 2 owner validation is pending. No LLM,
+Phases 1 and 2 are owner-validated for the implemented Brother scope. No LLM,
 RAG, embeddings, trained intent/image model, Flask or public deployment exists yet.
 
 ## Prerequisites
@@ -101,7 +101,7 @@ describes the supported input patterns and response limits.
 Knowledge setup is explicit: apply migrations, import the exact PDFs, then seed the
 reviewed manifest. It verifies original hashes, page anchors and applicability, and
 upserts the same seven scoped answers. Other pages remain unapproved. Review notes
-identify agent source review and pending owner acceptance; they do not claim
+identify agent source review and the acceptance status at preparation time; owner CLI acceptance is now recorded in docs/phase2-owner-validation.md. They do not claim
 manufacturer certification or approval of every paragraph on a referenced page.
 
 ## Tests — one command

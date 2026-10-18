@@ -83,19 +83,19 @@ case, rather than appear in a disconnected demonstration.
 
 1. Foundation: pinned Python/uv dependencies, PostgreSQL schema and migration,
    PDF inventory/import, interface catalog, explicit contract and initial tests.
-2. Rules engine and reviewed knowledge: implemented for Brother; seven reviewed responses, source-restricted PostgreSQL access and a CLI demonstration. Two equipment models and phase-2 owner acceptance remain pending.
+2. Rules engine and reviewed knowledge: implemented for Brother; seven reviewed responses, source-restricted PostgreSQL access and a CLI demonstration. Phase 2 owner validation is accepted; two equipment models remain pending.
 3. Streamlit conversations: pending; connect the engine, state, references and errors.
 4. Advance-1 validation/package: pending; ten or more distinct conversations,
    limitations, improvements and reviewed GitHub materials.
 
 See `docs/phase1-evidence.md` for executed checks and `docs/user-validation.md`
-for owner acceptance, which remains pending until explicitly reported.
+for the recorded owner acceptance and observed manual checks.
 
 ## Rubric traceability and continuation
 
 | Requirement | Evidence / status |
 |---|---|
-| Problem, users, need, objective, scope and benefits | This draft; owner review pending |
+| Problem, users, need, objective, scope and benefits | Foundation objective and architecture reviewed by owner |
 | Architecture and component exchanges | Implemented and target diagrams above |
 | All intent entry → identification → response flows | docs/intents-and-flows.md |
 | Python 3.10+ and functional NLTK rules chatbot | Python 3.12.14; NLTK RegexpTokenizer and rules engine, available through CLI |
@@ -174,4 +174,4 @@ understand arbitrary paraphrases, mixed topics or negation. Missing/unrecognized
 wording may require reformulation, and untested cases can still be misclassified.
 Improve using observed regression failures and the required Advance-2 intent
 dataset/classifier while preserving the repository's independent source gates.
-Owner acceptance of this phase and ten final GUI conversations remain pending.
+Owner accepted this phase and supplied a successful CLI transcript; see docs/phase2-owner-validation.md. Ten final GUI conversations remain pending.

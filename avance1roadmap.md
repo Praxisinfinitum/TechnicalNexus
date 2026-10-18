@@ -73,7 +73,7 @@ actual results; no fabricated executions, metrics or screenshots.
 | Phase | Implementation | Automated tests | Owner validation | Evidence / next action |
 |---|---|---|---|---|
 | 1. Foundation, scope, architecture | Implemented for Brother; models 2/3 deferred | Passed in development and clean environment | Accepted | docs/phase1-evidence.md; docs/user-validation.md |
-| 2. Rules engine and approved knowledge | Implemented for Brother; models 2/3 deferred | 58 passed; see docs/phase2-evidence.md | Pending | Seven reviewed answers; CLI and five real demo conversations |
+| 2. Rules engine and approved knowledge | Implemented for Brother; models 2/3 deferred | 58 passed; see docs/phase2-evidence.md | Accepted | Seven reviewed answers; CLI and five real demo conversations |
 | 3. Streamlit conversations | Pending | Pending | Pending | Integrate engine with session state and references |
 | 4. Advance 1 validation/package | Pending | Pending | Pending | 10+ conversations, analysis and GitHub evidence |
 
@@ -181,8 +181,7 @@ the final submission viewer cannot render Mermaid. Verify readability before del
 Entities: instance, equipment, document/version hash, equipment applicability,
 physical page/raw text/normalized text/approval, intent, answer and answer-source.
 One file may apply to multiple models; the folder alone never authorizes applicability.
-Current initial applicability and extracted pages remain unapproved. Phase 2 must
-validate review conditions at the repository query boundary, not only in the GUI.
+Initial import leaves applicability and pages unapproved. Phase 2 now approves only the reviewed reference-guide sections supporting seven answers and validates source conditions at the repository boundary, not only in the GUI.
 
 Original PDF names remain unchanged; metadata provides classification and titles.
 Import by SHA-256 is repeatable, changed bytes get another identity. Preserve original
@@ -252,7 +251,7 @@ Text/image metrics are future work; no model accuracy or measured time benefit e
 
 ## 8. Immediate next action and acceptance
 
-Phase 1 is owner-validated. Phase 2 engine/knowledge implementation for Brother is ready for the three owner checks in docs/user-validation.md.
+Phases 1 and 2 are owner-validated for the implemented Brother scope; see docs/phase2-owner-validation.md.
 Two models, source applicability approval, detailed online user guide and visual dataset
 remain pending; none should be fabricated. Next implementation is phase 3 after owner feedback, maintaining source approval and evidence boundaries. Do not silently begin
 all later phases based solely on this plan.
@@ -267,5 +266,5 @@ NLTK tokenization and deterministic rules preserve negation and need no corpus d
 The engine is available through CLI `chat`/`ask`; Streamlit remains a catalog until
 phase 3. Intents and all input → identification → response flows are documented in
 docs/intents-and-flows.md; five real CLI scenarios are in docs/phase2-demo.json.
-Owner validation is pending. No universal scope/semantic-safety guarantee is claimed.
+Owner validation accepted with a supplied CLI transcript. No universal scope/semantic-safety guarantee is claimed.
 Two models remain deferred, so the three-model Advance 1 is not complete.

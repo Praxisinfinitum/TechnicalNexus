@@ -13,7 +13,7 @@ Please report: accepted, or the check number and observed issue. No need to reru
 all unit tests manually. Minor wording requests can become backlog items; incorrect
 scope, unreadable architecture or startup failure must be corrected before acceptance.
 
-## Phase 2 — three owner checks (pending)
+## Phase 2 — accepted by owner
 
 Start the CLI from the project root:
 
@@ -23,11 +23,13 @@ Start the CLI from the project root:
 
 | Check | Inputs / action | Expected result | Owner result |
 |---|---|---|---|
-| 1. Documented answer | Enter `Nivel de tinta`, then `Brother DCP-T430W`; compare its source with reference-guide physical page 3. | Asks model first, then resumes ink-level topic with Spanish answer, limits and page reference. | Pending |
-| 2. Knowledge boundaries | Enter `¿Qué norma ISO aplica?`, then `¿Cómo calculo la nómina?`. | No regulatory answer invented; HR request outside scope. Neither includes printer repair advice. | Pending |
-| 3. Reset and model isolation | Enter `cambiar impresora`, `Epson L3250`, `Limpieza normal del cabezal`, then `DCP-T430W`. Finish with `adiós`. | Unsupported equipment rejected, no old context retained; requires supported model before cleaning, then cites page 4; close clears context. | Pending |
+| 1. Documented answer | Enter `Nivel de tinta`, then `Brother DCP-T430W`; compare its source with reference-guide physical page 3. | Asks model first, then resumes ink-level topic with Spanish answer, limits and page reference. | Accepted; owner supplied matching CLI transcript. |
+| 2. Knowledge boundaries | Enter `¿Qué norma ISO aplica?`, then `¿Cómo calculo la nómina?`. | No regulatory answer invented; HR request outside scope. Neither includes printer repair advice. | Accepted overall; ISO refusal observed in owner transcript. HR refusal covered by automated regression, not shown in manual transcript. |
+| 3. Reset and model isolation | Enter `cambiar impresora`, `Epson L3250`, `Limpieza normal del cabezal`, then `DCP-T430W`. Finish with `adiós`. | Unsupported equipment rejected, no old context retained; requires supported model before cleaning, then cites page 4; close clears context. | Accepted; rejection, reset and resumed page-4 response observed. Exit used console interruption; goodbye not shown in manual transcript. |
 
 Only Brother can be validated as supported today. This does not demonstrate switching
 between two supported printers. The catalog web GUI has no chat input yet; phase 3
 integrates the tested engine there. Report accepted or check number plus observation;
 no need to rerun the automated suite manually.
+
+Owner reported “Todo bien” and supplied the successful interactive CLI transcript. Summary: docs/phase2-owner-validation.md. Acceptance applies to the implemented Brother scope, not the two pending models or future GUI.

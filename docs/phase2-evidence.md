@@ -1,6 +1,6 @@
 # Phase 2 — implementation and validation
 
-Status: implemented for Brother DCP-T430W; owner checks pending; models 2/3 deferred.
+Status: implemented for Brother DCP-T430W; owner accepted; models 2/3 deferred.
 This is development phase 2 of Advance 1, **not the course's Advance 2**.
 
 ## Implemented behavior
@@ -61,3 +61,7 @@ the current web page remains a catalog/status page. Other models and correspondi
 sources must be provided before declaring the three-model advance complete. Unknown
 phrasing and unsupported procedures require further dataset/regression work; no
 trained-intent accuracy, CNN result or measured user time saving exists yet.
+
+## Owner acceptance
+
+Owner reported “Todo bien” and supplied an interactive CLI transcript confirming missing-model resumption, ISO abstention, unsupported-Epson rejection, cleared context and subsequent page-4 cleaning response. See phase2-owner-validation.md. HR refusal and goodbye were tested automatically but not shown in that manual transcript.
