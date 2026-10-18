@@ -72,7 +72,7 @@ actual results; no fabricated executions, metrics or screenshots.
 
 | Phase | Implementation | Automated tests | Owner validation | Evidence / next action |
 |---|---|---|---|---|
-| 1. Foundation, scope, architecture | Implemented for Brother; models 2/3 deferred | Passed in development and clean environment | Pending | docs/phase1-evidence.md; docs/user-validation.md |
+| 1. Foundation, scope, architecture | Implemented for Brother; models 2/3 deferred | Passed in development and clean environment | Checks 1–2 accepted; check 3 partial | docs/phase1-evidence.md; docs/user-validation.md |
 | 2. Rules engine and approved knowledge | Pending | Pending | Pending | Review source applicability and compose approved answers |
 | 3. Streamlit conversations | Pending | Pending | Pending | Integrate engine with session state and references |
 | 4. Advance 1 validation/package | Pending | Pending | Pending | 10+ conversations, analysis and GitHub evidence |

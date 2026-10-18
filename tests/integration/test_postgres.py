@@ -62,6 +62,11 @@ def test_migration_seed_import_and_scope(database, tmp_path):
     assert not page.approved and page.extraction_status == "empty" and page.page_number == 1
     assert catalog_rows(database, "human_resources") == []
     assert len(catalog_rows(database, "office_printer_maintenance")) == 1
+    metadata["reviewed_document_type"] = "driver_guide"
+    reviewed = import_pdf(database, pdf, metadata, tmp_path)
+    database.flush()
+    assert reviewed.document_type == "driver_guide" and reviewed.classification_reviewed
+    assert not page.approved  # Classification review does not authorize technical answers.
     database.commit()
 
 def test_unknown_equipment_cannot_import(database, tmp_path):

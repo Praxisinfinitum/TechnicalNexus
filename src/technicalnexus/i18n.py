@@ -15,7 +15,7 @@ CATALOGS = {"es": {
     "type_reference": "Consulta", "type_quick_setup": "Configuración rápida",
     "type_product_safety": "Seguridad del producto", "type_network_security": "Seguridad de red",
     "type_licensing": "Licencias", "type_software_guide": "Guía de software",
-    "type_driver_guide": "Controlador", "type_wifi_channels": "Canales Wi-Fi",
+    "type_driver_guide": "Guía de driver", "type_wifi_channels": "Canales Wi-Fi",
     "type_unclassified": "Sin clasificar",
     "scope": "Ámbito: mantenimiento de impresoras de oficina. Sin diagnóstico automático ni acciones sobre equipos.",
 }}

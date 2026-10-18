@@ -10,7 +10,7 @@ All originals are user-provided local PDFs. Exact download URLs were not supplie
 | DCP-T430W_3.pdf | Brother Print Support App — Guía del usuario | 13 | software_guide |
 | DCP-T430W_4.pdf | Guía de seguridad del producto | 18 | software_guide |
 | DCP-T430W_5.pdf | Información de seguridad importante | 3 | network_security |
-| DCP-T430W_6.pdf | Guía del controlador de impresión universal | 12 | unclassified |
+| DCP-T430W_6.pdf | Guía del controlador de impresión universal | 12 | driver_guide (owner reviewed) |
 | DCP-T430W_7.pdf | BRAdmin Professional 4 — Guía del usuario | 38 | software_guide |
 | DCP-T430W_8.pdf | BRAdmin Professional 4 para Microsoft Azure — Guía del usuario | 15 | software_guide |
 | DCP-T430W_9.pdf | Open Source Licensing Remarks | 60 | licensing |
@@ -37,3 +37,5 @@ The generic 5 GHz channel supplement does not by itself establish that DCP-T430W
 No suitable printer-defect training dataset has been selected. Investigated [MVTec datasets](https://www.mvtec.com/research-teaching/datasets) and [MVTec AD 2](https://www.mvtec.com/research-teaching/datasets/mvtec-ad-2): industrial anomaly datasets, not an established match to this printer task. AD 2 states CC BY-NC-SA 4.0; do not treat it as unrestricted commercial portfolio data or as a ready supervised printer-classification dataset. No dataset downloaded.
 
 Preferred next step: investigate owner-created printed-page images with known capture/source consent, class definitions and grouping by original sheet/capture session. Confirm sufficient examples before committing to classes. An alternative is useful consumable/component classification. Do not use manual diagrams as if they represented independent real-world training photographs.
+
+Owner review update: document 6 is classified as driver_guide (Spanish GUI: Guía de driver). This approves the document type only, not equipment applicability or answer content.

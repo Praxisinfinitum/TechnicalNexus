@@ -51,7 +51,9 @@
     "language": "es",
     "edition": "Version B",
     "source_url": null,
-    "applicability_note": "Multiple driver families; model and platform applicability pending."
+    "applicability_note": "Multiple driver families; model and platform applicability pending.",
+    "reviewed_document_type": "driver_guide",
+    "classification_review_note": "Owner requested driver guide classification; 2026-10-17. Applicability and answer approval remain separate."
   },
   {
     "filename": "DCP-T430W_7.pdf",

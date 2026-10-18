@@ -53,3 +53,11 @@ imported/approved additions. No ten-conversation evidence, intent/CNN metrics, R
 agent, API, container or public deployment exists at this milestone. Linux and
 production environments have not been tested. Markdown diagrams have not yet been
 exported into a final paginated academic document.
+
+## Owner feedback follow-up
+
+Catalog and architecture accepted by the owner. Document 6 classification explicitly
+reviewed as driver_guide; Spanish label updated to Guía de driver. Import applies
+reviewed type metadata without approving technical content. Regression: 14 passed
+in 5.41 s. Database health query confirmed PostgreSQL 18.3; Spanish GUI confirmed
+by owner, observation of the green DB status message remains pending.

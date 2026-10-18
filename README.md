@@ -67,7 +67,9 @@ are not uploaded to the private repository automatically.
 Repeated PDF import is keyed by original SHA-256; it does not duplicate pages or
 overwrite reviewed records. Changed PDF bytes create another document identity.
 Changing proposed metadata for an existing hash requires an explicit reviewed
-update in a later phase, not a silent import overwrite. Individual source download
+update, not a silent import overwrite. A manifest `reviewed_document_type` applies
+an explicit owner-reviewed type correction during import without approving pages
+or equipment applicability. Individual source download
 URLs were not supplied; provenance records say so instead of inventing URLs.
 
 ## Tests — one command

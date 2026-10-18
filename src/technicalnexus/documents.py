@@ -40,12 +40,21 @@ def classify_document(text: str) -> str:
     return next((kind for kind, marker in patterns if marker in sample), "unclassified")
 
 def import_pdf(session: Session, path: Path, metadata: dict, project_root: Path) -> Document:
+    reviewed_type = metadata.get("reviewed_document_type")
+    if reviewed_type is not None and reviewed_type not in {
+        "licensing", "quick_setup", "product_safety", "network_security", "reference",
+        "wifi_channels", "software_guide", "driver_guide", "unclassified",
+    }:
+        raise ValueError("Unknown reviewed document type")
     equipment_id = metadata["equipment_id"]
     if session.get(Equipment, equipment_id) is None:
         raise ValueError("Unknown equipment")
     digest = sha256(path.read_bytes()).hexdigest()
     existing = session.get(Document, digest)
     if existing is not None:
+        if reviewed_type is not None:
+            existing.document_type = reviewed_type
+            existing.classification_reviewed = True
         if session.get(Applicability, (digest, equipment_id)) is None:
             session.add(Applicability(document_id=digest, equipment_id=equipment_id, status="pending", evidence="Additional association requires review"))
         return existing
@@ -54,10 +63,10 @@ def import_pdf(session: Session, path: Path, metadata: dict, project_root: Path)
         raise ValueError("PDF contains no pages")
     document = Document(id=digest, original_filename=path.name,
         relative_path=path.resolve().relative_to(project_root.resolve()).as_posix(),
-        title=metadata["title"], document_type=classify_document(pages[0].normalized_text),
+        title=metadata["title"], document_type=reviewed_type or classify_document(pages[0].normalized_text),
         language=metadata["language"], edition=metadata["edition"], source_url=metadata.get("source_url"),
         provenance="User-provided local PDF; individual download URL not supplied", page_count=len(pages),
-        classification_reviewed=False)
+        classification_reviewed=reviewed_type is not None)
     session.add(document)
     session.flush()
     session.add(Applicability(document_id=digest, equipment_id=equipment_id,
