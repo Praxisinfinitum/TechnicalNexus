@@ -33,3 +33,18 @@ integrates the tested engine there. Report accepted or check number plus observa
 no need to rerun the automated suite manually.
 
 Owner reported “Todo bien” and supplied the successful interactive CLI transcript. Summary: docs/phase2-owner-validation.md. Acceptance applies to the implemented Brother scope, not the two pending models or future GUI.
+
+## Phase 3 — three owner checks (pending)
+
+Use http://localhost:8501. No CLI required for these checks.
+
+| Check | Actions | Expected result | Owner result |
+|---|---|---|---|
+| 1. Referenced conversation | Send `Nivel de tinta` without selecting equipment. Then select Brother DCP-T430W or type the model. | Requests a model, resumes the question and shows Spanish answer, conditions and reference-guide page 3 below the reply. | Pending |
+| 2. Reset and separate sessions | Click `Reiniciar conversación`. Open a new tab/session, select Brother in only one, and ask `Nivel de tinta` in the other. | Reset removes history/selection. The other tab independently requests a model; its selection/history do not change the first tab. | Pending |
+| 3. Scope and recovery wording | In chat ask `¿Qué norma ISO aplica?`, then `Epson L3250`, then `Limpieza normal del cabezal`. | Clear Spanish limits; unsupported equipment clears selector/context; cleaning requires an admitted model again. No invented steps. | Pending |
+
+Automatic tests already cover a database connection failure and successful retry;
+you do not need to stop PostgreSQL manually. Switching between two supported models
+remains deferred until the other equipment is selected. Report accepted or a check
+number plus observed issue; no need to rerun all unit tests yourself.

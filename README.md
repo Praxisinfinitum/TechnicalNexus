@@ -5,14 +5,13 @@ Development and documentation are in English; the initial GUI is in Spanish.
 
 ## Current milestone
 
-Phase 2 implements a **rules-based maintenance engine accessible through the CLI**.
-The Spanish Streamlit page currently remains a catalog/status page; conversational
-GUI integration is phase 3. Only Brother DCP-T430W is selected; two other models
+Phase 3 integrates the **rules-based maintenance engine into a Spanish Streamlit chat**.
+The same engine remains available through the CLI; it is not duplicated in the GUI. Only Brother DCP-T430W is selected; two other models
 remain owner decisions. Seven reviewed responses include exact source pages and
 conditions. Unknown regulations, unsupported equipment, unreviewed procedures and
 missing knowledge produce explicit limits or clarification.
 
-Phases 1 and 2 are owner-validated for the implemented Brother scope. No LLM,
+Phases 1 and 2 are owner-validated for the implemented Brother scope. Phase 3 owner validation is pending. No LLM,
 RAG, embeddings, trained intent/image model, Flask or public deployment exists yet.
 
 ## Prerequisites
@@ -58,6 +57,26 @@ and schema do not require Windows. Linux and production portability are unverifi
 Local data is under `work/postgres-data`; do not synchronize/copy this live database
 as a backup. Stop it before moving the workspace. Originals and generated data
 are not uploaded to the private repository automatically.
+
+## Use the web chat
+
+1. Open `http://localhost:8501` and type a question, or select Brother DCP-T430W first.
+2. If the model is missing, answer in the chat or use the selector. A pending question
+   resumes after a valid selection. Source file, physical PDF page and section appear
+   under each technical answer.
+3. Use **Reiniciar conversación** (or type `reiniciar`) to clear history and equipment.
+   Choosing the placeholder in the selector starts a new technical context and clears
+   previous messages. Unsupported models typed into chat also clear the technical
+   context and synchronize the selector; historical replies remain visible as history.
+4. Open the source catalog expander when needed. A successful catalog query displays
+   the green PostgreSQL indicator. A connection error is explained without credentials
+   or driver traces; the history/context remain available so a later query can retry.
+
+Only one model is currently supported, so switching between two supported printers
+cannot yet be demonstrated. Each browser session has separate in-memory state, not
+shared global context. History is not stored in PostgreSQL and may disappear when
+its WebSocket session ends or the app restarts. Normal Streamlit reruns retain it.
+Browser sessions are not authentication or production multi-tenant isolation.
 
 ## Useful operations
 
@@ -127,8 +146,8 @@ Python 3.12.14 using `uv sync --frozen --link-mode=copy --python <path>`.
 
 | Path | Responsibility |
 |---|---|
-| `app.py` | Spanish Streamlit catalog |
-| `src/technicalnexus/` | Configuration, rules engine, scope, PDF extraction and reviewed knowledge repository |
+| `app.py` | Spanish Streamlit chat, selector, reset and source catalog |
+| `src/technicalnexus/` | Configuration, conversation adapter/service, rules engine, scope, PDF extraction and reviewed knowledge repository |
 | `migrations/` | Immutable Alembic schema revisions |
 | `data/document_manifest.json` | Proposed titles, editions and applicability notes |
 | `tests/` | Unit, selection regression, PostgreSQL integration and UI checks |
@@ -145,11 +164,11 @@ role. Production needs a restricted role, hosted persistent PostgreSQL, backup
 policy and a continuously available Flask host.
 
 pgvector is not available in the current PostgreSQL installation and is not needed
-for phase 1. Future embeddings can reference existing pages/fragments with model,
+for the current rules-based version. Future embeddings can reference existing pages/fragments with model,
 version and dimension metadata; no SQLite-to-PostgreSQL migration is planned.
 RAG remains optional. Required later: TF-IDF/BoW + NB/SVM, ResNet50/EfficientNet,
 agent coordination and Flask. Streamlit Community Cloud will host the GUI and
 Cloudflare Tunnel will expose the later Flask service; a tunnel is not hosting.
 
 Repository: https://github.com/Praxisinfinitum/TechnicalNexus (private).
-See `docs/user-validation.md` for the three phase-2 owner checks.
+See `docs/user-validation.md` for the three phase-3 owner checks.

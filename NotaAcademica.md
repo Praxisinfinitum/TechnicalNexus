@@ -1,6 +1,6 @@
 # TechnicalNexus — living academic draft
 
-**Status:** phase-2 living draft, 2026-10-17. Not the completed Advance 1 or final report.
+**Status:** phase-3 living draft, 2026-10-17. Not the completed Advance 1 or final report.
 This file accumulates architecture, decisions and evidence for the eventual
 15–20-page final document. Phase 2 adds bounded rules-based maintenance answers. This does not claim trained-model performance, repair success or benefits measured with users.
 
@@ -84,7 +84,7 @@ case, rather than appear in a disconnected demonstration.
 1. Foundation: pinned Python/uv dependencies, PostgreSQL schema and migration,
    PDF inventory/import, interface catalog, explicit contract and initial tests.
 2. Rules engine and reviewed knowledge: implemented for Brother; seven reviewed responses, source-restricted PostgreSQL access and a CLI demonstration. Phase 2 owner validation is accepted; two equipment models remain pending.
-3. Streamlit conversations: pending; connect the engine, state, references and errors.
+3. Streamlit conversations: implemented for Brother; shared rules engine, explicit per-session state, selector/history/reset, references and controlled errors. Owner validation pending.
 4. Advance-1 validation/package: pending; ten or more distinct conversations,
    limitations, improvements and reviewed GitHub materials.
 
@@ -149,9 +149,7 @@ flowchart TD
     SEED --> DB
 ```
 
-The CLI is the user interface for the phase-2 demonstration. Streamlit remains the
-catalog; phase 3 will connect it to the same engine rather than create a second
-implementation. Technical answers require exact instance, equipment, intent and
+The CLI was the phase-2 demonstration interface. Phase 3 now connects Streamlit to the same engine rather than create a second implementation. Technical answers require exact instance, equipment, intent and
 language, a reviewed answer, confirmed document applicability and all source pages
 approved for the linked reviewed sections. The JSON review manifest is an import
 record; inference does not consult it as a fallback when PostgreSQL is unavailable.
@@ -175,3 +173,36 @@ wording may require reformulation, and untested cases can still be misclassified
 Improve using observed regression failures and the required Advance-2 intent
 dataset/classifier while preserving the repository's independent source gates.
 Owner accepted this phase and supplied a successful CLI transcript; see docs/phase2-owner-validation.md. Ten final GUI conversations remain pending.
+
+## Phase 3 implemented web integration
+
+```mermaid
+flowchart TD
+    U[User: Spanish chat or model selection] --> UI[Streamlit UI]
+    UI --> STATE[Per-session immutable chat state and history]
+    STATE --> SERVICE[Application service: request and response contract]
+    SERVICE --> ENGINE[Existing NLTK rules and scope gates]
+    ENGINE --> REPO[Reviewed knowledge repository]
+    REPO --> DB[(PostgreSQL)]
+    DB --> REPO
+    REPO --> ENGINE
+    ENGINE --> SERVICE
+    SERVICE --> STATE
+    STATE --> VIEW[Spanish response, conditions and source file/page/section]
+    VIEW --> U
+    UI --> RESET[Reset history and equipment]
+    RESET --> STATE
+```
+
+The GUI maintains no separate inference rules. Each query uses explicit model and
+pending-intent context. Selecting an equipment answers a pending model question;
+reset and unknown-model rejection discard technical context. The selector reflects
+model changes typed in chat. A normal rerun retains messages without submitting
+the last question twice. Histories are not persisted in PostgreSQL and are separate
+per Streamlit session; authentication/multi-tenant isolation remains unimplemented.
+
+Data-access failures produce a Spanish controlled error, keep history/model and
+allow retry after recovery. Tests simulate the failure without stopping development
+PostgreSQL. Synthetic reviewed records in isolated test schemas keep GUI tests
+independent of private manual files. Owner validation is a separate three-step check,
+recorded in docs/user-validation.md. Final ten-conversation evaluation is phase 4.

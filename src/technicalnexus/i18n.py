@@ -2,8 +2,8 @@
 CATALOGS = {"es": {
     "title": "TechnicalNexus",
     "subtitle": "Asistencia técnica con documentación autorizada",
-    "phase": "Fase 2 · Motor disponible por consola",
-    "notice": "El motor conversacional de la fase 2 está disponible por consola. La conversación en esta interfaz se integrará en la fase 3.",
+    "phase": "Fase 3 · Asistente de mantenimiento",
+    "notice": "Respuestas basadas en documentación revisada para Brother DCP-T430W. Consulta un tema por mensaje.",
     "equipment": "Equipo disponible",
     "pending": "Los otros dos modelos están pendientes de selección.",
     "db_ok": "Conexión con PostgreSQL verificada.",
@@ -38,6 +38,16 @@ CATALOGS = {"es": {
     "engine_error": "No pude consultar el conocimiento autorizado. Intenta de nuevo cuando la base de datos esté disponible; no generaré una respuesta sin respaldo.",
     "engine_conditions": "Alcance y condiciones:",
     "cli_prompt": "Tú: ", "cli_response": "TechnicalNexus:", "cli_source": "Fuente",
+    "ui_chat_title": "Consulta de mantenimiento",
+    "ui_prompt": "Escribe tu consulta; por ejemplo: nivel de tinta",
+    "ui_welcome": "Selecciona tu impresora o indica el modelo en el chat. Puedo orientar sobre tinta, papel y limpieza normal del cabezal. Escribe «ayuda» para ver las opciones.",
+    "ui_no_equipment": "Selecciona una impresora",
+    "ui_reset": "Reiniciar conversación",
+    "ui_reset_done": "Se borraron el historial y el equipo seleccionado. Puedes comenzar un caso nuevo.",
+    "ui_equipment_changed": "Equipo seleccionado: {model}. Se inició un contexto nuevo para no mezclar procedimientos.",
+    "ui_reference": "Fuente: {filename} · pág. {page} · {section}",
+    "ui_working": "Consultando el conocimiento autorizado…",
+    "ui_session_notice": "El historial sólo se conserva durante esta sesión; no se guarda en la base de datos. Reiniciar la conversación borra el historial y la selección del equipo.",
 }}
 
 def translate(key: str, language: str = "es") -> str:

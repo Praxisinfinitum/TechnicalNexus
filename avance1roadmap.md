@@ -74,7 +74,7 @@ actual results; no fabricated executions, metrics or screenshots.
 |---|---|---|---|---|
 | 1. Foundation, scope, architecture | Implemented for Brother; models 2/3 deferred | Passed in development and clean environment | Accepted | docs/phase1-evidence.md; docs/user-validation.md |
 | 2. Rules engine and approved knowledge | Implemented for Brother; models 2/3 deferred | 58 passed; see docs/phase2-evidence.md | Accepted | Seven reviewed answers; CLI and five real demo conversations |
-| 3. Streamlit conversations | Pending | Pending | Pending | Integrate engine with session state and references |
+| 3. Streamlit conversations | Implemented for Brother | 66 passed; see docs/phase3-evidence.md | Pending | Spanish chat, per-session state, selector/reset and visible references |
 | 4. Advance 1 validation/package | Pending | Pending | Pending | 10+ conversations, analysis and GitHub evidence |
 
 ### Phase 1 — Foundation, reproducible environment and source scope
@@ -157,24 +157,33 @@ Owner checks: (1) brief valid/change/rejection demo and review conversation summ
 (2) read README and academic draft for accuracy; (3) verify repository/evidence access
 and accept or report observations before personally submitting in Canvas.
 
-## 4. Phase-1 implemented block architecture
+## 4. Implemented block architecture — phase 3
 
 ```mermaid
 flowchart TD
-    USER[User] --> UI[Spanish Streamlit catalog]
-    UI --> REPO[Data repository layer]
+    USER[User: Spanish text and equipment selection] --> UI[Streamlit chat and catalog]
+    UI --> STATE[Per-session history and context]
+    STATE --> SERVICE[Application service]
+    SERVICE --> RULES[Existing NLTK rules and scope gates]
+    RULES --> REPO[Reviewed knowledge repository]
     REPO --> DB[(PostgreSQL)]
     DB --> REPO
-    REPO --> UI
-    PDF[Local original PDFs] --> IMPORT[Page extraction and conservative normalization]
-    MANIFEST[Proposed document metadata] --> IMPORT
+    REPO --> RULES
+    RULES --> SERVICE
+    SERVICE --> STATE
+    STATE --> UI
+    UI --> USER
+    RESET[Reset history and equipment] --> STATE
+    PDF[Local original PDFs] --> IMPORT[Page extraction and normalization]
+    REVIEW[Explicit review manifest] --> SEED[Hash-checked reviewed answer import]
     IMPORT --> DB
-    MIG[Alembic migration and seed] --> DB
+    SEED --> DB
+    MIG[Alembic migrations] --> DB
 ```
 
-Diagram is implemented foundation, not the future chatbot. See NotaAcademica.md
-for final target flow. Keep Mermaid editable and provide a rendered image when
-the final submission viewer cannot render Mermaid. Verify readability before delivery.
+This diagram is the current implementation, not the final agent/CNN/API architecture.
+See NotaAcademica.md for earlier stages and final target flow. Keep Mermaid editable
+and export a readable image if the submission viewer cannot render it.
 
 ## 5. Storage and source policy
 
@@ -253,7 +262,7 @@ Text/image metrics are future work; no model accuracy or measured time benefit e
 
 Phases 1 and 2 are owner-validated for the implemented Brother scope; see docs/phase2-owner-validation.md.
 Two models, source applicability approval, detailed online user guide and visual dataset
-remain pending; none should be fabricated. Next implementation is phase 3 after owner feedback, maintaining source approval and evidence boundaries. Do not silently begin
+remain pending; none should be fabricated. Next implementation is phase 4 after owner feedback, maintaining source approval and evidence boundaries. Do not silently begin
 all later phases based solely on this plan.
 
 ## 9. Phase 2 implementation record
@@ -263,8 +272,21 @@ PostgreSQL migration 0002 records review notes, conditions and section reference
 `data/reviewed_knowledge.json` is an explicit import record, not runtime retrieval.
 The repository fails closed if any required source is unapproved or inapplicable.
 NLTK tokenization and deterministic rules preserve negation and need no corpus download.
-The engine is available through CLI `chat`/`ask`; Streamlit remains a catalog until
-phase 3. Intents and all input → identification → response flows are documented in
+The engine was first exposed through CLI `chat`/`ask`; phase 3 now integrates the same engine into Streamlit. Intents and all input → identification → response flows are documented in
 docs/intents-and-flows.md; five real CLI scenarios are in docs/phase2-demo.json.
 Owner validation accepted with a supplied CLI transcript. No universal scope/semantic-safety guarantee is claimed.
 Two models remain deferred, so the three-model Advance 1 is not complete.
+
+## 10. Phase 3 implementation record
+
+Spanish Streamlit conversations call the same phase-2 engine through a small
+application service. Immutable ChatState/messages live only in st.session_state;
+PostgreSQL sessions and engines are opened/closed per operation, not shared as
+conversation state. The selector and typed model/context changes stay synchronized.
+A pending question resumes through a selector response as well as typed model input.
+Button/typed reset clear history and model; selector changes start a clean technical
+context. Unsupported-model chat replies keep history for traceability but clear
+active model/pending state. Every technical response displays file/page/section.
+Connection failures preserve history and support retry without exposing credentials.
+No new model, API, image service or public deployment was introduced. Owner checks
+are pending in docs/user-validation.md; phase 4 has not started.

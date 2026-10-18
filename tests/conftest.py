@@ -39,3 +39,27 @@ def database(monkeypatch):
         with engine.begin() as connection:
             connection.execute(text(f'DROP SCHEMA "{schema}" CASCADE'))
         engine.dispose()
+
+@pytest.fixture
+def reviewed_ink_database(database):
+    """Synthetic reviewed source, so UI tests do not require private PDF originals."""
+    from technicalnexus.database import seed_catalog
+    from technicalnexus.models import Answer, AnswerSource, Applicability, Document, Intent, Page
+    seed_catalog(database)
+    database.add(Document(id="c" * 64, original_filename="reviewed-fixture.pdf", relative_path="fixture.pdf",
+        title="Reviewed UI fixture", document_type="reference", language="es", edition="test",
+        provenance="Synthetic test data, not manufacturer guidance", page_count=1))
+    database.add(Intent(id="ink_level", instance_id="office_printer_maintenance", description="Ink level fixture"))
+    database.flush()
+    database.add(Applicability(document_id="c" * 64, equipment_id="brother_dcp_t430w",
+        status="confirmed", evidence="Test fixture"))
+    page = Page(document_id="c" * 64, page_number=1, raw_text="tinta", normalized_text="tinta",
+        extraction_status="extracted", approved=True)
+    answer = Answer(equipment_id="brother_dcp_t430w", intent_id="ink_level", language="es",
+        text="Respuesta de tinta revisada para pruebas.", conditions="Datos sintéticos de prueba.",
+        review_note="Explicit synthetic fixture review", approved=True)
+    database.add_all([page, answer])
+    database.flush()
+    database.add(AnswerSource(answer_id=answer.id, page_id=page.id, section="Volumen de tinta"))
+    database.commit()
+    return database
