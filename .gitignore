@@ -1,0 +1,16 @@
+# Local tools, credentials and generated files
+work/
+.venv/
+__pycache__/
+.pytest_cache/
+.env
+.env.*
+!.env.example
+.streamlit/secrets.toml
+# Original manuals remain local until redistribution rights are reviewed
+ManualesDeImpresoras/
+*.egg-info/
+.ruff_cache/
+.coverage
+dist/
+build/

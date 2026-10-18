@@ -1,0 +1,1 @@
+"""TechnicalNexus application foundation."""

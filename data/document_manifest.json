@@ -1,0 +1,92 @@
+[
+  {
+    "filename": "DCP-T430W_1.pdf",
+    "equipment_id": "brother_dcp_t430w",
+    "title": "Guía de consulta",
+    "language": "en,es,pt",
+    "edition": "Version 0",
+    "source_url": null,
+    "applicability_note": "Cover lists DCP-T430W and other models; section-level review pending."
+  },
+  {
+    "filename": "DCP-T430W_2.pdf",
+    "equipment_id": "brother_dcp_t430w",
+    "title": "Guía de configuración rápida",
+    "language": "es",
+    "edition": "Version B",
+    "source_url": null,
+    "applicability_note": "Cover lists DCP-T430W and other models; section-level review pending."
+  },
+  {
+    "filename": "DCP-T430W_3.pdf",
+    "equipment_id": "brother_dcp_t430w",
+    "title": "Brother Print Support App — Guía del usuario",
+    "language": "es",
+    "edition": "Version 0",
+    "source_url": null,
+    "applicability_note": "Software-wide guide; DCP-T430W applicability not confirmed."
+  },
+  {
+    "filename": "DCP-T430W_4.pdf",
+    "equipment_id": "brother_dcp_t430w",
+    "title": "Guía de seguridad del producto",
+    "language": "es",
+    "edition": "Not yet verified",
+    "source_url": null,
+    "applicability_note": "Safety content requires full applicability and edition review."
+  },
+  {
+    "filename": "DCP-T430W_5.pdf",
+    "equipment_id": "brother_dcp_t430w",
+    "title": "Información de seguridad importante",
+    "language": "es",
+    "edition": "Version A",
+    "source_url": null,
+    "applicability_note": "Network/security supplement; functions must not be assumed supported."
+  },
+  {
+    "filename": "DCP-T430W_6.pdf",
+    "equipment_id": "brother_dcp_t430w",
+    "title": "Guía del controlador de impresión universal",
+    "language": "es",
+    "edition": "Version B",
+    "source_url": null,
+    "applicability_note": "Multiple driver families; model and platform applicability pending."
+  },
+  {
+    "filename": "DCP-T430W_7.pdf",
+    "equipment_id": "brother_dcp_t430w",
+    "title": "BRAdmin Professional 4 — Guía del usuario",
+    "language": "es",
+    "edition": "Version H",
+    "source_url": null,
+    "applicability_note": "Software-wide guide; device feature applicability pending."
+  },
+  {
+    "filename": "DCP-T430W_8.pdf",
+    "equipment_id": "brother_dcp_t430w",
+    "title": "BRAdmin Professional 4 para Microsoft Azure — Guía del usuario",
+    "language": "es",
+    "edition": "Version A",
+    "source_url": null,
+    "applicability_note": "Software-wide guide; not approved for maintenance answers."
+  },
+  {
+    "filename": "DCP-T430W_9.pdf",
+    "equipment_id": "brother_dcp_t430w",
+    "title": "Open Source Licensing Remarks",
+    "language": "en",
+    "edition": "Not yet verified",
+    "source_url": null,
+    "applicability_note": "Licensing reference, not a maintenance procedure."
+  },
+  {
+    "filename": "DCP-T430W_10.pdf",
+    "equipment_id": "brother_dcp_t430w",
+    "title": "Channels Supported by Brother Machines for 5 GHz Wi-Fi Networks",
+    "language": "multilingual",
+    "edition": "Version A",
+    "source_url": null,
+    "applicability_note": "Generic regional supplement; does not establish 5 GHz support for this model."
+  }
+]
