@@ -100,7 +100,7 @@ Python 3.12.14 using `uv sync --frozen --link-mode=copy --python <path>`.
 | `migrations/` | Immutable Alembic schema revisions |
 | `data/document_manifest.json` | Proposed titles, editions and applicability notes |
 | `tests/` | Unit, selection regression, PostgreSQL integration and UI checks |
-| `outputs/avance1roadmap.md` | Active English plan and milestone status |
+| `avance1roadmap.md` | Active English plan and milestone status |
 | `NotaAcademica.md` | Living academic draft, source material for the final report |
 | `docs/` | Source inventory, test evidence and user acceptance checklist |
 
