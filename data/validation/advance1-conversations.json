@@ -397,5 +397,119 @@
         "expected_equipment": "brother_dcp_t430w"
       }
     ]
+  },
+  {
+    "id": "C18",
+    "user_need": "Recognize the owner-reported plural head-cleaning wording",
+    "steps": [
+      {
+        "input": "Brother DCP-T430W",
+        "expected_intent": "select_equipment",
+        "expected_status": "answer",
+        "expected_pages": [],
+        "expected_equipment": "brother_dcp_t430w"
+      },
+      {
+        "input": "Como hago una limpieza de cabezales",
+        "expected_intent": "print_quality",
+        "expected_status": "answer",
+        "expected_pages": [
+          4
+        ],
+        "expected_equipment": "brother_dcp_t430w"
+      }
+    ]
+  },
+  {
+    "id": "C19",
+    "user_need": "Guided navigation to reviewed ink_level answer",
+    "steps": [
+      {
+        "input": "Brother DCP-T430W",
+        "expected_intent": "select_equipment",
+        "expected_status": "answer",
+        "expected_pages": [],
+        "expected_equipment": "brother_dcp_t430w"
+      },
+      {
+        "input": "Nivel de tinta",
+        "guided_intent": "ink_level",
+        "expected_intent": "ink_level",
+        "expected_status": "answer",
+        "expected_pages": [
+          3
+        ],
+        "expected_equipment": "brother_dcp_t430w"
+      }
+    ]
+  },
+  {
+    "id": "C20",
+    "user_need": "Guided navigation to reviewed print_quality answer",
+    "steps": [
+      {
+        "input": "Brother DCP-T430W",
+        "expected_intent": "select_equipment",
+        "expected_status": "answer",
+        "expected_pages": [],
+        "expected_equipment": "brother_dcp_t430w"
+      },
+      {
+        "input": "Limpieza normal del cabezal",
+        "guided_intent": "print_quality",
+        "expected_intent": "print_quality",
+        "expected_status": "answer",
+        "expected_pages": [
+          4
+        ],
+        "expected_equipment": "brother_dcp_t430w"
+      }
+    ]
+  },
+  {
+    "id": "C21",
+    "user_need": "Guided navigation to reviewed paper_jam answer",
+    "steps": [
+      {
+        "input": "Brother DCP-T430W",
+        "expected_intent": "select_equipment",
+        "expected_status": "answer",
+        "expected_pages": [],
+        "expected_equipment": "brother_dcp_t430w"
+      },
+      {
+        "input": "Atasco de papel",
+        "guided_intent": "paper_jam",
+        "expected_intent": "paper_jam",
+        "expected_status": "answer",
+        "expected_pages": [
+          4
+        ],
+        "expected_equipment": "brother_dcp_t430w"
+      }
+    ]
+  },
+  {
+    "id": "C22",
+    "user_need": "Guided navigation to reviewed manual_location answer",
+    "steps": [
+      {
+        "input": "Brother DCP-T430W",
+        "expected_intent": "select_equipment",
+        "expected_status": "answer",
+        "expected_pages": [],
+        "expected_equipment": "brother_dcp_t430w"
+      },
+      {
+        "input": "Dónde consultar el manual",
+        "guided_intent": "manual_location",
+        "expected_intent": "manual_location",
+        "expected_status": "answer",
+        "expected_pages": [
+          1
+        ],
+        "expected_equipment": "brother_dcp_t430w"
+      }
+    ]
   }
 ]

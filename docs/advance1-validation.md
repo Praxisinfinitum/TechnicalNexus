@@ -2,12 +2,12 @@
 
 Status: executed for Brother DCP-T430W only. Two other models and owner package acceptance remain pending.
 
-Execution (UTC): 2026-10-18T03:39:46.181424+00:00
-Base code commit: `755dd42ad7eb6da30650a2b5d70a879ab1beb608`. Exact code/input fingerprint: `5c6ddc8bc50240ddf31afb81a03b763b0e33b5ee9995f26ad8e1d49488fcba7a`.
+Execution (UTC): 2026-10-18T04:21:49.854194+00:00
+Base code commit: `84d0ed120f045ba5db6b37deb04c99490fb1d2f2`. Exact code/input fingerprint: `07d269d0e3b975d9677a22e3c20bd27c68363dc473ffd8389c082e7594d5304e`.
 
 This is real Streamlit AppTest execution against newly migrated PostgreSQL with the supplied PDF originals and reviewed knowledge. It is not a synthetic-answer fixture, physical printer trial or manual browser run.
 
-Result: **17/17 conversations; 40/40 turns passed the predefined checks.**
+Result: **22/22 conversations; 50/50 turns passed the predefined checks.**
 
 Each conversation starts with independent session state. Expected results were authored in data/validation/advance1-conversations.json before execution. Full inputs, actual responses, references and per-turn checks are in [the JSON evidence](advance1-conversations.json).
 
@@ -30,6 +30,11 @@ Each conversation starts with independent session state. Expected results were a
 | C15 | Escalate an excluded procedure and close | 3 | PASS |
 | C16 | Do not bypass source restrictions | 2 | PASS |
 | C17 | Handle a temporary knowledge connection failure | 3 | PASS |
+| C18 | Recognize the owner-reported plural head-cleaning wording | 2 | PASS |
+| C19 | Guided navigation to reviewed ink_level answer | 2 | PASS |
+| C20 | Guided navigation to reviewed print_quality answer | 2 | PASS |
+| C21 | Guided navigation to reviewed paper_jam answer | 2 | PASS |
+| C22 | Guided navigation to reviewed manual_location answer | 2 | PASS |
 
 ## Method and limits
 
@@ -38,7 +43,7 @@ Checks compare intent, status, active equipment, physical source pages and visib
 Fresh schema reconstruction/import: 10 documents, 169 pages, 7 reviewed answers; PostgreSQL 18.3, revision 0002.
 Development data was not modified; the generated validation schema was removed after execution. No passwords or database URLs are included in the evidence.
 
-Measured AppTest rerun duration: mean 362.68 ms, range 101.2–9042.73 ms. This includes UI test/framework work and database requests; it is not isolated inference latency, a browser/network benchmark, or a load/scalability test.
+Measured AppTest rerun duration: mean 346.72 ms, range 96.89–9012.88 ms. This includes UI test/framework work and database requests; it is not isolated inference latency, a browser/network benchmark, or a load/scalability test.
 
 Cases include seven reviewed technical/navigation topics, missing context, ambiguity/negation, another department, absent normative knowledge, unsupported models, reset and closure. C17 simulates an unavailable DB endpoint then restores the same test schema. Changing between two supported models remains untested because only Brother is supplied.
 
@@ -509,3 +514,133 @@ Alcance y condiciones: Orientación sobre nivel de tinta, no instrucciones compl
 Source: DCP-T430W_1.pdf, physical page 3 — Comprobar el volumen de tinta.
 
 Expected/actual: ink_level/ink_level; answer/answer. Result: PASS.
+
+## C18 — Recognize the owner-reported plural head-cleaning wording
+
+### Turn 1
+
+User: Brother DCP-T430W
+
+Assistant:
+
+Equipo seleccionado: Brother DCP-T430W. ¿Qué consulta de mantenimiento tienes?
+
+Expected/actual: select_equipment/select_equipment; answer/answer. Result: PASS.
+
+### Turn 2
+
+User: Como hago una limpieza de cabezales
+
+Assistant:
+
+Para la limpieza normal indicada en la guía: pulsa simultáneamente Detener y Atajo Copia. Cuando parpadee el LED de tinta, pulsa Copia Negro para limpiar sólo el negro o Copia Color para todos los colores. Al terminar, el equipo imprime una hoja de comprobación de calidad.
+
+Alcance y condiciones: Orientación limitada a la limpieza normal del panel; no determina la causa de rayas o bandas ni cubre limpieza especial. Si la calidad no mejora, revisa la guía completa o consulta soporte.
+
+Source: DCP-T430W_1.pdf, physical page 4 — Mejorar la calidad de impresión — limpieza normal.
+
+Expected/actual: print_quality/print_quality; answer/answer. Result: PASS.
+
+## C19 — Guided navigation to reviewed ink_level answer
+
+### Turn 1
+
+User: Brother DCP-T430W
+
+Assistant:
+
+Equipo seleccionado: Brother DCP-T430W. ¿Qué consulta de mantenimiento tienes?
+
+Expected/actual: select_equipment/select_equipment; answer/answer. Result: PASS.
+
+### Turn 2
+
+User: Nivel de tinta
+
+Assistant:
+
+Comprueba visualmente el nivel en los tanques. Si alcanza la línea inferior, la guía indica rellenar pronto. Al rellenar, no superes la marca máxima.
+
+Alcance y condiciones: Orientación sobre nivel de tinta, no instrucciones completas de rellenado ni una estimación de tinta mediante software.
+
+Source: DCP-T430W_1.pdf, physical page 3 — Comprobar el volumen de tinta.
+
+Expected/actual: ink_level/ink_level; answer/answer. Result: PASS.
+
+## C20 — Guided navigation to reviewed print_quality answer
+
+### Turn 1
+
+User: Brother DCP-T430W
+
+Assistant:
+
+Equipo seleccionado: Brother DCP-T430W. ¿Qué consulta de mantenimiento tienes?
+
+Expected/actual: select_equipment/select_equipment; answer/answer. Result: PASS.
+
+### Turn 2
+
+User: Limpieza normal del cabezal
+
+Assistant:
+
+Para la limpieza normal indicada en la guía: pulsa simultáneamente Detener y Atajo Copia. Cuando parpadee el LED de tinta, pulsa Copia Negro para limpiar sólo el negro o Copia Color para todos los colores. Al terminar, el equipo imprime una hoja de comprobación de calidad.
+
+Alcance y condiciones: Orientación limitada a la limpieza normal del panel; no determina la causa de rayas o bandas ni cubre limpieza especial. Si la calidad no mejora, revisa la guía completa o consulta soporte.
+
+Source: DCP-T430W_1.pdf, physical page 4 — Mejorar la calidad de impresión — limpieza normal.
+
+Expected/actual: print_quality/print_quality; answer/answer. Result: PASS.
+
+## C21 — Guided navigation to reviewed paper_jam answer
+
+### Turn 1
+
+User: Brother DCP-T430W
+
+Assistant:
+
+Equipo seleccionado: Brother DCP-T430W. ¿Qué consulta de mantenimiento tienes?
+
+Expected/actual: select_equipment/select_equipment; answer/answer. Result: PASS.
+
+### Turn 2
+
+User: Atasco de papel
+
+Assistant:
+
+La página 4 de la Guía de consulta muestra con diagramas cómo retirar un atasco y advierte evitar mancharse las manos de tinta. Consulta esos diagramas y la guía del usuario online para el procedimiento completo; no sustituiré los dibujos por pasos no revisados.
+
+Alcance y condiciones: Es una orientación a la fuente, no una secuencia completa de reparación ni autorización para desmontar el equipo.
+
+Source: DCP-T430W_1.pdf, physical page 4 — Retirar atasco de papel.
+
+Expected/actual: paper_jam/paper_jam; answer/answer. Result: PASS.
+
+## C22 — Guided navigation to reviewed manual_location answer
+
+### Turn 1
+
+User: Brother DCP-T430W
+
+Assistant:
+
+Equipo seleccionado: Brother DCP-T430W. ¿Qué consulta de mantenimiento tienes?
+
+Expected/actual: select_equipment/select_equipment; answer/answer. Result: PASS.
+
+### Turn 2
+
+User: Dónde consultar el manual
+
+Assistant:
+
+La Guía de consulta remite a https://support.brother.com/manuals para operaciones detalladas y solución de problemas. Selecciona el modelo DCP-T430W y el idioma correspondiente.
+
+Alcance y condiciones: El contenido enlazado no se ha incorporado automáticamente al conocimiento aprobado de esta versión.
+
+Source: DCP-T430W_1.pdf, physical page 1 — Referencia a la Guía del usuario online.
+
+Expected/actual: manual_location/manual_location; answer/answer. Result: PASS.

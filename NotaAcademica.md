@@ -85,7 +85,7 @@ case, rather than appear in a disconnected demonstration.
    PDF inventory/import, interface catalog, explicit contract and initial tests.
 2. Rules engine and reviewed knowledge: implemented for Brother; seven reviewed responses, source-restricted PostgreSQL access and a CLI demonstration. Phase 2 owner validation is accepted; two equipment models remain pending.
 3. Streamlit conversations: implemented for Brother; shared rules engine, explicit per-session state, selector/history/reset, references and controlled errors. Owner validation accepted; all three phase-3 checks were reported successful.
-4. Advance-1 validation/package: prepared for Brother; 17 independent GUI conversations, 40 turns, reproducible fresh-schema source import, clean-environment tests and review materials. Package owner acceptance and two further printer models remain pending.
+4. Advance-1 validation/package: prepared for Brother; 22 independent GUI conversations, 50 turns, reproducible fresh-schema source import, clean-environment tests and review materials. Package owner acceptance and two further printer models remain pending.
 
 See `docs/phase1-evidence.md` for executed checks and `docs/user-validation.md`
 for the recorded owner acceptance and observed manual checks.
@@ -99,7 +99,7 @@ for the recorded owner acceptance and observed manual checks.
 | All intent entry → identification → response flows | docs/intents-and-flows.md |
 | Python 3.10+ and functional NLTK rules chatbot | Python 3.12.14; NLTK RegexpTokenizer and rules engine, available through CLI |
 | GitHub | Phase-1 source versioned in private repository; phase-2 commit recorded in Git history |
-| Ten conversations and analysis | 17 independent AppTest GUI conversations, 40 turns; docs/advance1-validation.md and analysis below; single-model scope |
+| Ten conversations and analysis | 22 independent AppTest GUI conversations, 50 turns; docs/advance1-validation.md and analysis below; single-model scope |
 
 Advance 2 (week 5): tokenization, normalization, stopwords, stemming/lemmatization;
 TF-IDF or BoW; Naive Bayes or SVM; CNN transfer learning with ResNet50 or EfficientNet;
@@ -171,7 +171,7 @@ understand arbitrary paraphrases, mixed topics or negation. Missing/unrecognized
 wording may require reformulation, and untested cases can still be misclassified.
 Improve using observed regression failures and the required Advance-2 intent
 dataset/classifier while preserving the repository's independent source gates.
-Owner accepted this phase and supplied a successful CLI transcript; see docs/phase2-owner-validation.md. At phase-2 acceptance, final GUI evaluation was pending; phase 4 now records 17 independent GUI conversations below.
+Owner accepted this phase and supplied a successful CLI transcript; see docs/phase2-owner-validation.md. At phase-2 acceptance, final GUI evaluation was pending; phase 4 now records 22 independent GUI conversations below.
 
 ## Phase 3 implemented web integration
 
@@ -204,7 +204,7 @@ Data-access failures produce a Spanish controlled error, keep history/model and
 allow retry after recovery. Tests simulate the failure without stopping development
 PostgreSQL. Synthetic reviewed records in isolated test schemas keep GUI tests
 independent of private manual files. Owner validation is a separate three-step check,
-recorded in docs/user-validation.md. Phase 4 now supplies the recorded 17-conversation evaluation below.
+recorded in docs/user-validation.md. Phase 4 now supplies the recorded 22-conversation evaluation below.
 
 ## Phase 4 — implemented-scope evaluation and review material
 
@@ -229,11 +229,11 @@ diagram remains future work, including Flask, CNN, agent and public hosting.
 
 ### Method and results
 
-Seventeen conversation cases with expected results were written before execution.
+Twenty-two conversation cases with expected results were written before execution.
 Each starts an independent Streamlit AppTest session against a fresh PostgreSQL
 schema reconstructed from migrations, the original supplied PDFs and reviewed
 knowledge. The validation imported 10 documents/169 pages and 7 reviewed answers.
-All 17 conversations and all 40 turns passed the predefined intent, status, active
+All 22 conversations and all 50 turns passed the predefined intent, status, active
 equipment, physical source-page and visible-reference checks. Full actual inputs
 and replies appear in docs/advance1-validation.md and docs/advance1-conversations.json.
 
@@ -250,8 +250,8 @@ The assistant requested missing equipment and resumed the topic after selection.
 It answered reviewed ink/paper/normal-cleaning topics with source pages, pointed to
 jam diagrams instead of inventing steps, refused unsupported norms and HR queries,
 cleared context for an unapproved printer, and recovered after a simulated DB failure.
-The measured failure turn took 9042.73 ms, while the other 39 AppTest turns averaged
-140.11 ms (range 101.2–276.4 ms). These are UI/framework test durations, not isolated
+The measured failure turn took 9012.88 ms, while the other 49 AppTest turns averaged
+169.86 ms (range 96.89–428.95 ms). These are UI/framework test durations, not isolated
 inference latency or real-network production measurements. Multiple catalog/answer
 connection attempts during reruns are a plausible contributor to the slow failure
 path; reducing repeated checks and reviewing timeouts is a concrete next improvement
@@ -275,3 +275,20 @@ review/submit in Canvas. Colab's original published mention and the student's la
 local-only clarification remain explicitly distinguished. This Markdown draft is
 material for the final technical document, not a claim that its 15–20 pages, video,
 public URL or trained-model metrics have already been produced.
+
+
+### Guided conversation refinement
+
+The interface now offers a hierarchical route: equipment → topic → specific
+question → reviewed orientation. Seven canonical Spanish queries are navigation
+metadata, not a duplicate knowledge base. They enter the same NLTK tokenization,
+intent rules and scope/source gates as free text. The menu only exposes queries
+with currently valid reviewed answers for the selected equipment; submission
+rechecks authorization. Free text remains available for meaningful NLP, ambiguity
+handling and out-of-scope rejection. This preserves the implementation criterion
+while improving usability for a finite rules vocabulary. The guided route does
+not perform symptom diagnosis or certify repair. Four additional real-source GUI
+cases cover each topic; the plural head-cleaning regression is also included.
+The latest expanded suite passed 77 tests in the existing locked development
+environment. The earlier 66-test clean-environment result is historical.
+User acceptance of this interface refinement remains pending.

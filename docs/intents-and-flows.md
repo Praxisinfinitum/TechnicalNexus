@@ -65,3 +65,16 @@ Other two equipment models are not implemented. Equipment aliases currently use 
 model validates reset/isolation behavior but does not demonstrate switching between
 two supported models. User acceptance and ten final integrated conversations remain
 separate tasks. Phase 3 connects this engine to the GUI; no second web UI is built here.
+
+
+## Guided route and rule reuse
+
+Equipment selection precedes topic and specific question. guidance.py defines
+seven labels/canonical queries for four topics (ink, paper/tray, print quality,
+documentation). KnowledgeRepository.find filters available choices using the same
+approval and source applicability gates as answers. Clicking consultation submits
+the canonical text to the existing NLTK/rules service, which rechecks the database.
+No answers are embedded in widgets. Invalidated choices disappear on rerun; the
+free-text route still supports clarification, unknown models and unavailable
+regulations. Reset clears navigation and conversation together. The print-quality
+rule accepts both cabezal and cabezales; excluded chemicals remain blocked.

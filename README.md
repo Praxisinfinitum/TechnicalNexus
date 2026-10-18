@@ -3,6 +3,17 @@
 Equipment-scoped technical assistance grounded in authorized documents.
 Development and documentation are in English; the initial GUI is in Spanish.
 
+## Guided consultation and free text
+
+Select the printer, then a topic and specific question, and click **Consultar
+orientación**. The four topics are ink, paper/tray, print quality and documentation.
+Only questions with currently approved answers and valid sources for the selected
+equipment are offered. Each choice sends a canonical Spanish query through the
+same NLTK/rules service as the chat; the service checks authorization again.
+Options contain no duplicate answer text. Guidance is not a diagnosis or proof of
+repair. Free text remains available, including clarification and scope rejection.
+Reset clears the conversation, equipment and guided selections.
+
 ## Current milestone — Advance 1 review package
 
 Phase 3 integrates the **rules-based maintenance engine into a Spanish Streamlit chat**.
@@ -145,7 +156,7 @@ Python 3.12.14 using `uv sync --frozen --link-mode=copy --python <path>`.
 ## Advance 1 validation package
 
 - [Review route and rubric mapping](docs/advance1-review-package.md)
-- [17 conversations with actual responses](docs/advance1-validation.md)
+- [22 conversations with actual responses](docs/advance1-validation.md)
 - [Machine-readable results](docs/advance1-conversations.json)
 - [Current architecture](docs/architecture/current.svg) and [editable Mermaid](docs/architecture/current.mmd)
 - [Limitations and continuation](docs/improvement-plan.md)
@@ -158,7 +169,7 @@ Reproduce the GUI conversation evidence after normal setup:
 
 The script requires the exact local PDF originals and a separate `_test` database.
 It creates/migrates a unique schema, imports real sources, seeds the seven reviewed
-answers and executes 17 independent AppTest conversations. It records expected vs
+answers and executes 22 independent AppTest conversations. It records expected vs
 actual outputs and removes only its own schema afterward. It does not modify the
 running development database. All predefined checks passed in the recorded run;
 this is functional acceptance evidence, not arbitrary-language accuracy or a

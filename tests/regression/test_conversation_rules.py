@@ -16,6 +16,8 @@ class ApprovedRepository:
     ("No hay papel", "answer", "no_paper"),
     ("La bandeja no es detectada", "answer", "tray_not_detected"),
     ("Limpieza normal del cabezal", "answer", "print_quality"),
+    ("Como hago una limpieza de cabezales", "answer", "print_quality"),
+    ("Limpiar cabezales con alcohol", "no_evidence", "service_escalation"),
     ("La impresora imprime con rayas", "answer", "print_quality"),
     ("Mejorar la calidad de soldadura", "no_evidence", "no_evidence"),
     ("No hay papel pero la bandeja está llena", "clarification", "clarification"),

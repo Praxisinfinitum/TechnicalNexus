@@ -1,4 +1,6 @@
 import os
+from sqlalchemy import select
+from technicalnexus.models import Page
 from streamlit.testing.v1 import AppTest
 from technicalnexus.config import ROOT
 
@@ -59,3 +61,36 @@ def test_data_failure_keeps_history_and_can_recover(reviewed_ink_database, monke
     monkeypatch.setenv("DATABASE_URL", working_url)
     state = send(ui, "Nivel de tinta")
     assert state.messages[-1].references
+
+
+def test_guided_route_matches_text_and_reset_clears_navigation(reviewed_ink_database):
+    ui = app()
+    assert len(ui.selectbox) == 1
+    ui.selectbox(key="equipment_choice").set_value("brother_dcp_t430w").run()
+    assert ui.selectbox(key="guide_topic").options == ["Selecciona un tema", "Tinta"]
+    ui.selectbox(key="guide_topic").set_value("ink").run()
+    ui.selectbox(key="guide_question").set_value("ink_level").run()
+    ui.button(key="guide_submit").click().run()
+    assert not ui.exception
+    guided = ui.session_state["conversation"].messages[-1]
+    assert guided.intent_id == "ink_level" and guided.references
+    assert send(ui, "Nivel de tinta").messages[-1] == guided
+    ui.button(key="reset_chat").click().run()
+    assert len(ui.selectbox) == 1
+    assert not ui.session_state["conversation"].messages
+
+
+def test_revoked_source_hides_guided_options_and_blocks_old_choice(reviewed_ink_database):
+    ui = app()
+    send(ui, "DCP-T430W")
+    ui.selectbox(key="guide_topic").set_value("ink").run()
+    ui.selectbox(key="guide_question").set_value("ink_level").run()
+    page = reviewed_ink_database.scalar(select(Page))
+    page.approved = False
+    reviewed_ink_database.commit()
+    # A click submitted from an old page must not disclose a revoked answer.
+    ui.button(key="guide_submit").click().run()
+    assert not ui.exception
+    assert len(ui.selectbox) == 1
+    assert not ui.session_state["conversation"].messages[-1].references
+    assert send(ui, "Nivel de tinta").messages[-1].status == "no_evidence"

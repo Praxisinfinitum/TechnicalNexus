@@ -61,3 +61,13 @@ Approximately 5–10 minutes total; no need to rerun all 17 conversations manual
 
 Final acceptance applies only to available Brother validation. Additional supported
 models and their evidence remain an explicit follow-up, not an implicit approval.
+
+
+## Guided interface refinement — owner checks pending
+
+1. Select Brother → Calidad de impresión → limpieza normal → Consultar orientación.
+   Confirm conditions and the physical page-4 source.
+2. Type “Como hago una limpieza de cabezales”, then “qué norma ISO aplica”.
+   Confirm normal-cleaning guidance, then rejection of unavailable regulations.
+3. Reset. Confirm equipment, topic/question and history clear; select Brother
+   again and use Tinta → level check. No need to repeat the full automated suite.

@@ -30,7 +30,7 @@ def technical_intents(text: str) -> list[str]:
         ("after_refill", r"\b(?:ya|despues|tras)\b.*\b(?:rellen\w*|recarg\w*)\b|\b(?:rellene|recargue)\b|\bled\b.*\btinta\b"),
         ("no_paper", r"\b(?:no hay|sin|falta|cargar) papel\b|\bpapel no cargado\b"),
         ("tray_not_detected", r"\bbandeja\b.*\b(?:no|sin)\b.*\bdetect\w*\b|\bno detect\w*\b.*\bbandeja\b"),
-        ("print_quality", r"\bcalidad (?:de )?(?:la )?impresion\b|\b(?:rayas|bandas|lineas)\b.*\b(?:impresion|impresa|impresas|imprimir)\b|\b(?:imprime|impresion|hoja|paginas)\b.*\b(?:rayas|bandas|lineas)\b|\b(?:limpiar|limpieza)\b.*\bcabezal\b"),
+        ("print_quality", r"\bcalidad (?:de )?(?:la )?impresion\b|\b(?:rayas|bandas|lineas)\b.*\b(?:impresion|impresa|impresas|imprimir)\b|\b(?:imprime|impresion|hoja|paginas)\b.*\b(?:rayas|bandas|lineas)\b|\b(?:limpiar|limpieza)\b.*\bcabezal(?:es)?\b"),
         ("paper_jam", r"\b(?:atasco|atascado|atascada|atorado|atorada)\b"),
         ("manual_location", r"\b(?:manual|manuales|documentacion|guia del usuario)\b"),
     ]

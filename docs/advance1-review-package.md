@@ -14,7 +14,7 @@ the inspected rubric. Do not submit this package as completed three-model eviden
    problem, objective, users, architecture and actual development stages.
 3. Inspect the [architecture SVG](architecture/current.svg) or editable
    [Mermaid source](architecture/current.mmd), and [intent flows](intents-and-flows.md).
-4. Review [17-conversation validation](advance1-validation.md), including actual
+4. Review [22-conversation validation](advance1-validation.md), including actual
    responses, and [machine-readable evidence](advance1-conversations.json).
 5. Confirm [owner validation](user-validation.md), [source inventory](source-inventory.md)
    and [future improvements](improvement-plan.md).
@@ -27,7 +27,7 @@ the inspected rubric. Do not submit this package as completed three-model eviden
 | Conceptual architecture | 20 | Current SVG/Mermaid and academic draft: user, chatbot, knowledge base, conversation and data exchanges. Final CNN/agent/API diagram is explicitly future work. |
 | Intents and conversation flow | 20 | intents-and-flows.md maps every defined intent/control/error to input → identification → response. GUI validation covers user-reachable flows; unsupported contract language is checked by automated regression. |
 | Rules implementation | 25 | Python 3.12.14, NLTK tokenization and deterministic rules; Streamlit adapter and PostgreSQL gates; private GitHub code. Colab omitted by the owner's explicit clarification, despite its mention in the originally read page. |
-| Tests and analysis | 15 | 17 independent GUI conversations, 40 input/response turns, exact source pages and expected/actual checks; fresh-schema import and 66 passing accumulated tests in a clean environment. Single-model scope and phrase limitations remain explicit. |
+| Tests and analysis | 15 | 22 independent GUI conversations, 50 input/response turns, exact source pages and expected/actual checks; fresh-schema import; latest expanded suite: 77 passing tests in .venv (previous clean-environment run: 66 tests). Single-model scope and phrase limitations remain explicit. |
 
 Private source repository: https://github.com/Praxisinfinitum/TechnicalNexus
 

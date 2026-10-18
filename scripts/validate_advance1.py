@@ -98,7 +98,14 @@ def execute_case(case, scoped):
         if step.get("simulate_database_failure"):
             os.environ["DATABASE_URL"] = "postgresql+psycopg://test:unusable@127.0.0.1:1/missing"
         try:
-            ui.chat_input[0].set_value(step["input"]).run(timeout=30)
+            if "guided_intent" in step:
+                from technicalnexus.guidance import OPTIONS
+                option = next(option for option in OPTIONS if option.intent_id == step["guided_intent"])
+                ui.selectbox(key="guide_topic").set_value(option.topic).run(timeout=30)
+                ui.selectbox(key="guide_question").set_value(option.intent_id).run(timeout=30)
+                ui.button(key="guide_submit").click().run(timeout=30)
+            else:
+                ui.chat_input[0].set_value(step["input"]).run(timeout=30)
         finally:
             os.environ["DATABASE_URL"] = scoped
         state = ui.session_state["conversation"]
@@ -113,7 +120,7 @@ def execute_case(case, scoped):
             "equipment": state.context.equipment_id == step["expected_equipment"],
             "visible_references": all(any(f"pág. {page}" in caption and "Fuente:" in caption for caption in captions) for page in pages),
         }
-        records.append({"input": step["input"], "expected": {k.removeprefix("expected_"): v for k, v in step.items() if k.startswith("expected_")},
+        records.append({"input": step["input"], "route": "guided" if "guided_intent" in step else "free_text", "expected": {k.removeprefix("expected_"): v for k, v in step.items() if k.startswith("expected_")},
             "actual": {"status": actual.status, "intent": actual.intent_id, "response": actual.text,
                 "equipment": state.context.equipment_id, "references": [
                     {"file": ref.filename, "document_sha256": ref.document_id, "page": ref.page_number,

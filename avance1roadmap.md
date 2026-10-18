@@ -75,7 +75,7 @@ actual results; no fabricated executions, metrics or screenshots.
 | 1. Foundation, scope, architecture | Implemented for Brother; models 2/3 deferred | Passed in development and clean environment | Accepted | docs/phase1-evidence.md; docs/user-validation.md |
 | 2. Rules engine and approved knowledge | Implemented for Brother; models 2/3 deferred | 58 passed; see docs/phase2-evidence.md | Accepted | Seven reviewed answers; CLI and five real demo conversations |
 | 3. Streamlit conversations | Implemented for Brother | 66 passed; see docs/phase3-evidence.md | Accepted | Spanish chat, per-session state, selector/reset and visible references |
-| 4. Advance 1 validation/package | Ready for available Brother scope; models 2/3 deferred | 17/17 conversations, 40/40 turns; 66 tests in clean environment | Pending | docs/advance1-review-package.md and docs/phase4-evidence.md |
+| 4. Advance 1 validation/package | Ready for available Brother scope; models 2/3 deferred | 17/22 conversations, 50/50 turns; 66 tests in clean environment | Pending | docs/advance1-review-package.md and docs/phase4-evidence.md |
 
 ### Phase 1 — Foundation, reproducible environment and source scope
 
@@ -292,9 +292,9 @@ No new model, API, image service or public deployment was introduced. Owner conf
 
 ## 11. Phase 4 validation/package record
 
-A predefined 17-conversation set executed through real Streamlit AppTest against
+A predefined 22-conversation set executed through real Streamlit AppTest against
 a freshly migrated PostgreSQL test schema containing the actual supplied PDFs and
-reviewed answers. All 40 turns passed expected status/intent/equipment/source-page
+reviewed answers. All 50 turns passed expected status/intent/equipment/source-page
 and visible-reference checks. The schema was removed afterward; no development
 cleanup occurred. A separate clean environment rebuilt from uv.lock passed all
 66 accumulated tests. Evidence, analysis, source hashes and code/input fingerprint
@@ -306,3 +306,25 @@ The academic note remains a living draft, not the final 15–20-page report. Pac
 acceptance by the owner, two models and instructor access to the private repository
 remain pending. No Canvas delivery or later-coursework development is authorized
 by marking this validation work prepared.
+
+
+## 12. Guided navigation refinement
+
+Implemented equipment → topic → specific question → referenced orientation, with
+free-text chat retained. Seven canonical queries in guidance.py reuse NLTK and
+all scope/source gates; they do not store answers. Available choices are filtered
+through KnowledgeRepository.find for the selected instance/model, then rechecked
+when submitted. A revoked source hides its option; no diagnosis is inferred.
+The plural “cabezales” is now recognized, while alcohol/special-cleaning requests
+remain excluded. Latest regression: 77 tests passed in 22.01 seconds in .venv.
+The earlier clean-lock environment run had 66 tests; it predates this refinement.
+The regenerated evidence covers 22 conversations / 50 turns, including guided
+routes across all four topics. New UX owner validation remains pending.
+
+Owner checks (brief):
+1. Select Brother → Calidad de impresión → limpieza normal → Consultar orientación;
+   confirm the response, conditions and page-4 reference.
+2. Write “Como hago una limpieza de cabezales”, then “qué norma ISO aplica”;
+   confirm normal-cleaning guidance followed by refusal of unavailable norms.
+3. Restart the conversation; confirm equipment, navigation and history clear,
+   then select Brother → Tinta and consult the ink level.

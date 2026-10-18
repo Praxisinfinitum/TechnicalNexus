@@ -7,7 +7,7 @@ complete on the basis of this single-model package.
 
 ## Executed checks
 
-- 17 independent Streamlit AppTest conversations, 40 turns: **17/17 and 40/40 passed**
+- 22 independent Streamlit AppTest conversations, 50 turns: **22/22 and 50/50 passed**
   the predefined checks. Cases were written before execution and include actual
   source-backed replies, ambiguity, missing model, HR, absent norms, unsupported
   device, reset, closure, excluded procedures and DB failure/recovery.
@@ -21,8 +21,8 @@ complete on the basis of this single-model package.
 - Rebuilt `work/phase4-venv` from uv.lock using Python 3.12.14 and copy mode:
   **66 accumulated tests passed in 27.05 s**. PostgreSQL 18.3 was used for persistence
   integration. Linux/production and concurrent load were not validated.
-- GUI evaluation run: 39 normal AppTest turns averaged 140.11 ms, range
-  101.2–276.4 ms. The simulated unavailable endpoint turn took 9042.73 ms.
+- Latest GUI evaluation: 49 normal turns averaged 169.86 ms, range
+  96.89–428.95 ms. The simulated unavailable endpoint turn took 9012.88 ms.
   These measurements include UI/framework/database work and are not production
   service-latency or model-accuracy benchmarks.
 - The chat adapter now records intent IDs as internal evidence metadata, including
@@ -35,7 +35,7 @@ intent flows, reviewed knowledge manifest, source inventory, transcripts and
 expected cases, regression suite, validation runner and improvement plan.
 See advance1-review-package.md for the criterion-to-evidence map and review route.
 Earlier phase-3 browser screenshot remains available as agent browser evidence;
-the new 17-conversation report is explicitly AppTest execution.
+the new 22-conversation report is explicitly AppTest execution.
 
 ## Observed limitations and acceptance boundaries
 
@@ -60,3 +60,14 @@ is represented as complete.
 - GitHub CLI verified owner access and PRIVATE visibility for Praxisinfinitum/TechnicalNexus.
   This does not prove instructor access or change sharing permissions.
 - Development PostgreSQL remained healthy after the isolated validation run.
+
+
+## Guided interface refinement validation
+
+Latest run: **77 tests passed in 22.01 seconds** in .venv, including all seven
+canonical query mappings, guided/text answer equivalence, navigation reset and
+revoked-source filtering. The prior clean-environment 66-test result above is
+historical. Regenerated real-source evidence: **22/22 conversations, 50/50 turns**,
+including four guided topics and the owner-reported plural cleaning phrase.
+Guided turns include selector interactions and are not comparable with isolated
+inference latency. Owner acceptance of the new interface remains pending.

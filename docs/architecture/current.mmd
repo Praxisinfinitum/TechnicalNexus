@@ -1,5 +1,9 @@
 flowchart TD
-    USER[User: Spanish text and equipment selection] --> UI[Streamlit chat and catalog]
+    USER[User: equipment, guided options or Spanish text] --> UI[Streamlit guided navigation, chat and catalog]
+    UI --> NAV[Topic and question: canonical query]
+    NAV --> SERVICE
+    REPO --> FILTER[Only currently reviewed options]
+    FILTER --> UI
     UI --> STATE[Per-session history and context]
     STATE --> SERVICE[Application service]
     SERVICE --> RULES[Existing NLTK rules and scope gates]
