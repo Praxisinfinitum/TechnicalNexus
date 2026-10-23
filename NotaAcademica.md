@@ -1,294 +1,225 @@
 # TechnicalNexus — living academic draft
 
-**Status:** phase-4 review draft, 2026-10-17. Not the completed Advance 1 or final report.
-This file accumulates architecture, decisions and evidence for the eventual
-15–20-page final document. Phase 2 adds bounded rules-based maintenance answers. This does not claim trained-model performance, repair success or benefits measured with users.
+**Status: 2026-10-22, three-model implementation draft.** This is source material
+for the Advance-1 deliverable and eventual final report, not the finished academic
+submission. The owner accepted earlier phases for T430W; new-model and package
+acceptance remain pending. No physical repair outcomes or measured user benefits
+are asserted.
 
 ## Problem, users and objective
 
-Office printer users and maintenance personnel must locate instructions across
-manuals, software guides and regional supplements. Applying a procedure to the
-wrong model or treating a generic feature description as device support can
-produce misleading guidance. The need is traceable assistance constrained to
-authorized equipment, sources and procedures.
+Office users and maintenance personnel must find instructions in long manuals
+that cover several models, optional accessories and regions. Similar symptom
+names can lead to applying another printer's procedure. TechnicalNexus aims to
+make reviewed instructions easier to find while retaining the exact equipment,
+source version, page and conditions of each response.
 
-Advance 1 aims to implement and validate a rules-based assistant for approved
-maintenance queries. Brother DCP-T430W is the first selected model; two other
-brands/models will be selected by the student. Reuse across equipment is achieved
-through explicit catalog/applicability and knowledge records, not unrestricted
-answers. Expected benefits are easier source lookup and clearer scope; time and
-error reductions remain hypotheses, not observed results.
+The first domain is office-printer maintenance. Users are office support staff,
+operators and technicians seeking documented user-level orientation. Expected
+benefits include easier retrieval and fewer model-selection mistakes; these are
+hypotheses until evaluated with users, not measured results.
 
-The final objective is an integrated web assistant using NLP, an image classifier
-and a coordinating agent, guiding the same maintenance task with documented
-limits. Images may identify visible print categories; they must not be treated as
-proof of root cause or printer identity without separate validation.
+The selected models are Brother DCP-T430W, Brother DCP-T220 and Canon imageRUNNER
+ADVANCE DX C3935i. Two Brother printers share the brand and ink-tank approach;
+Canon adds a different product family. Three different brands were an early
+diversity preference, not a rubric requirement. Scope is determined per model,
+not inferred from the brand or a shared manual.
 
-## Phase 1 implemented architecture
+## Why a rules-based assistant at this stage
+
+Advance 1 implements a symbolic conversational baseline in Python with meaningful
+NLTK RegexpTokenizer normalization, explicit intent rules and clarification flows.
+It does not train a language model, infer repairs or generate unsourced content.
+Negation is preserved. The finite rules handle tested wording; they do not prove
+universal semantic understanding or guarantee isolation against every paraphrase.
+
+Guided navigation improves usability with that finite vocabulary. After choosing
+an equipment, the user selects a topic and specific question. The menu is filtered
+through the same live approval/source repository as answers. It submits canonical
+Spanish text to the same NLTK/rules service; it is not a separate answer engine.
+Free text remains available for intent identification, clarification and scope
+rejection. Missing evidence returns a controlled refusal.
+
+## Architecture and data exchanges
 
 ```mermaid
 flowchart TD
-    U[User] --> UI[Spanish Streamlit catalog]
-    UI --> CONFIG[Validated environment configuration]
-    UI --> REPO[Catalog repository]
-    REPO --> DB[(PostgreSQL 18)]
-    DB --> REPO
-    REPO --> UI
-    PDF[Local original PDFs] --> IMPORT[Import CLI: extract pages and normalize]
-    MANIFEST[Reviewed title inventory and proposed applicability] --> IMPORT
-    IMPORT --> DB
-    MIG[Alembic migrations and seed] --> DB
-    DB --> REVIEW[Future review and approved responses]
+    U[User: equipment, guided options or Spanish text] --> UI[Streamlit GUI]
+    UI --> C[Per-session model, history and pending intent]
+    C --> S[Application service]
+    S --> N[NLTK normalization and deterministic rules]
+    N --> K[Reviewed knowledge repository]
+    K <--> D[(PostgreSQL)]
+    K --> N
+    N --> S
+    S --> UI
+    K --> O[Only currently approved guided options]
+    O --> UI
+    P[Original PDFs] --> I[Page extraction and normalization]
+    I --> D
+    R[Explicit source review manifests] --> V[Hash, anchor, section and applicability checks]
+    V --> D
 ```
 
-The repository is a data-access boundary, not a GitHub repository in this diagram.
-Streamlit runs locally in Python and presents results in a browser. PostgreSQL is
-a separate local process. PDF text is stored by document hash and physical page;
-raw and normalized text are distinct. Originals remain unchanged. Import alone leaves applicability and page approval pending. Phase 2 explicitly reviews selected source sections for seven scoped answers; extraction success still never grants approval by itself.
+The block diagram is also available as docs/architecture/current.svg and editable
+Mermaid. Streamlit is both the current GUI and local adapter. A reusable service
+opens a short-lived database session and calls the engine. PostgreSQL stores
+instances, equipment, source metadata/pages, intents, reviewed answers and source
+relationships. PDF originals stay external, identified by SHA-256 and paths.
+No SQLite migration, vector search or API is required for this milestone.
 
-The initial reference page was rendered and inspected: it contains multiple
-languages, model groups and columns. Plain extraction is therefore not a faithful
-replacement for the layout. Section-level review and language separation are
-needed before composing Spanish answers. Three empty-text pages and one page
-with replacement characters were flagged during import; OCR is not implemented.
+The GUI keeps each session's history and pending intent in Streamlit session state;
+these are not stored in PostgreSQL. Browser session separation is not production
+authentication or tenant authorization. Each supported-model switch clears the old
+history, pending context and guided choices. Unknown/mixed models clear the active
+equipment. The source catalog is filtered by the selected printer.
 
-No separate backend API, LLM, image model, vector index or trained intent model
-exists yet. The engine now implements the phase-1 request/context/response contract using NLTK tokenization and deterministic rules. It asks for missing models, resumes one pending intent, returns referenced knowledge and handles tested scope/ambiguity cases. State is explicit per caller. Tests cover free-text examples without claiming universal semantic rejection.
+## Current reviewed knowledge and applicability
 
-## Target architecture for the final project (not implemented)
+| Model | Reviewed answers | Initial scope |
+|---|---:|---|
+| Brother DCP-T430W | 7 | Visible ink level, post-refill action, confirmed no-paper, tray insertion, normal head cleaning, jam diagrams and manual location |
+| Brother DCP-T220 | 8 | Its own versions of those seven topics, plus scanner-glass cleaning |
+| Canon C3935i | 4 | Toner-level display, copy-glass cleaning, general jam precautions and manual location |
+
+The T220 refill response uses Detener only if the ink LED flashes; it does not
+borrow the T430W Papel + Atajo Copia combination. For a T220 jam, the documented
+inside-equipment procedure begins by unplugging. Canon's general jam precautions
+say not to power off while clearing the jam. This illustrates why matching a
+symptom without preserving equipment identity is insufficient.
+
+Canon's Spanish PDF is European edition USRMA-8188-03 (2025-09). The enabled toner,
+glass-cleaning and jam sections were cross-checked against official Latin America
+USRMA-8189-03. Physical PDF pages remain the citation anchors. This limited review
+does not authorize regional regulation, electrical specifications, accessory or
+other chapters. The exact online cross-check URLs and PDF hashes are recorded in
+`data/knowledge/canon_c3935i.json` and docs/model-expansion.md.
+
+Import registered 19 document/equipment associations, represented by 16 unique
+PDF hashes and 2,197 extracted pages. Identical software files are stored once;
+their applicability remains a separate relationship for each model. Import and
+classification do not automatically approve technical content. Only the linked
+reviewed sections support the 19 answers. Source review is an agent-assisted
+technical review with owner acceptance pending, not manufacturer certification.
+Original licensed documents remain local and outside Git.
+
+## Intent identification and conversation behavior
+
+The technical intentions are ink_level, after_refill, no_paper, tray_not_detected,
+print_quality, paper_jam, manual_location, toner_level and glass_cleaning. Not every
+intention has an approved answer on every printer. Canon ink/head cleaning and
+Brother toner queries remain without evidence; the engine never substitutes
+another model's answer. See docs/intents-and-flows.md for exact flow definitions.
+
+Control flows include greeting, help, model selection, clarification, reset,
+closure, unsupported equipment/language, unrelated department, unavailable norms,
+excluded repairs and database errors. A query naming two supported printers or a
+contradictory brand/model is rejected rather than merged. A missing model can
+remember one technical intent and resume it after explicit selection.
+
+A response is available only when the exact instance, equipment, intention and
+language match an approved answer with a review note. Every source page must be
+approved, successfully extracted, associated with confirmed model applicability
+and have a section reference. Missing or revoked evidence fails closed. The menu
+uses those same gates, and submitting an option rechecks them. No runtime JSON or
+other-model answer fallback is used when PostgreSQL is unavailable.
+
+## Development phases and reproducibility
+
+1. Foundation: locked Python environment, PostgreSQL/Alembic schema, conservative
+   PDF extraction, initial source inventory and Spanish catalog. Owner accepted.
+2. Rules engine: reviewed T430W responses, CLI, intent precedence and scope tests.
+   Owner supplied successful CLI evidence; see phase2-owner-validation.md.
+3. Streamlit chat: per-session state, model selection, reset, citations and error
+   handling. Owner reported the three original GUI checks successful. Guided
+   navigation and the original user illustration on a blue background were added.
+4. Validation and three-model integration: added exact model aliases, sources,
+   scoped answer manifests, menu filtering and supported-model switching tests.
+   Automated validation is complete for the predefined cases; owner checks pending.
+
+Python 3.12.14 and the existing uv.lock are retained. There are no new packages or
+schema migrations for adding the models. README describes setup, local PostgreSQL,
+import, reviewed-knowledge seeding and execution. The private repository is
+https://github.com/Praxisinfinitum/TechnicalNexus. Instructor access has not yet been
+proven. The originally inspected rubric mentioned Colab; the owner clarified it
+was optional and chose local Streamlit development with GitHub versioning.
+
+## Validation results and practical limits
+
+The predefined evaluation contains **38 independent conversations / 97 turns**
+executed with Streamlit AppTest against a freshly migrated, isolated PostgreSQL
+schema containing the actual original PDFs and reviewed answers. All predefined
+status, intent, active-model, source-page, model-specific text and visible-reference
+checks passed. The generated schema was removed afterwards; development data was
+not cleaned. See docs/advance1-validation.md and advance1-conversations.json for
+actual inputs, outputs, versions, original hashes and code/input fingerprint.
+
+The expanded code suite passed **97 unit, regression, PostgreSQL integration and
+UI tests**. These cover model-switch state, exact repository scope, source
+revocation, guided/text equivalence and unsupported model/procedure inputs. The
+earlier 66-test clean-environment reconstruction is historical; the expanded suite
+was run in the existing locked development environment.
+
+The fixed functional pass rate is not classifier accuracy, proof of arbitrary
+language safety, successful physical repair or production scalability. The
+unavailable-database scenario still takes about nine seconds; repeated requests
+and connection timeouts are an improvement target. UI timings include framework
+and database work. PDF layout still needs visual review. Additional procedures,
+regions and aliases require explicit source review and independent regression.
+
+Three short owner checks are in docs/user-validation.md. Physical maintenance is
+not required to validate this interface. User acceptance, academic-document
+assembly, instructor access and Canvas submission remain pending.
+
+## Rubric traceability for Advance 1
+
+| Criterion | Points | Evidence |
+|---|---:|---|
+| Problem and justification | 20 | Problem, objective, users, scope and expected benefits above |
+| Conceptual architecture | 20 | Current block/flow diagrams and component/data explanation |
+| Intents and conversation flows | 20 | Nine technical intentions, control flows, guided/text routing and limits |
+| Python/NLTK rules implementation | 25 | Shared engine, PostgreSQL gates, local Streamlit and GitHub code |
+| At least ten conversations and analysis | 15 | 38 real-source GUI conversations, 97 turns, tests and improvement analysis |
+
+The recorded rubric does not specify an Advance-1 minimum page count or require
+three printer brands. The facilitator separately requested the architecture block
+diagram. The student reviews, understands and submits the work personally.
+
+## Alignment with Advance 2 and final project
+
+Advance 2 will add a properly separated text dataset, normalization, stopwords,
+stemming/lemmatization, TF-IDF/BoW and NB/SVM evaluation, plus ResNet50/EfficientNet
+transfer learning with accuracy, precision, recall, F1 and confusion matrix. No
+suitable visual dataset has yet been selected. Printer images/classes must have
+provenance and split rules; manual diagrams are not independent training photos.
+
+The final target adds a coordinating reactive/deliberative/hybrid agent and Flask
+REST API used by Streamlit. Text/image predictions contribute to the selected
+printer's case; the existing source/applicability gates remain independent.
+Streamlit Community Cloud plus Cloudflare Tunnel are the selected later delivery
+path; persistent Flask/PostgreSQL hosting is still required because a tunnel is
+not a host. No public deployment, trained classifier or CNN is claimed today.
 
 ```mermaid
 flowchart LR
-    U[User: Spanish text and optional image] --> UI[Streamlit Community Cloud]
-    UI --> T[Cloudflare Tunnel]
-    T --> API[Flask REST API]
-    API --> A[Agent: scope and coordination]
-    A --> NLP[NLP intent classifier and chatbot]
-    NLP --> A
-    A --> V[ResNet50 or EfficientNet visual classifier]
-    V --> A
-    A --> DB[(PostgreSQL: approved scoped knowledge)]
-    DB --> A
-    A --> API
-    API --> UI
+    UI[Streamlit] --> API[Future Flask API]
+    API --> A[Future coordinating agent]
+    A --> T[Future text classifier]
+    A --> V[Future visual classifier]
+    A --> S[Existing scoped answer service]
+    S --> DB[(PostgreSQL and reviewed source links)]
 ```
 
-The tunnel communicates with a continuously available backend; PostgreSQL also
-needs persistent hosting. No provider for these two runtime responsibilities is
-chosen yet. Adding embeddings later is optional and does not replace the required
-text or CNN classifiers. The image class must contribute to the conversational
-case, rather than appear in a disconnected demonstration.
+The final 15–20-page technical report, 5–10-minute video, public URL, integrated
+metrics and deployment evidence belong to later coursework. This living Markdown
+note will supply material for those documents; it is not their completed version.
 
-## Development stages and current evidence
+## Source and evidence references
 
-1. Foundation: pinned Python/uv dependencies, PostgreSQL schema and migration,
-   PDF inventory/import, interface catalog, explicit contract and initial tests.
-2. Rules engine and reviewed knowledge: implemented for Brother; seven reviewed responses, source-restricted PostgreSQL access and a CLI demonstration. Phase 2 owner validation is accepted; two equipment models remain pending.
-3. Streamlit conversations: implemented for Brother; shared rules engine, explicit per-session state, selector/history/reset, references and controlled errors. Owner validation accepted; all three phase-3 checks were reported successful.
-4. Advance-1 validation/package: prepared for Brother; 22 independent GUI conversations, 50 turns, reproducible fresh-schema source import, clean-environment tests and review materials. Package owner acceptance and two further printer models remain pending.
-
-See `docs/phase1-evidence.md` for executed checks and `docs/user-validation.md`
-for the recorded owner acceptance and observed manual checks.
-
-## Rubric traceability and continuation
-
-| Requirement | Evidence / status |
-|---|---|
-| Problem, users, need, objective, scope and benefits | Foundation objective and architecture reviewed by owner |
-| Architecture and component exchanges | Implemented and target diagrams above |
-| All intent entry → identification → response flows | docs/intents-and-flows.md |
-| Python 3.10+ and functional NLTK rules chatbot | Python 3.12.14; NLTK RegexpTokenizer and rules engine, available through CLI |
-| GitHub | Phase-1 source versioned in private repository; phase-2 commit recorded in Git history |
-| Ten conversations and analysis | 22 independent AppTest GUI conversations, 50 turns; docs/advance1-validation.md and analysis below; single-model scope |
-
-Advance 2 (week 5): tokenization, normalization, stopwords, stemming/lemmatization;
-TF-IDF or BoW; Naive Bayes or SVM; CNN transfer learning with ResNet50 or EfficientNet;
-accuracy, precision, recall, F1 and confusion matrix; integrated text/image result.
-Final (week 8): Streamlit + Flask, chatbot NLP + visual classifier + coordinating
-agent, public URL, errors/monitoring, integrated testing and performance/scalability/
-maintainability/ethics analysis. Final deliverables include 15–20 pages, GitHub,
-5–10-minute demo, public URL, architecture, testing/deployment evidence, model/chatbot
-metrics and future improvements. Week 8 is reserved for integration/review/correction.
-
-Course pages previously inspected in the authenticated browser:
-- https://cursos.tecmilenio.mx/courses/254360/assignments/4614153
-- https://cursos.tecmilenio.mx/courses/254360/assignments/4614156
-- https://cursos.tecmilenio.mx/courses/254360/assignments/4614163
-
-Colab appeared in the originally read rubric; the student subsequently clarified
-it is optional and explicitly chose local development. This is a recorded student
-instruction, not a claim that the published page was amended.
-
-## Risks and ethics
-
-Do not transfer procedures across models, infer unsupported network capabilities,
-turn image classes into diagnoses, or approve text automatically after extraction.
-Protect source provenance and private documents; permissions to redistribute
-manuals and future datasets remain to be reviewed. Do not log personal image
-content or publish credentials. Synthetic image transformations must not leak
-between training and test partitions. No inference or user-success metrics exist
-yet, and no production isolation/security guarantee has been evaluated.
-
-## Phase 2 implemented architecture and analysis
-
-```mermaid
-flowchart TD
-    U[User: Spanish text] --> CLI[CLI chat or single query]
-    CLI --> CTX[Explicit model and pending-intent context]
-    CTX --> N[NLTK RegexpTokenizer and normalization]
-    N --> RULES[Scope gates and deterministic intent rules]
-    RULES -->|Missing context or unsupported input| LIMIT[Clarification or limit response]
-    RULES -->|Scoped technical intent| REPO[Reviewed knowledge repository]
-    REPO --> DB[(PostgreSQL: answers and every source approval)]
-    DB --> REPO
-    REPO --> R[Spanish answer plus conditions and page references]
-    LIMIT --> CLI
-    R --> CLI
-    REVIEW[Explicit source and diagram review manifest] --> SEED[Hash-checked seed]
-    SEED --> DB
-```
-
-The CLI was the phase-2 demonstration interface. Phase 3 now connects Streamlit to the same engine rather than create a second implementation. Technical answers require exact instance, equipment, intent and
-language, a reviewed answer, confirmed document applicability and all source pages
-approved for the linked reviewed sections. The JSON review manifest is an import
-record; inference does not consult it as a fallback when PostgreSQL is unavailable.
-
-Reference-guide pages 1–4 were read and rendered for visual checks. Normal head
-cleaning includes button relationships visible in the diagram, not reconstructed
-from interleaved multilingual extraction. The jam answer directs users to the
-diagrams rather than inventing a complete disassembly sequence. Approval notes
-identify agent source review, not human/manufacturer certification. Other manuals
-and procedures are not authorized by association with this equipment folder.
-
-Observed tests found “normal” matching an overbroad “norma” rule; the rule was
-corrected and covered by regression. Quality matching now requires printing or
-head-cleaning context. Five actual PostgreSQL-backed multi-turn CLI conversations
-are in docs/phase2-demo.json. Full test results and limits are in
-docs/phase2-evidence.md. No trained-classifier metrics are available yet.
-
-Main limitation: phrase rules and a finite unrelated-domain vocabulary do not
-understand arbitrary paraphrases, mixed topics or negation. Missing/unrecognized
-wording may require reformulation, and untested cases can still be misclassified.
-Improve using observed regression failures and the required Advance-2 intent
-dataset/classifier while preserving the repository's independent source gates.
-Owner accepted this phase and supplied a successful CLI transcript; see docs/phase2-owner-validation.md. At phase-2 acceptance, final GUI evaluation was pending; phase 4 now records 22 independent GUI conversations below.
-
-## Phase 3 implemented web integration
-
-```mermaid
-flowchart TD
-    U[User: Spanish chat or model selection] --> UI[Streamlit UI]
-    UI --> STATE[Per-session immutable chat state and history]
-    STATE --> SERVICE[Application service: request and response contract]
-    SERVICE --> ENGINE[Existing NLTK rules and scope gates]
-    ENGINE --> REPO[Reviewed knowledge repository]
-    REPO --> DB[(PostgreSQL)]
-    DB --> REPO
-    REPO --> ENGINE
-    ENGINE --> SERVICE
-    SERVICE --> STATE
-    STATE --> VIEW[Spanish response, conditions and source file/page/section]
-    VIEW --> U
-    UI --> RESET[Reset history and equipment]
-    RESET --> STATE
-```
-
-The GUI maintains no separate inference rules. Each query uses explicit model and
-pending-intent context. Selecting an equipment answers a pending model question;
-reset and unknown-model rejection discard technical context. The selector reflects
-model changes typed in chat. A normal rerun retains messages without submitting
-the last question twice. Histories are not persisted in PostgreSQL and are separate
-per Streamlit session; authentication/multi-tenant isolation remains unimplemented.
-
-Data-access failures produce a Spanish controlled error, keep history/model and
-allow retry after recovery. Tests simulate the failure without stopping development
-PostgreSQL. Synthetic reviewed records in isolated test schemas keep GUI tests
-independent of private manual files. Owner validation is a separate three-step check,
-recorded in docs/user-validation.md. Phase 4 now supplies the recorded 22-conversation evaluation below.
-
-## Phase 4 — implemented-scope evaluation and review material
-
-### Why an intelligent assistant is appropriate
-
-Users describe problems with different wording and may omit the model or mix
-procedures. The problem calls for managing conversational context and selecting
-applicable technical knowledge, with a later role for interpreting visual evidence.
-Advance 1 uses a controlled symbolic baseline: NLTK tokenization, explicit intent
-rules and reviewed responses. It does not learn from manuals or infer repairs.
-Subsequent trained NLP and CNN components address broader language/visual variation
-while retaining independent source/applicability checks. This justifies the AI
-project direction without calling the current rules engine a trained model.
-
-### Architecture artifact
-
-![Implemented architecture](docs/architecture/current.svg)
-
-Editable Mermaid source: docs/architecture/current.mmd. The diagram shows actual
-user, chatbot, knowledge base and flow relationships; the earlier final target
-diagram remains future work, including Flask, CNN, agent and public hosting.
-
-### Method and results
-
-Twenty-two conversation cases with expected results were written before execution.
-Each starts an independent Streamlit AppTest session against a fresh PostgreSQL
-schema reconstructed from migrations, the original supplied PDFs and reviewed
-knowledge. The validation imported 10 documents/169 pages and 7 reviewed answers.
-All 22 conversations and all 50 turns passed the predefined intent, status, active
-equipment, physical source-page and visible-reference checks. Full actual inputs
-and replies appear in docs/advance1-validation.md and docs/advance1-conversations.json.
-
-A separately reconstructed Python 3.12.14 environment using uv.lock passed the
-66 accumulated tests. Integration tests and evaluation use PostgreSQL, not SQLite.
-The generated validation schema was removed after execution; development data was
-not cleaned. This documents reproducibility of setup and the tested behavior, not
-production portability, universal language understanding or successful physical
-repairs. Source manifest/code hashes and run metadata identify the evaluated state.
-
-### Observed functioning, limitation and related improvement
-
-The assistant requested missing equipment and resumed the topic after selection.
-It answered reviewed ink/paper/normal-cleaning topics with source pages, pointed to
-jam diagrams instead of inventing steps, refused unsupported norms and HR queries,
-cleared context for an unapproved printer, and recovered after a simulated DB failure.
-The measured failure turn took 9012.88 ms, while the other 49 AppTest turns averaged
-169.86 ms (range 96.89–428.95 ms). These are UI/framework test durations, not isolated
-inference latency or real-network production measurements. Multiple catalog/answer
-connection attempts during reruns are a plausible contributor to the slow failure
-path; reducing repeated checks and reviewing timeouts is a concrete next improvement
-to validate with the same case. An unavailable database must still never trigger
-an invented technical answer.
-
-Only one model is currently available. Unknown-model rejection and session reset
-are tested, but switching between two admitted printers is not. Incorporate the
-other two models and reviewed sources, then extend those cases before declaring
-the planned three-model scope complete. Finite phrase rules remain limited even
-though these fixed cases pass; the later intent dataset needs independent evaluation,
-not reuse of this functional pass rate as classifier accuracy. A complete improvement
-plan is in docs/improvement-plan.md.
-
-### Submission boundary
-
-The evidence package and rubric map are in docs/advance1-review-package.md. Phases
-1–3 are owner accepted; phase-4 package review is pending. The student must confirm
-instructor access to the private repository or an allowed code export and personally
-review/submit in Canvas. Colab's original published mention and the student's later
-local-only clarification remain explicitly distinguished. This Markdown draft is
-material for the final technical document, not a claim that its 15–20 pages, video,
-public URL or trained-model metrics have already been produced.
-
-
-### Guided conversation refinement
-
-The interface now offers a hierarchical route: equipment → topic → specific
-question → reviewed orientation. Seven canonical Spanish queries are navigation
-metadata, not a duplicate knowledge base. They enter the same NLTK tokenization,
-intent rules and scope/source gates as free text. The menu only exposes queries
-with currently valid reviewed answers for the selected equipment; submission
-rechecks authorization. Free text remains available for meaningful NLP, ambiguity
-handling and out-of-scope rejection. This preserves the implementation criterion
-while improving usability for a finite rules vocabulary. The guided route does
-not perform symptom diagnosis or certify repair. Four additional real-source GUI
-cases cover each topic; the plural head-cleaning regression is also included.
-The latest expanded suite passed 77 tests in the existing locked development
-environment. The earlier 66-test clean-environment result is historical.
-User acceptance of this interface refinement remains pending.
+- README.md: setup and app operation.
+- docs/model-expansion.md: reviewed new-model scope and regional checks.
+- docs/source-inventory.md: imported document identities and source links.
+- data/document_manifest.json and data/knowledge/: reproducible metadata/review.
+- docs/advance1-validation.md: executed conversation evidence.
+- docs/advance1-review-package.md: rubric map and delivery boundaries.
+- docs/improvement-plan.md: limitations and later coursework.

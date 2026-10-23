@@ -511,5 +511,500 @@
         "expected_equipment": "brother_dcp_t430w"
       }
     ]
+  },
+  {
+    "id": "C23",
+    "user_need": "DCP-T220 scoped ink_level",
+    "steps": [
+      {
+        "input": "Brother DCP-T220",
+        "expected_intent": "select_equipment",
+        "expected_status": "answer",
+        "expected_pages": [],
+        "expected_equipment": "brother_dcp_t220"
+      },
+      {
+        "input": "Nivel de tinta",
+        "expected_intent": "ink_level",
+        "expected_status": "answer",
+        "expected_pages": [
+          193
+        ],
+        "expected_equipment": "brother_dcp_t220",
+        "guided_intent": "ink_level"
+      }
+    ]
+  },
+  {
+    "id": "C24",
+    "user_need": "DCP-T220 scoped after_refill",
+    "steps": [
+      {
+        "input": "Brother DCP-T220",
+        "expected_intent": "select_equipment",
+        "expected_status": "answer",
+        "expected_pages": [],
+        "expected_equipment": "brother_dcp_t220"
+      },
+      {
+        "input": "Ya rellené la tinta",
+        "expected_intent": "after_refill",
+        "expected_status": "answer",
+        "expected_pages": [
+          196
+        ],
+        "expected_equipment": "brother_dcp_t220",
+        "guided_intent": "after_refill"
+      }
+    ]
+  },
+  {
+    "id": "C25",
+    "user_need": "DCP-T220 scoped no_paper",
+    "steps": [
+      {
+        "input": "Brother DCP-T220",
+        "expected_intent": "select_equipment",
+        "expected_status": "answer",
+        "expected_pages": [],
+        "expected_equipment": "brother_dcp_t220"
+      },
+      {
+        "input": "No hay papel",
+        "expected_intent": "no_paper",
+        "expected_status": "answer",
+        "expected_pages": [
+          165
+        ],
+        "expected_equipment": "brother_dcp_t220",
+        "guided_intent": "no_paper"
+      }
+    ]
+  },
+  {
+    "id": "C26",
+    "user_need": "DCP-T220 scoped tray_not_detected",
+    "steps": [
+      {
+        "input": "Brother DCP-T220",
+        "expected_intent": "select_equipment",
+        "expected_status": "answer",
+        "expected_pages": [],
+        "expected_equipment": "brother_dcp_t220"
+      },
+      {
+        "input": "Bandeja no detectada",
+        "expected_intent": "tray_not_detected",
+        "expected_status": "answer",
+        "expected_pages": [
+          165
+        ],
+        "expected_equipment": "brother_dcp_t220",
+        "guided_intent": "tray_not_detected"
+      }
+    ]
+  },
+  {
+    "id": "C27",
+    "user_need": "DCP-T220 scoped print_quality",
+    "steps": [
+      {
+        "input": "Brother DCP-T220",
+        "expected_intent": "select_equipment",
+        "expected_status": "answer",
+        "expected_pages": [],
+        "expected_equipment": "brother_dcp_t220"
+      },
+      {
+        "input": "Limpieza normal del cabezal",
+        "expected_intent": "print_quality",
+        "expected_status": "answer",
+        "expected_pages": [
+          200
+        ],
+        "expected_equipment": "brother_dcp_t220",
+        "guided_intent": "print_quality"
+      }
+    ]
+  },
+  {
+    "id": "C28",
+    "user_need": "DCP-T220 scoped paper_jam",
+    "steps": [
+      {
+        "input": "Brother DCP-T220",
+        "expected_intent": "select_equipment",
+        "expected_status": "answer",
+        "expected_pages": [],
+        "expected_equipment": "brother_dcp_t220"
+      },
+      {
+        "input": "Atasco de papel",
+        "expected_intent": "paper_jam",
+        "expected_status": "answer",
+        "expected_pages": [
+          170
+        ],
+        "expected_equipment": "brother_dcp_t220",
+        "guided_intent": "paper_jam"
+      }
+    ]
+  },
+  {
+    "id": "C29",
+    "user_need": "DCP-T220 scoped manual_location",
+    "steps": [
+      {
+        "input": "Brother DCP-T220",
+        "expected_intent": "select_equipment",
+        "expected_status": "answer",
+        "expected_pages": [],
+        "expected_equipment": "brother_dcp_t220"
+      },
+      {
+        "input": "Dónde consultar el manual",
+        "expected_intent": "manual_location",
+        "expected_status": "answer",
+        "expected_pages": [
+          1
+        ],
+        "expected_equipment": "brother_dcp_t220",
+        "guided_intent": "manual_location"
+      }
+    ]
+  },
+  {
+    "id": "C30",
+    "user_need": "DCP-T220 scoped glass_cleaning",
+    "steps": [
+      {
+        "input": "Brother DCP-T220",
+        "expected_intent": "select_equipment",
+        "expected_status": "answer",
+        "expected_pages": [],
+        "expected_equipment": "brother_dcp_t220"
+      },
+      {
+        "input": "Limpiar el cristal del escáner",
+        "expected_intent": "glass_cleaning",
+        "expected_status": "answer",
+        "expected_pages": [
+          199
+        ],
+        "expected_equipment": "brother_dcp_t220",
+        "guided_intent": "glass_cleaning"
+      }
+    ]
+  },
+  {
+    "id": "C31",
+    "user_need": "Canon C3935i scoped toner_level",
+    "steps": [
+      {
+        "input": "Canon imageRUNNER ADVANCE DX C3935i",
+        "expected_intent": "select_equipment",
+        "expected_status": "answer",
+        "expected_pages": [],
+        "expected_equipment": "canon_c3935i"
+      },
+      {
+        "input": "Nivel de tóner",
+        "expected_intent": "toner_level",
+        "expected_status": "answer",
+        "expected_pages": [
+          145
+        ],
+        "expected_equipment": "canon_c3935i",
+        "guided_intent": "toner_level"
+      }
+    ]
+  },
+  {
+    "id": "C32",
+    "user_need": "Canon C3935i scoped glass_cleaning",
+    "steps": [
+      {
+        "input": "Canon imageRUNNER ADVANCE DX C3935i",
+        "expected_intent": "select_equipment",
+        "expected_status": "answer",
+        "expected_pages": [],
+        "expected_equipment": "canon_c3935i"
+      },
+      {
+        "input": "Limpiar el cristal del escáner",
+        "expected_intent": "glass_cleaning",
+        "expected_status": "answer",
+        "expected_pages": [
+          103,
+          104
+        ],
+        "expected_equipment": "canon_c3935i",
+        "guided_intent": "glass_cleaning"
+      }
+    ]
+  },
+  {
+    "id": "C33",
+    "user_need": "Canon C3935i scoped paper_jam",
+    "steps": [
+      {
+        "input": "Canon imageRUNNER ADVANCE DX C3935i",
+        "expected_intent": "select_equipment",
+        "expected_status": "answer",
+        "expected_pages": [],
+        "expected_equipment": "canon_c3935i"
+      },
+      {
+        "input": "Atasco de papel",
+        "expected_intent": "paper_jam",
+        "expected_status": "answer",
+        "expected_pages": [
+          148
+        ],
+        "expected_equipment": "canon_c3935i",
+        "guided_intent": "paper_jam"
+      }
+    ]
+  },
+  {
+    "id": "C34",
+    "user_need": "Canon C3935i scoped manual_location",
+    "steps": [
+      {
+        "input": "Canon imageRUNNER ADVANCE DX C3935i",
+        "expected_intent": "select_equipment",
+        "expected_status": "answer",
+        "expected_pages": [],
+        "expected_equipment": "canon_c3935i"
+      },
+      {
+        "input": "Dónde consultar el manual",
+        "expected_intent": "manual_location",
+        "expected_status": "answer",
+        "expected_pages": [
+          1
+        ],
+        "expected_equipment": "canon_c3935i",
+        "guided_intent": "manual_location"
+      }
+    ]
+  },
+  {
+    "id": "C35",
+    "user_need": "Switch supported printers without transplanting jam and refill precautions",
+    "steps": [
+      {
+        "input": "Seleccionar brother_dcp_t220",
+        "expected_intent": "select_equipment",
+        "expected_status": "answer",
+        "expected_pages": [],
+        "expected_equipment": "brother_dcp_t220",
+        "select_equipment": "brother_dcp_t220"
+      },
+      {
+        "input": "Atasco de papel",
+        "expected_intent": "paper_jam",
+        "expected_status": "answer",
+        "expected_pages": [
+          170
+        ],
+        "expected_equipment": "brother_dcp_t220",
+        "expected_text_contains": [
+          "desenchufando"
+        ]
+      },
+      {
+        "input": "Seleccionar canon_c3935i",
+        "expected_intent": "select_equipment",
+        "expected_status": "answer",
+        "expected_pages": [],
+        "expected_equipment": "canon_c3935i",
+        "select_equipment": "canon_c3935i"
+      },
+      {
+        "input": "Atasco de papel",
+        "expected_intent": "paper_jam",
+        "expected_status": "answer",
+        "expected_pages": [
+          148
+        ],
+        "expected_equipment": "canon_c3935i",
+        "expected_text_contains": [
+          "No apagues"
+        ]
+      },
+      {
+        "input": "Seleccionar brother_dcp_t430w",
+        "expected_intent": "select_equipment",
+        "expected_status": "answer",
+        "expected_pages": [],
+        "expected_equipment": "brother_dcp_t430w",
+        "select_equipment": "brother_dcp_t430w"
+      },
+      {
+        "input": "Ya rellené la tinta",
+        "expected_intent": "after_refill",
+        "expected_status": "answer",
+        "expected_pages": [
+          3
+        ],
+        "expected_equipment": "brother_dcp_t430w",
+        "expected_text_contains": [
+          "Papel y Atajo Copia",
+          "tres segundos"
+        ]
+      },
+      {
+        "input": "Seleccionar brother_dcp_t220",
+        "expected_intent": "select_equipment",
+        "expected_status": "answer",
+        "expected_pages": [],
+        "expected_equipment": "brother_dcp_t220",
+        "select_equipment": "brother_dcp_t220"
+      },
+      {
+        "input": "Ya rellené la tinta",
+        "expected_intent": "after_refill",
+        "expected_status": "answer",
+        "expected_pages": [
+          196
+        ],
+        "expected_equipment": "brother_dcp_t220",
+        "expected_text_contains": [
+          "Detener"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "C36",
+    "user_need": "Pending toner question and typed model changes use the selected scope",
+    "steps": [
+      {
+        "input": "Nivel de tóner",
+        "expected_intent": "select_equipment",
+        "expected_status": "clarification",
+        "expected_pages": [],
+        "expected_equipment": null
+      },
+      {
+        "input": "Canon C3935i",
+        "expected_intent": "toner_level",
+        "expected_status": "answer",
+        "expected_pages": [
+          145
+        ],
+        "expected_equipment": "canon_c3935i"
+      },
+      {
+        "input": "Brother DCP-T220",
+        "expected_intent": "select_equipment",
+        "expected_status": "answer",
+        "expected_pages": [],
+        "expected_equipment": "brother_dcp_t220"
+      },
+      {
+        "input": "Nivel de tóner",
+        "expected_intent": "no_evidence",
+        "expected_status": "no_evidence",
+        "expected_pages": [],
+        "expected_equipment": "brother_dcp_t220"
+      },
+      {
+        "input": "Nivel de tinta",
+        "expected_intent": "ink_level",
+        "expected_status": "answer",
+        "expected_pages": [
+          193
+        ],
+        "expected_equipment": "brother_dcp_t220"
+      }
+    ]
+  },
+  {
+    "id": "C37",
+    "user_need": "Mixed admitted models clear context and require a new selection",
+    "steps": [
+      {
+        "input": "Seleccionar canon_c3935i",
+        "expected_intent": "select_equipment",
+        "expected_status": "answer",
+        "expected_pages": [],
+        "expected_equipment": "canon_c3935i",
+        "select_equipment": "canon_c3935i"
+      },
+      {
+        "input": "Compara DCP-T220 y C3935i",
+        "expected_intent": "unsupported_equipment",
+        "expected_status": "out_of_scope",
+        "expected_pages": [],
+        "expected_equipment": null
+      },
+      {
+        "input": "Brother DCP-T220W nivel de tinta",
+        "expected_intent": "unsupported_equipment",
+        "expected_status": "out_of_scope",
+        "expected_pages": [],
+        "expected_equipment": null
+      },
+      {
+        "input": "Nivel de tinta",
+        "expected_intent": "select_equipment",
+        "expected_status": "clarification",
+        "expected_pages": [],
+        "expected_equipment": null
+      },
+      {
+        "input": "DCP-T220",
+        "expected_intent": "ink_level",
+        "expected_status": "answer",
+        "expected_pages": [
+          193
+        ],
+        "expected_equipment": "brother_dcp_t220"
+      }
+    ]
+  },
+  {
+    "id": "C38",
+    "user_need": "Canon never inherits Brother ink or head cleaning and rejects unavailable norms",
+    "steps": [
+      {
+        "input": "Seleccionar canon_c3935i",
+        "expected_intent": "select_equipment",
+        "expected_status": "answer",
+        "expected_pages": [],
+        "expected_equipment": "canon_c3935i",
+        "select_equipment": "canon_c3935i"
+      },
+      {
+        "input": "Nivel de tinta",
+        "expected_intent": "no_evidence",
+        "expected_status": "no_evidence",
+        "expected_pages": [],
+        "expected_equipment": "canon_c3935i"
+      },
+      {
+        "input": "Limpieza normal del cabezal",
+        "expected_intent": "no_evidence",
+        "expected_status": "no_evidence",
+        "expected_pages": [],
+        "expected_equipment": "canon_c3935i"
+      },
+      {
+        "input": "Limpiar con alcohol el cristal",
+        "expected_intent": "service_escalation",
+        "expected_status": "no_evidence",
+        "expected_pages": [],
+        "expected_equipment": "canon_c3935i"
+      },
+      {
+        "input": "Qué norma ISO aplica",
+        "expected_intent": "unavailable_regulation",
+        "expected_status": "no_evidence",
+        "expected_pages": [],
+        "expected_equipment": "canon_c3935i"
+      }
+    ]
   }
 ]

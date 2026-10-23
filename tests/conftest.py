@@ -63,3 +63,25 @@ def reviewed_ink_database(database):
     database.add(AnswerSource(answer_id=answer.id, page_id=page.id, section="Volumen de tinta"))
     database.commit()
     return database
+
+@pytest.fixture
+def reviewed_multi_database(reviewed_ink_database):
+    from technicalnexus.models import Answer, AnswerSource, Applicability, Document, Intent, Page
+    session = reviewed_ink_database
+    for digest, equipment, intent, label in [("d"*64, "brother_dcp_t220", "ink_level", "T220 ink"),
+            ("e"*64, "canon_c3935i", "toner_level", "Canon toner")]:
+        session.add(Document(id=digest, original_filename=equipment+".pdf", relative_path=equipment+".pdf",
+            title=label, document_type="user_guide", language="es", edition="test",
+            provenance="Synthetic test fixture", page_count=1))
+        session.merge(Intent(id=intent, instance_id="office_printer_maintenance", description=label))
+        session.flush()
+        session.add(Applicability(document_id=digest, equipment_id=equipment, status="confirmed", evidence="test"))
+        page = Page(document_id=digest, page_number=1, raw_text=label, normalized_text=label,
+            extraction_status="extracted", approved=True)
+        answer = Answer(equipment_id=equipment, intent_id=intent, language="es", text=label,
+            conditions="Fixture only", review_note="Fixture", approved=True)
+        session.add_all([page, answer])
+        session.flush()
+        session.add(AnswerSource(answer_id=answer.id, page_id=page.id, section=label))
+    session.commit()
+    return session

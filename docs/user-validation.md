@@ -1,3 +1,28 @@
+# Current owner validation — three-model expansion (pending)
+
+2026-10-22. Perform these three checks at http://localhost:8501; about 5 minutes.
+Automated validation already passed; do not repeat the entire test suite manually.
+
+1. **Brother DCP-T220:** choose Tinta → steps after refill, then Calidad de impresión
+   → normal cleaning. Confirm Detener after refill if the ink LED flashes, and
+   Inicio Negro/Inicio Color for cleaning, with physical pages 196 and 200.
+2. **Canon C3935i:** switch the selector; previous history and topic must clear.
+   Consult Tóner y consumibles → toner level and Limpieza del escáner → glass.
+   Confirm references 145 and 103–104. Type “Nivel de tinta” and “Limpieza normal
+   del cabezal”; both must decline without reusing Brother procedures.
+3. **Isolation:** ask about a jam on Canon (do not power off), then switch to T220
+   and ask again (source procedure starts by unplugging). Check distinct filenames
+   and pages 148/170. Try “Compara DCP-T220 y C3935i”; selection must clear.
+
+Owner result: pending. Physical maintenance is not required for these UI checks.
+Academic document assembly, private instructor access and submission remain pending.
+
+---
+
+The following records describe earlier versions and preserve their original
+acceptance status. Their pending-model wording is historical; use the current
+three-model checklist above for this expansion.
+
 # Phase 1 — owner validation
 
 These three checks take approximately 5–10 minutes total. Automated tests have

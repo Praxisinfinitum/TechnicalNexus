@@ -6,12 +6,12 @@ from sqlalchemy import text
 from sqlalchemy.orm import Session
 from technicalnexus.config import ROOT, Settings
 from technicalnexus.database import engine_for, seed_catalog
-from technicalnexus.documents import catalog_rows, import_pdf
-from technicalnexus.scope import INSTANCE_ID
+from technicalnexus.documents import catalog_rows, document_path, import_pdf
+from technicalnexus.scope import INSTANCE_ID, KNOWN_EQUIPMENT
 from technicalnexus.contracts import ConversationContext, QueryRequest
 from technicalnexus.engine import RulesEngine
 from technicalnexus.i18n import translate
-from technicalnexus.knowledge import KnowledgeRepository, load_reviewed_knowledge
+from technicalnexus.knowledge import KnowledgeRepository, load_all_reviewed_knowledge
 
 def main():
     if hasattr(sys.stdout, "reconfigure"):
@@ -19,7 +19,7 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("command", choices=["seed", "import-manuals", "catalog", "health", "seed-knowledge", "chat", "ask"])
     parser.add_argument("--text", help="A single Spanish query for the ask command")
-    parser.add_argument("--equipment", choices=["brother_dcp_t430w"], help="Explicit equipment context for ask")
+    parser.add_argument("--equipment", choices=sorted(KNOWN_EQUIPMENT), help="Explicit equipment context for ask")
     args = parser.parse_args()
     if args.command == "ask" and not args.text:
         parser.error("ask requires --text")
@@ -36,13 +36,13 @@ def main():
             seed_catalog(session)
             metadata = json.loads((ROOT / "data/document_manifest.json").read_text(encoding="utf-8"))
             for entry in metadata:
-                import_pdf(session, settings.manuals_path / entry["filename"], entry, ROOT)
+                import_pdf(session, document_path(settings, entry, ROOT), entry, ROOT)
             session.commit()
             print(f"Registered {len(metadata)} PDFs; no technical answers approved")
         elif args.command == "seed-knowledge":
-            load_reviewed_knowledge(session, ROOT / "data/reviewed_knowledge.json", ROOT)
+            load_all_reviewed_knowledge(session, ROOT)
             session.commit()
-            print("Reviewed Brother knowledge loaded; other sources remain unapproved")
+            print("Reviewed model-specific knowledge loaded; other sources remain unapproved")
         elif args.command in {"chat", "ask"}:
             engine = RulesEngine(KnowledgeRepository(session))
             context = ConversationContext(equipment_id=args.equipment)

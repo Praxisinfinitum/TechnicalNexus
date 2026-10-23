@@ -6,7 +6,7 @@ Development and documentation are in English; the initial GUI is in Spanish.
 ## Guided consultation and free text
 
 Select the printer, then a topic and specific question, and click **Consultar
-orientación**. The four topics are ink, paper/tray, print quality and documentation.
+orientación**. Topics depend on the model: ink, paper/tray, print quality, documentation, toner and scanner cleaning.
 Only questions with currently approved answers and valid sources for the selected
 equipment are offered. Each choice sends a canonical Spanish query through the
 same NLTK/rules service as the chat; the service checks authorization again.
@@ -17,12 +17,10 @@ Reset clears the conversation, equipment and guided selections.
 ## Current milestone — Advance 1 review package
 
 Phase 3 integrates the **rules-based maintenance engine into a Spanish Streamlit chat**.
-The same engine remains available through the CLI; it is not duplicated in the GUI. Only Brother DCP-T430W is selected; two other models
-remain owner decisions. Seven reviewed responses include exact source pages and
-conditions. Unknown regulations, unsupported equipment, unreviewed procedures and
+The same engine remains available through the CLI; it is not duplicated in the GUI. Three models are integrated: Brother DCP-T430W (7 reviewed answers), Brother DCP-T220 (8), and Canon imageRUNNER ADVANCE DX C3935i (4). Each answer includes exact source pages and conditions. Unknown regulations, unsupported equipment, unreviewed procedures and
 missing knowledge produce explicit limits or clarification.
 
-Phases 1–3 are owner-validated for the implemented Brother scope. Phase 4 has a prepared validation/review package; owner package acceptance and the other two models remain pending. No LLM,
+Phases 1–3 are owner-validated for the implemented Brother scope. Phase 4 has a prepared validation/review package; owner package acceptance and manual validation of the expanded three-model scope remain pending. No LLM,
 RAG, embeddings, trained intent/image model, Flask or public deployment exists yet.
 
 ## Prerequisites
@@ -30,7 +28,7 @@ RAG, embeddings, trained intent/image model, Flask or public deployment exists y
 - Windows development environment; Python **3.12.14** and uv **0.13.1** were validated.
 - PostgreSQL **18.3** binaries. The helper defaults to `C:/Program Files/PostgreSQL/18/bin`.
 - Port `55432` available for this project's isolated, loopback-only cluster.
-- Original PDFs under `ManualesDeImpresoras/DCP-T430W/` for document import.
+- Original PDFs in the three model folders under `ManualesDeImpresoras/`; see `data/document_manifest.json` for exact project-relative paths.
   These are local inputs excluded from Git until redistribution rights are reviewed.
 
 Do not use Python 3.14 for this locked environment. An existing Python 3.12 can
@@ -71,7 +69,7 @@ are not uploaded to the private repository automatically.
 
 ## Use the web chat
 
-1. Open `http://localhost:8501` and type a question, or select Brother DCP-T430W first.
+1. Open `http://localhost:8501` and type a question, or select one of the three printers first.
 2. If the model is missing, answer in the chat or use the selector. A pending question
    resumes after a valid selection. Source file, physical PDF page and section appear
    under each technical answer.
@@ -83,8 +81,7 @@ are not uploaded to the private repository automatically.
    the green PostgreSQL indicator. A connection error is explained without credentials
    or driver traces; the history/context remain available so a later query can retry.
 
-Only one model is currently supported, so switching between two supported printers
-cannot yet be demonstrated. Each browser session has separate in-memory state, not
+Changing between supported models starts a new case, clears prior history and navigation, and rechecks the new model's source gates. The source catalog is filtered by the selected equipment. Each browser session has separate in-memory state, not
 shared global context. History is not stored in PostgreSQL and may disappear when
 its WebSocket session ends or the app restarts. Normal Streamlit reruns retain it.
 Browser sessions are not authentication or production multi-tenant isolation.
@@ -102,9 +99,9 @@ Repeated PDF import is keyed by original SHA-256; it does not duplicate pages or
 overwrite reviewed records. Changed PDF bytes create another document identity.
 Changing proposed metadata for an existing hash requires an explicit reviewed
 update, not a silent import overwrite. A manifest `reviewed_document_type` applies
-an explicit owner-reviewed type correction during import without approving pages
+an explicit reviewed type correction during import without approving pages
 or equipment applicability. Individual source download
-URLs were not supplied; provenance records say so instead of inventing URLs.
+URLs were not supplied for the original T430W collection; the newer T220/Canon acquisitions include official URLs and checksums. Shared identical documents are stored once and linked to each equipment with separate applicability gates.
 
 ## Try the phase-2 engine
 
@@ -130,7 +127,7 @@ describes the supported input patterns and response limits.
 
 Knowledge setup is explicit: apply migrations, import the exact PDFs, then seed the
 reviewed manifest. It verifies original hashes, page anchors and applicability, and
-upserts the same seven scoped answers. Other pages remain unapproved. Review notes
+upserts 19 scoped answers across three model manifests (`data/reviewed_knowledge.json` and `data/knowledge/*.json`). Other pages remain unapproved. Review notes
 identify agent source review and the acceptance status at preparation time; owner CLI acceptance is now recorded in docs/phase2-owner-validation.md. They do not claim
 manufacturer certification or approval of every paragraph on a referenced page.
 
@@ -145,7 +142,7 @@ Tests reject a database without a `_test` suffix or one matching development.
 Each integration test migrates a unique schema and removes only that schema.
 Unit and scope regression tests do not use the development database. UI tests use
 Streamlit AppTest. Free-text rules now have unit/regression coverage. This validates tested phrases,
-not universal semantic isolation. Ten final GUI conversations remain phase-4 work.
+not universal semantic isolation. The real-source GUI evaluation is described below.
 
 For a fresh environment verification, create another environment using the same
 lock (`UV_PROJECT_ENVIRONMENT=work/repro-venv` with `uv sync --frozen --link-mode=copy`) and run its
@@ -156,7 +153,7 @@ Python 3.12.14 using `uv sync --frozen --link-mode=copy --python <path>`.
 ## Advance 1 validation package
 
 - [Review route and rubric mapping](docs/advance1-review-package.md)
-- [22 conversations with actual responses](docs/advance1-validation.md)
+- [38 conversations with actual responses](docs/advance1-validation.md)
 - [Machine-readable results](docs/advance1-conversations.json)
 - [Current architecture](docs/architecture/current.svg) and [editable Mermaid](docs/architecture/current.mmd)
 - [Limitations and continuation](docs/improvement-plan.md)
@@ -168,12 +165,12 @@ Reproduce the GUI conversation evidence after normal setup:
 ```
 
 The script requires the exact local PDF originals and a separate `_test` database.
-It creates/migrates a unique schema, imports real sources, seeds the seven reviewed
-answers and executes 22 independent AppTest conversations. It records expected vs
+It creates/migrates a unique schema, imports real sources, seeds the 19 reviewed
+answers and executes 38 independent AppTest conversations. It records expected vs
 actual outputs and removes only its own schema afterward. It does not modify the
 running development database. All predefined checks passed in the recorded run;
 this is functional acceptance evidence, not arbitrary-language accuracy or a
-physical printer trial. Two-model switching remains pending additional equipment.
+physical printer trial. The cases include supported-model switches and explicit checks for different jam and refill instructions.
 
 ## Structure
 
@@ -205,3 +202,17 @@ Cloudflare Tunnel will expose the later Flask service; a tunnel is not hosting.
 
 Repository: https://github.com/Praxisinfinitum/TechnicalNexus (private).
 See [the review package](docs/advance1-review-package.md) and `docs/user-validation.md` for the three phase-4 owner checks.
+
+## Added models — 2026-10-22
+
+See [the model-expansion review](docs/model-expansion.md) for the exact answer
+scope and source review. Canon toner and glass-cleaning options do not expose
+Brother ink/head-cleaning answers. The Canon European Spanish PDF is used for
+stable physical-page references; the three enabled maintenance sections were
+cross-checked against the official Latin America manual. Other regional details,
+regulations and accessories are not authorized by that review.
+
+Import is repeatable and uses explicit `relative_path` entries for new folders.
+`MANUALS_PATH` remains a compatibility override for the original T430W entries.
+All original PDFs remain local, including Canon's personal/non-commercial licensed
+manual; the private repository contains metadata and paraphrased reviewed answers.

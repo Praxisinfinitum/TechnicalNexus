@@ -2,7 +2,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import Session
 from technicalnexus.config import Settings
 from technicalnexus.models import Equipment, Instance
-from technicalnexus.scope import INSTANCE_ID
+from technicalnexus.scope import EQUIPMENT, INSTANCE_ID
 
 def engine_for(url: str):
     Settings(url)  # Enforce PostgreSQL, including integration tests.
@@ -11,5 +11,6 @@ def engine_for(url: str):
 def seed_catalog(session: Session):
     session.merge(Instance(id=INSTANCE_ID, name="Office printer maintenance"))
     session.flush()
-    session.merge(Equipment(id="brother_dcp_t430w", instance_id=INSTANCE_ID, brand="Brother", model="DCP-T430W"))
+    for key, (brand, model) in EQUIPMENT.items():
+        session.merge(Equipment(id=key, instance_id=INSTANCE_ID, brand=brand, model=model))
     session.flush()

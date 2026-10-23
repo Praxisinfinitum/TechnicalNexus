@@ -80,3 +80,17 @@ def test_review_manifest_is_repeatable_and_detects_changed_original(database, tm
     original.write_bytes(b"different-source-version")
     with pytest.raises(ValueError, match="differs"):
         load_reviewed_knowledge(database, manifest, tmp_path)
+
+
+def test_model_specific_lookup_and_revocation_do_not_affect_other_models(reviewed_multi_database):
+    session = reviewed_multi_database
+    repo = KnowledgeRepository(session)
+    assert repo.find(INSTANCE_ID, "brother_dcp_t220", "ink_level", "es").text == "T220 ink"
+    assert repo.find(INSTANCE_ID, "canon_c3935i", "ink_level", "es") is None
+    assert repo.find(INSTANCE_ID, "brother_dcp_t220", "toner_level", "es") is None
+    scope = session.get(Applicability, ("d"*64, "brother_dcp_t220"))
+    scope.status = "excluded"
+    session.flush()
+    assert repo.find(INSTANCE_ID, "brother_dcp_t220", "ink_level", "es") is None
+    assert repo.find(INSTANCE_ID, "brother_dcp_t430w", "ink_level", "es") is not None
+    assert repo.find(INSTANCE_ID, "canon_c3935i", "toner_level", "es") is not None

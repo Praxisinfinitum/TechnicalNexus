@@ -1,15 +1,16 @@
 # TechnicalNexus — Advance 1 roadmap
 
-Updated: 2026-10-17. Active consolidated English plan. Earlier Spanish planning
+Updated: 2026-10-22. Active consolidated English plan. Earlier Spanish planning
 history is retained locally under work/, not as a competing active roadmap.
 This is an execution plan and progress record, not the final academic submission.
 
 ## 1. Agreed scope and principles
 
 Build an equipment-scoped technical assistant. The first domain is office-printer
-maintenance; Brother DCP-T430W is selected. The owner will provide/select two other
-models, aiming for different brands, technologies and capacity. Do not invent
-those models or block independent work while they are pending. The three-model
+maintenance. The owner selected Brother DCP-T430W, Brother DCP-T220 and Canon
+imageRUNNER ADVANCE DX C3935i. All three now have bounded reviewed answer sets.
+The chosen collection has two brands; the earlier diversity goal was a project
+preference, not an extra rubric requirement.
 Advance 1 cannot be declared complete with only Brother.
 
 The instance defines authorized area, equipment, versions and sources. Unknown
@@ -120,7 +121,7 @@ Automated validation:
 
 Owner checks: (1) one query per incorporated model and one manual comparison;
 (2) unrelated/no-evidence query; (3) change equipment and check context/clarification.
-Do not claim completion of all three models while the other manuals are pending.
+Three-model implementation is now present; do not infer owner acceptance or academic submission from automated tests.
 
 ### Phase 3 — Streamlit conversational experience
 
@@ -277,7 +278,7 @@ docs/intents-and-flows.md; five real CLI scenarios are in docs/phase2-demo.json.
 Owner validation accepted with a supplied CLI transcript. No universal scope/semantic-safety guarantee is claimed.
 Two models remain deferred, so the three-model Advance 1 is not complete.
 
-## 10. Phase 3 implementation record
+## 10. Historical phase 3 implementation record
 
 Spanish Streamlit conversations call the same phase-2 engine through a small
 application service. Immutable ChatState/messages live only in st.session_state;
@@ -290,7 +291,7 @@ active model/pending state. Every technical response displays file/page/section.
 Connection failures preserve history and support retry without exposing credentials.
 No new model, API, image service or public deployment was introduced. Owner confirmed all three phase-3 checks successful. Phase 4 validation/package work is ready for owner review for Brother; the other two models remain deferred.
 
-## 11. Phase 4 validation/package record
+## 11. Historical single-model phase 4 validation/package record
 
 A predefined 22-conversation set executed through real Streamlit AppTest against
 a freshly migrated PostgreSQL test schema containing the actual supplied PDFs and
@@ -328,3 +329,23 @@ Owner checks (brief):
    confirm normal-cleaning guidance followed by refusal of unavailable norms.
 3. Restart the conversation; confirm equipment, navigation and history clear,
    then select Brother → Tinta and consult the ink level.
+
+## 13. Three-model integration — current status, 2026-10-22
+
+Earlier phase records document the then-current single-model scope. They do not
+limit the current three-model implementation.
+
+- Added DCP-T220 and Canon C3935i to catalog, aliases, selector and CLI.
+- Registered 19 PDF associations; identical originals share one document hash,
+  while applicability and answers remain equipment-specific.
+- Added 8 T220 answers and 4 Canon answers, for 19 total. No schema migration,
+  LLM, RAG or trained classifier was introduced.
+- Reviewed physical PDF sections; Canon toner, glass and jam procedures were
+  cross-checked with Latin America documentation. No regional regulations approved.
+- Guided options are approval-filtered; supported-model changes clear context,
+  history and guided selections. Mixed model/brand inputs clear the active scope.
+- Expanded real-source validation to 38 conversations and 97 turns, including
+  opposite jam power precautions and different refill-panel actions.
+- See docs/model-expansion.md for current results and three brief owner checks.
+  Prior owner approvals apply to the earlier T430W implementation; new model and
+  package acceptance remain pending. The academic deliverable is still not authored.

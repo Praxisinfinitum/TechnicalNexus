@@ -14,6 +14,13 @@ class ReviewedAnswer:
     conditions: str
     references: tuple[SourceReference, ...]
 
+def reviewed_manifest_paths(root: Path):
+    return (root / "data/reviewed_knowledge.json", *sorted((root / "data/knowledge").glob("*.json")))
+
+def load_all_reviewed_knowledge(session: Session, root: Path):
+    for path in reviewed_manifest_paths(root):
+        load_reviewed_knowledge(session, path, root)
+
 class KnowledgeRepository:
     def __init__(self, session: Session):
         self.session = session

@@ -5,7 +5,7 @@
 <rect width="1100" height="840" fill="#f6f8fb"/>
 <g font-family="Arial, sans-serif" fill="#17324d">
 <text x="550" y="32" text-anchor="middle" font-size="23" font-weight="bold">TechnicalNexus — implemented architecture</text>
-<text x="550" y="57" text-anchor="middle" font-size="14">One supported printer: Brother DCP-T430W · local deployment · Spanish GUI</text>
+<text x="550" y="57" text-anchor="middle" font-size="14">Three printers: Brother DCP-T430W / DCP-T220 · Canon C3935i · local Spanish GUI</text>
 <rect x="380" y="90" width="400" height="60" rx="10" fill="#ffffff" stroke="#91a5b8" stroke-width="1.5"/>
 <text x="580.0" y="125.0" text-anchor="middle" font-size="16">User: equipment / guided options / text</text>
 <rect x="380" y="180" width="400" height="60" rx="10" fill="#e8f2fa" stroke="#91a5b8" stroke-width="1.5"/>

@@ -1,25 +1,22 @@
 # Continuation and improvement plan
 
-## Before claiming the three-model Advance 1 complete
+## Before declaring Advance 1 ready for submission
 
-1. Owner selects the other two printers and provides sources. Record their exact
-   models, technology/capacity and document applicability. Do not infer capability
-   from a folder or a generic software/network supplement.
-2. Extend admitted-model aliases/catalog and reviewed answers; retain the same
-   engine/repository contract. Add source-gate and actual two-supported-model
-   switching cases, not just rejection of an unknown model.
-3. Re-run the full suite and independent GUI evaluation. Keep Brother results as
-   regression and record any changed answers rather than overwriting history claims.
-4. Confirm instructor access to the private code/materials and review final wording
-   with the student. Colab's originally published mention and the owner's local-only
-   decision remain a recorded distinction.
+The owner-selected three printers are integrated as of 2026-10-22. Current code
+contains 19 reviewed answers, and the evaluation covers 38 conversations/97 turns.
+The earlier single-model milestone is preserved in Git and phase evidence.
+
+1. Owner performs the three short model-expansion checks in user-validation.md.
+2. Assemble the actual Advance-1 academic document from the draft and evidence.
+3. Confirm instructor access to private code/materials. Do not publish licensed PDFs.
+4. Keep the facilitator's Colab clarification separate from the originally read page.
 
 ## Observed limitations and concrete improvements
 
 | Observation | Improvement | Validation |
 |---|---|---|
 | Finite rules need explicit phrasing; “normal” initially matched an overbroad normative rule and was corrected during phase 2. | Keep those regression cases; collect owner phrasing and train the required NB/SVM intent model later. Retain independent source/approval gates. | Unseen paraphrase evaluation with per-intent metrics and explicit ambiguous/out-of-domain cases. |
-| Only one model is available; current rejection/reset checks cannot prove switching between two admitted printers. | Add the pending models as reviewed scopes. | Same topic against two supported models, selection change and no cross-model source leakage. |
+| Three scopes now have different procedures and a finite approved knowledge set. | Expand only with explicit source/region review; keep Canon ink/head-cleaning unsupported until appropriate evidence exists. | Preserve model-switch, mixed-model, source revocation and differing jam/refill cases. |
 | The simulated unavailable DB turn took about 9 seconds; normal AppTest turns averaged about 140 ms in this run. These are framework/UI timings, not isolated inference latency. | Avoid repeated health/catalog queries during a single chat rerun; use a bounded health status strategy and review connection timeouts. Do not add an unsourced answer fallback. | Repeat the identical failure/recovery scenario and compare measured duration while preserving history, context and secret redaction. |
 | Multicolumn/multilingual PDF extraction is not a faithful layout representation; three pages were empty and one flagged in the initial inventory. | Continue visual section review; add OCR/layout-aware processing only when necessary, preserving raw text and exact version/page. | Sample comparison with original pages, language separation and anchor/version checks. |
 | Jam guidance intentionally points to diagrams instead of inventing a complete repair sequence. | Review any fuller procedure from an applicable official user guide before adding it. | Source-backed step review, user confirmation and regression; no unattended physical repair claims. |

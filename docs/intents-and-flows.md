@@ -1,13 +1,35 @@
-# Phase 2 — intent catalog and conversation flows
+# Intent catalog and conversation flows — three-model scope
 
-Domain: office-printer maintenance. Equipment: Brother DCP-T430W only. User-facing
+Domain: office-printer maintenance. Equipment: Brother DCP-T430W, Brother DCP-T220 and Canon C3935i. User-facing
 language: Spanish. Rules are deterministic, not a trained intent classifier.
 
 Every row below describes input → identification → associated response. Technical
-responses and conditions are versioned in `data/reviewed_knowledge.json` and loaded
+responses and conditions are versioned in `data/reviewed_knowledge.json` plus `data/knowledge/*.json` and loaded
 into PostgreSQL; the JSON is a reviewed import artifact, not a runtime fallback.
 
-## Technical intents (all require a confirmed supported model)
+## Current technical-intent matrix
+
+All rows require an exact model. A missing entry means no reviewed answer and no
+guided option; it never borrows a response from another printer. Page numbers are
+physical PDF pages. The detailed Spanish text/conditions live in review manifests.
+
+| Intent / example | Identification | T430W | T220 | Canon C3935i |
+|---|---|---|---|---|
+| ink_level / Nivel de tinta | Ink + level/volume | Visible tank level, p. 3 | Own visible level, p. 193 | No evidence |
+| after_refill / Ya rellené la tinta | Completed refill/ink LED | Papel + Atajo Copia, p. 3 | Close caps/cover; Detener if LED flashes, p. 196 | No evidence |
+| no_paper / No hay papel | Explicit absence of paper | Load + Copia controls, p. 2 | Load + Inicio controls, p. 165 | No evidence |
+| tray_not_detected / Bandeja no detectada | Tray + not detected | Slow complete insertion, p. 2 | Own insertion guidance, p. 165 | No evidence |
+| print_quality / Limpieza de cabezales | Head cleaning/print-quality pattern | Normal Copia sequence, p. 4 | Normal Inicio sequence, p. 200 | No evidence |
+| paper_jam / Atasco de papel | Explicit jam | Diagram referral, p. 4 | Refer full illustrated inside-equipment sequence starting unplugged, p. 170 | Follow display, do not power off or force paper, p. 148 |
+| manual_location / Dónde está el manual | Manual/documentation | Official model guide, p. 1 | Own guide, p. 1 | Edition + Latin America link, p. 1 |
+| toner_level / Nivel de tóner | Toner + level/remaining | No evidence | No evidence | Monitor estado/Cancelar → Consumibl./Otros, p. 145 |
+| glass_cleaning / Limpiar el cristal del escáner | Cleaning + glass/scanner | No evidence | Unplug, soft damp cloth, p. 199 | Stop jobs, power off/unplug, supplied cloth, dry/close/restart, pp. 103–104 |
+
+## Original T430W technical-intent details
+
+The following table describes the original T430W response set only; use the matrix
+above for the new models.
+
 
 | ID / user need | Example input | Identification | Associated response / source |
 |---|---|---|---|
@@ -61,17 +83,15 @@ rephrasing, and an unfamiliar mixed-domain request may be misclassified. Continu
 adding observed failures to regression, then evaluate the required NB/SVM classifier
 in Advance 2 without removing source/applicability checks.
 
-Other two equipment models are not implemented. Equipment aliases currently use explicit rules; adding a model requires updating the admitted scope/alias catalog, reviewed knowledge and regression cases. Rejecting a change to an unsupported
-model validates reset/isolation behavior but does not demonstrate switching between
-two supported models. User acceptance and ten final integrated conversations remain
-separate tasks. Phase 3 connects this engine to the GUI; no second web UI is built here.
-
+All three selected models are now implemented with bounded answers. Aliases are
+explicit rules; adding another model requires scope/alias changes, source review
+and regression cases. Approved-model switches and mixed-model refusals are covered
+by current evaluation; owner acceptance of the expansion remains pending.
 
 ## Guided route and rule reuse
 
 Equipment selection precedes topic and specific question. guidance.py defines
-seven labels/canonical queries for four topics (ink, paper/tray, print quality,
-documentation). KnowledgeRepository.find filters available choices using the same
+nine labels/canonical queries across model-filtered topics (ink, paper/tray, print quality, documentation, toner and scanner cleaning). KnowledgeRepository.find filters available choices using the same
 approval and source applicability gates as answers. Clicking consultation submits
 the canonical text to the existing NLTK/rules service, which rechecks the database.
 No answers are embedded in widgets. Invalidated choices disappear on rerun; the

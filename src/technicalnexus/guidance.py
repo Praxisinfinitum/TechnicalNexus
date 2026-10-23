@@ -18,6 +18,8 @@ OPTIONS = (
     GuidedOption("paper_jam", "paper", "guide_jam", "Atasco de papel"),
     GuidedOption("print_quality", "quality", "guide_cleaning", "Limpieza normal del cabezal"),
     GuidedOption("manual_location", "documents", "guide_manual", "Dónde consultar el manual"),
+    GuidedOption("toner_level", "consumables", "guide_toner_level", "Nivel de tóner"),
+    GuidedOption("glass_cleaning", "cleaning", "guide_glass", "Limpiar el cristal del escáner"),
 )
 
 def available_options(repository: KnowledgeRepository, context: ConversationContext):

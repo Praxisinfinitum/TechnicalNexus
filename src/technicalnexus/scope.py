@@ -2,7 +2,13 @@
 from dataclasses import replace
 from technicalnexus.contracts import ConversationContext
 
-KNOWN_EQUIPMENT = {"brother_dcp_t430w"}
+EQUIPMENT = {
+    "brother_dcp_t430w": ("Brother", "DCP-T430W"),
+    "brother_dcp_t220": ("Brother", "DCP-T220"),
+    "canon_c3935i": ("Canon", "imageRUNNER ADVANCE DX C3935i"),
+}
+KNOWN_EQUIPMENT = set(EQUIPMENT)
+EQUIPMENT_LABELS = {key: f"{brand} {model}" for key, (brand, model) in EQUIPMENT.items()}
 INSTANCE_ID = "office_printer_maintenance"
 
 def select_equipment(context: ConversationContext, equipment_id: str) -> ConversationContext:

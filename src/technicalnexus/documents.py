@@ -9,6 +9,16 @@ from sqlalchemy import select
 from sqlalchemy.orm import Session
 from technicalnexus.models import Applicability, Document, Equipment, Page
 
+def document_path(settings, metadata: dict, project_root: Path) -> Path:
+    """Explicit project-relative paths support multiple folders; keep legacy override."""
+    if "relative_path" not in metadata:
+        return settings.manuals_path / metadata["filename"]
+    path = (project_root / metadata["relative_path"]).resolve()
+    path.relative_to((project_root / "ManualesDeImpresoras").resolve())
+    if path.name != metadata["filename"]:
+        raise ValueError("Manifest filename differs from document path")
+    return path
+
 @dataclass(frozen=True)
 class ExtractedPage:
     number: int
@@ -43,13 +53,15 @@ def import_pdf(session: Session, path: Path, metadata: dict, project_root: Path)
     reviewed_type = metadata.get("reviewed_document_type")
     if reviewed_type is not None and reviewed_type not in {
         "licensing", "quick_setup", "product_safety", "network_security", "reference",
-        "wifi_channels", "software_guide", "driver_guide", "unclassified",
+        "wifi_channels", "software_guide", "driver_guide", "user_guide", "unclassified",
     }:
         raise ValueError("Unknown reviewed document type")
     equipment_id = metadata["equipment_id"]
     if session.get(Equipment, equipment_id) is None:
         raise ValueError("Unknown equipment")
     digest = sha256(path.read_bytes()).hexdigest()
+    if metadata.get("sha256", digest) != digest:
+        raise ValueError("PDF differs from acquired source checksum")
     existing = session.get(Document, digest)
     if existing is not None:
         if reviewed_type is not None:
@@ -65,7 +77,7 @@ def import_pdf(session: Session, path: Path, metadata: dict, project_root: Path)
         relative_path=path.resolve().relative_to(project_root.resolve()).as_posix(),
         title=metadata["title"], document_type=reviewed_type or classify_document(pages[0].normalized_text),
         language=metadata["language"], edition=metadata["edition"], source_url=metadata.get("source_url"),
-        provenance="User-provided local PDF; individual download URL not supplied", page_count=len(pages),
+        provenance=metadata.get("provenance", "User-provided local PDF; individual download URL not supplied"), page_count=len(pages),
         classification_reviewed=reviewed_type is not None)
     session.add(document)
     session.flush()
@@ -77,9 +89,11 @@ def import_pdf(session: Session, path: Path, metadata: dict, project_root: Path)
     session.flush()
     return document
 
-def catalog_rows(session: Session, instance_id: str) -> list[dict]:
+def catalog_rows(session: Session, instance_id: str, equipment_id: str | None = None) -> list[dict]:
     statement = (select(Document, Equipment).join(Applicability, Applicability.document_id == Document.id)
                  .join(Equipment, Equipment.id == Applicability.equipment_id)
                  .where(Equipment.instance_id == instance_id).order_by(Document.original_filename))
+    if equipment_id is not None:
+        statement = statement.where(Equipment.id == equipment_id)
     return [{"model": e.model, "file": d.original_filename, "document": d.title,
              "pages": d.page_count, "type": d.document_type} for d, e in session.execute(statement)]

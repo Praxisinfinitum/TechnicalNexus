@@ -6,8 +6,8 @@ flowchart TD
     FILTER --> UI
     UI --> STATE[Per-session history and context]
     STATE --> SERVICE[Application service]
-    SERVICE --> RULES[Existing NLTK rules and scope gates]
-    RULES --> REPO[Reviewed knowledge repository]
+    SERVICE --> RULES[NLTK rules and exact model scope gates]
+    RULES --> REPO[19 model-scoped reviewed answers]
     REPO --> DB[(PostgreSQL)]
     DB --> REPO
     REPO --> RULES

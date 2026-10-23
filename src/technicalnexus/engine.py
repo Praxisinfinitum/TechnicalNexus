@@ -6,11 +6,15 @@ from nltk.tokenize import RegexpTokenizer
 from technicalnexus.contracts import ConversationContext, EngineResponse, QueryRequest, ResponseStatus
 from technicalnexus.i18n import translate
 from technicalnexus.knowledge import ReviewedAnswer
-from technicalnexus.scope import INSTANCE_ID, KNOWN_EQUIPMENT, select_equipment
+from technicalnexus.scope import EQUIPMENT, EQUIPMENT_LABELS, INSTANCE_ID, KNOWN_EQUIPMENT, select_equipment
 
 TOKENIZER = RegexpTokenizer(r"[a-z]+|\d+")
-SUPPORTED_MODEL = re.compile(r"\b(?:dcp )?t 430 w\b")
-OTHER_MODEL = re.compile(r"\b(?:dcp|mfc|hl|t|l|g|laserjet|deskjet|pixma) (?:[a-z] )?\d+(?: [a-z]+)?\b")
+SUPPORTED_MODELS = {
+    "brother_dcp_t430w": re.compile(r"\b(?:dcp )?t 430 w\b"),
+    "brother_dcp_t220": re.compile(r"\b(?:dcp )?t 220\b(?! [a-z]\b)"),
+    "canon_c3935i": re.compile(r"\bc 3935 i\b"),
+}
+OTHER_MODEL = re.compile(r"\b(?:dcp|mfc|hl|t|l|g|c|laserjet|deskjet|pixma) (?:[a-z] )?\d+(?: [a-z]+)?\b")
 
 class AnswerRepository(Protocol):
     def find(self, instance_id: str, equipment_id: str, intent_id: str, language: str) -> ReviewedAnswer | None: ...
@@ -33,6 +37,8 @@ def technical_intents(text: str) -> list[str]:
         ("print_quality", r"\bcalidad (?:de )?(?:la )?impresion\b|\b(?:rayas|bandas|lineas)\b.*\b(?:impresion|impresa|impresas|imprimir)\b|\b(?:imprime|impresion|hoja|paginas)\b.*\b(?:rayas|bandas|lineas)\b|\b(?:limpiar|limpieza)\b.*\bcabezal(?:es)?\b"),
         ("paper_jam", r"\b(?:atasco|atascado|atascada|atorado|atorada)\b"),
         ("manual_location", r"\b(?:manual|manuales|documentacion|guia del usuario)\b"),
+        ("toner_level", r"\b(?:nivel|niveles|cantidad|restante|queda|poco|bajo)\b.*\btoner\b|\btoner\b.*\b(?:nivel|niveles|cantidad|restante|queda|bajo)\b"),
+        ("glass_cleaning", r"\b(?:limpiar|limpieza)\b.*\b(?:cristal|escaner)\b"),
     ]
     for intent, pattern in rules:
         if matches(pattern, text):
@@ -73,12 +79,20 @@ class RulesEngine:
         if matches(r"\b(?:desmont\w*|desarm\w*|repar\w*|fusor|voltaje|electronic\w*|alcohol|solvente\w*|acetona|limpieza especial)\b", text):
             return result(ResponseStatus.NO_EVIDENCE, "service_escalation", "engine_service")
 
-        supported = bool(SUPPORTED_MODEL.search(text))
-        without_supported = SUPPORTED_MODEL.sub("", text)
+        selected = [key for key, pattern in SUPPORTED_MODELS.items() if pattern.search(text)]
+        without_supported = text
+        for pattern in SUPPORTED_MODELS.values():
+            without_supported = pattern.sub("", without_supported)
         unknown_model = OTHER_MODEL.search(without_supported)
-        other_brand = matches(r"\b(?:hp|canon|epson|xerox|lexmark|samsung|ricoh)\b", text)
-        if unknown_model or other_brand:
+        other_brand = matches(r"\b(?:hp|epson|xerox|lexmark|samsung|ricoh)\b", text)
+        brands = {brand for brand in ("brother", "canon") if matches(r"\b" + brand + r"\b", text)}
+        if (unknown_model or other_brand or len(selected) > 1 or len(brands) > 1
+                or (selected and brands and EQUIPMENT[selected[0]][0].casefold() not in brands)):
             return result(ResponseStatus.OUT_OF_SCOPE, "unsupported_equipment", "engine_unknown_model", ConversationContext())
+        supported = bool(selected)
+        if not supported and brands and (context.equipment_id is None
+                or EQUIPMENT[context.equipment_id][0].casefold() not in brands):
+            return result(ResponseStatus.CLARIFICATION, "select_equipment", "engine_select", ConversationContext())
         if text in {"adios", "salir", "hasta luego", "terminar", "cerrar"}:
             return result(ResponseStatus.ANSWER, "goodbye", "engine_goodbye", ConversationContext())
         if text in {"reiniciar", "reiniciar conversacion", "nuevo caso", "reset"}:
@@ -94,7 +108,10 @@ class RulesEngine:
             # A fresh explicit model selection resets pending technical state; a reply
             # to a model clarification can resume exactly one remembered intent.
             previous_pending = context.pending_fields
-            context = select_equipment(context, "brother_dcp_t430w")
+            previous_equipment = context.equipment_id
+            context = select_equipment(context, selected[0])
+            if previous_equipment is not None:
+                previous_pending = ()  # Never carry a pending intent across model switches.
         else:
             previous_pending = ()
         intents = technical_intents(text)
@@ -105,7 +122,8 @@ class RulesEngine:
             intents = [previous_pending[0].split(":", 1)[1]]
         if not intents:
             if supported:
-                return result(ResponseStatus.ANSWER, "select_equipment", "engine_selected", context)
+                return EngineResponse(ResponseStatus.ANSWER, "select_equipment",
+                    translate("engine_selected").format(model=EQUIPMENT_LABELS[context.equipment_id]), context)
             if "brother" in text or matches(r"\b(?:mantenimiento|impresora|tinta|papel)\b", text):
                 return result(ResponseStatus.CLARIFICATION, "clarification", "engine_detail", context)
             return result(ResponseStatus.NO_EVIDENCE, "no_evidence", "engine_no_evidence", context)

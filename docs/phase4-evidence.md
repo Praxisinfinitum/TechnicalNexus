@@ -1,3 +1,21 @@
+# Current phase-4 evidence — three-model expansion
+
+2026-10-22: all 38 real-source GUI conversations / 96 turns passed, using a freshly
+migrated test schema. Import resulted in 16 unique PDFs / 2,197 pages and 19
+reviewed answers. There are 19 document-to-equipment associations because three
+identical software documents are deduplicated by SHA-256. The dedicated schema
+was removed after validation; development data was not cleaned.
+
+The expanded suite passed 97 tests in 27.93 seconds. See model-expansion.md for
+scope, regional review and owner checks. No new dependencies or database migration.
+The PDF originals remain local and excluded from Git. The earlier 66-test clean
+lock reconstruction is historical; it is not a fresh reconstruction of this run.
+
+Owner acceptance of this expansion and the academic package remains pending.
+The following sections preserve the earlier single-model record for traceability.
+
+---
+
 # Phase 4 — validation and review package
 
 Status: validation/package implementation ready for Brother DCP-T430W; owner

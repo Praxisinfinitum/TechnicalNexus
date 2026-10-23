@@ -1,0 +1,97 @@
+{
+  "instance_id": "office_printer_maintenance",
+  "equipment_id": "canon_c3935i",
+  "review_note": "Codex source review 2026-10-22: selected PDF pages visually reviewed; toner, glass cleaning and jam cautions cross-checked against official Latin America HTML sections. Scope limited to these matched procedures. Owner acceptance pending; not manufacturer certification.",
+  "applicability_review": "C3935i explicitly listed on cover. European PDF used for stable physical-page citations; selected procedures cross-checked with Latin America USRMA-8189-03. No transfer of regional regulation/accessory claims.",
+  "answers": [
+    {
+      "intent_id": "toner_level",
+      "description": "Check remaining toner on the panel.",
+      "text": "En la Canon C3935i, abre Monitor estado/Cancelar y selecciona Consumibl./Otros para consultar el nivel de tóner restante.",
+      "conditions": "Consulta del indicador del equipo, no sustitución ni selección de cartucho. No se aplican instrucciones para tanques de tinta.",
+      "sources": [
+        {
+          "filename": "Canon_C3935i_User_Guide_es-ES.pdf",
+          "sha256": "89caa53ef13e0217657e33c41eb605a51d09746e2cc25aa4a46805b57c2baa52",
+          "page": 145,
+          "section": "Comprobación del nivel de tóner restante (p. impresa 131)",
+          "anchors": [
+            "Monitor estado/Cancelar",
+            "<Consumibl./Otros>"
+          ]
+        }
+      ]
+    },
+    {
+      "intent_id": "glass_cleaning",
+      "description": "Clean the copy glass and feeder underside only.",
+      "text": "En la Canon C3935i, comprueba que puedes detener los trabajos, apaga el equipo y desenchúfalo. Abre el alimentador y limpia el cristal de copia con el paño suministrado, limpio y seco. Para la parte opuesta del alimentador, usa un paño suave ligeramente humedecido y bien escurrido si hace falta, y luego uno seco. Espera a que todo se seque, cierra el alimentador con cuidado, conecta el equipo y enciéndelo.",
+      "conditions": "Sólo cristal de copia y parte opuesta del alimentador, siguiendo las ilustraciones. Apagar durante un trabajo puede interrumpirlo o dañar datos. No incluye rodillos, cristal antipolvo ni desmontaje; consulta soporte si la suciedad persiste.",
+      "sources": [
+        {
+          "filename": "Canon_C3935i_User_Guide_es-ES.pdf",
+          "sha256": "89caa53ef13e0217657e33c41eb605a51d09746e2cc25aa4a46805b57c2baa52",
+          "page": 103,
+          "section": "Limpiar el cristal de copia — pasos 1–3 (p. impresa 89)",
+          "anchors": [
+            "Apague el equipo",
+            "paño que se suministr",
+            "Abra el alimentador"
+          ]
+        },
+        {
+          "filename": "Canon_C3935i_User_Guide_es-ES.pdf",
+          "sha256": "89caa53ef13e0217657e33c41eb605a51d09746e2cc25aa4a46805b57c2baa52",
+          "page": 104,
+          "section": "Limpiar el cristal de copia — secado y cierre (p. impresa 90)",
+          "anchors": [
+            "se haya secado",
+            "Cierre el alimentador con cuidado"
+          ]
+        }
+      ]
+    },
+    {
+      "intent_id": "paper_jam",
+      "description": "Locate on-screen jam guidance without transplanting another model procedure.",
+      "text": "En la Canon C3935i, sigue el mensaje, la ubicación y el procedimiento de atasco que muestra la pantalla. No apagues el equipo para retirar el atasco: el manual advierte que se perderían los datos en impresión. No tires del papel a la fuerza; si no puedes retirarlo, contacta con el distribuidor o servicio técnico.",
+      "conditions": "Orientación general, no instrucciones de apertura ni extracción de una ubicación concreta. Consulta las instrucciones de seguridad y los accesorios instalados. La indicación de desenchufar la Brother DCP-T220 no se aplica a este caso Canon.",
+      "sources": [
+        {
+          "filename": "Canon_C3935i_User_Guide_es-ES.pdf",
+          "sha256": "89caa53ef13e0217657e33c41eb605a51d09746e2cc25aa4a46805b57c2baa52",
+          "page": 148,
+          "section": "Eliminar atascos de papel — precauciones (p. impresa 134)",
+          "anchors": [
+            "no apague el equipo",
+            "No saque a la fuerza",
+            "servicio técnico"
+          ]
+        }
+      ]
+    },
+    {
+      "intent_id": "manual_location",
+      "description": "Locate the official model-specific manual.",
+      "text": "El PDF revisado de Canon es Canon_C3935i_User_Guide_es-ES.pdf, edición europea USRMA-8188-03. Para Latinoamérica consulta el manual oficial USRMA-8189-03: https://oip.manual.canon/USRMA-8189-zz-CS-3900-esLN/",
+      "conditions": "Las tres secciones de mantenimiento habilitadas se contrastaron con la edición latinoamericana. Esto no autoriza normas, accesorios, configuraciones regionales ni otros capítulos.",
+      "sources": [
+        {
+          "filename": "Canon_C3935i_User_Guide_es-ES.pdf",
+          "sha256": "89caa53ef13e0217657e33c41eb605a51d09746e2cc25aa4a46805b57c2baa52",
+          "page": 1,
+          "section": "Portada — C3935i y edición",
+          "anchors": [
+            "C3935i",
+            "USRMA-8188-03"
+          ]
+        }
+      ]
+    }
+  ],
+  "regional_cross_check_urls": [
+    "https://oip.manual.canon/USRMA-8189-zz-CS-3900-esLN/contents/devu-dev-mainte-consumables_remain.html",
+    "https://oip.manual.canon/USRMA-8189-zz-CS-3900-esLN/contents/devu-dev-mainte-clean-platen.html",
+    "https://oip.manual.canon/USRMA-8189-zz-CS-3900-esLN/contents/devu-dev-papers_jam.html"
+  ]
+}

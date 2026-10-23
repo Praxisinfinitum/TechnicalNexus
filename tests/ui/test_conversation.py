@@ -94,3 +94,20 @@ def test_revoked_source_hides_guided_options_and_blocks_old_choice(reviewed_ink_
     assert len(ui.selectbox) == 1
     assert not ui.session_state["conversation"].messages[-1].references
     assert send(ui, "Nivel de tinta").messages[-1].status == "no_evidence"
+
+
+def test_supported_model_switches_clear_navigation_history_and_sources(reviewed_multi_database):
+    ui = app()
+    send(ui, "DCP-T430W")
+    send(ui, "Nivel de tinta")
+    ui.selectbox(key="guide_topic").set_value("ink").run()
+    ui.selectbox(key="equipment_choice").set_value("brother_dcp_t220").run()
+    assert ui.selectbox(key="guide_topic").value is None
+    assert len(ui.session_state["conversation"].messages) == 1
+    assert send(ui, "Nivel de tinta").messages[-1].text.startswith("T220 ink")
+    state = send(ui, "Canon C3935i nivel de tóner")
+    assert len(state.messages) == 2 and state.messages[-1].text.startswith("Canon toner")
+    assert ui.selectbox(key="equipment_choice").value == "canon_c3935i"
+    assert ui.selectbox(key="guide_topic").options == ["Selecciona un tema", "Tóner y consumibles"]
+    assert state.messages[-1].references[0].filename == "canon_c3935i.pdf"
+    assert send(ui, "Nivel de tinta").messages[-1].status == "no_evidence"

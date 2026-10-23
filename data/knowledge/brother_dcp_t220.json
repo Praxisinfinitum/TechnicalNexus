@@ -1,0 +1,155 @@
+{
+  "instance_id": "office_printer_maintenance",
+  "equipment_id": "brother_dcp_t220",
+  "review_note": "Codex source review 2026-10-22: model cover and specified source sections read; rendered maintenance pages visually inspected. Spanish paraphrases; owner acceptance pending, not manufacturer certification.",
+  "applicability_review": "DCP-T220 explicitly listed on cover. Only the linked sections are confirmed; shared manual network features and special cleaning are excluded.",
+  "answers": [
+    {
+      "intent_id": "ink_level",
+      "description": "Check visible ink volume.",
+      "text": "En la DCP-T220, mira el nivel real por la ventana de cada tanque. Si está en la línea inferior o por debajo, corresponde rellenar según el procedimiento del manual.",
+      "conditions": "Comprobación visual; no es una estimación por software ni el procedimiento completo de llenado.",
+      "sources": [
+        {
+          "filename": "DCP-T220_User_Guide_es-MX.pdf",
+          "sha256": "b75de486caa3f768ba3ab0c96dc229758cddb9afbf4aa6deb536fd88b199f678",
+          "page": 193,
+          "section": "Rellene los tanques de tinta — comprobación visual (p. impresa 189)",
+          "anchors": [
+            "ventana",
+            "línea inferior"
+          ]
+        }
+      ]
+    },
+    {
+      "intent_id": "after_refill",
+      "description": "Explain the documented action after completing refill.",
+      "text": "Después de terminar el rellenado en la DCP-T220, coloca el tapón del tanque y cierra su cubierta. Si el LED de tinta parpadea, pulsa Detener.",
+      "conditions": "Sólo después de completar el procedimiento de llenado. Si mezclaste colores en el tanque equivocado, contacta con Brother. No se aplica la combinación de botones de la DCP-T430W.",
+      "sources": [
+        {
+          "filename": "DCP-T220_User_Guide_es-MX.pdf",
+          "sha256": "b75de486caa3f768ba3ab0c96dc229758cddb9afbf4aa6deb536fd88b199f678",
+          "page": 196,
+          "section": "Rellene los tanques de tinta — pasos finales (p. impresa 192)",
+          "anchors": [
+            "Cierre la cubierta",
+            "LED de tinta parpadea",
+            "Detener"
+          ]
+        }
+      ]
+    },
+    {
+      "intent_id": "no_paper",
+      "description": "Respond only to confirmed absence of loaded paper.",
+      "text": "Si confirmaste que falta papel en la bandeja de la DCP-T220, carga papel y pulsa Inicio Negro o Inicio Color.",
+      "conditions": "Para la condición Sin papel en la bandeja. No interpreta patrones LED ni diagnostica fallos de alimentación con papel cargado.",
+      "sources": [
+        {
+          "filename": "DCP-T220_User_Guide_es-MX.pdf",
+          "sha256": "b75de486caa3f768ba3ab0c96dc229758cddb9afbf4aa6deb536fd88b199f678",
+          "page": 165,
+          "section": "Indicaciones LED — Sin papel (p. impresa 161)",
+          "anchors": [
+            "Sin papel",
+            "Inicio Negro o Inicio Color"
+          ]
+        }
+      ]
+    },
+    {
+      "intent_id": "tray_not_detected",
+      "description": "Respond to a tray not fully inserted.",
+      "text": "En la DCP-T220, vuelve a introducir la bandeja lentamente y por completo.",
+      "conditions": "Sólo para una bandeja que no se introdujo completamente. Si hay resistencia u obstrucción, no la fuerces; consulta el apartado de atascos o soporte.",
+      "sources": [
+        {
+          "filename": "DCP-T220_User_Guide_es-MX.pdf",
+          "sha256": "b75de486caa3f768ba3ab0c96dc229758cddb9afbf4aa6deb536fd88b199f678",
+          "page": 165,
+          "section": "Indicaciones LED — Bandeja no detectada (p. impresa 161)",
+          "anchors": [
+            "introducir lentamente",
+            "introducida completamente"
+          ]
+        }
+      ]
+    },
+    {
+      "intent_id": "print_quality",
+      "description": "Explain normal panel head cleaning.",
+      "text": "Para la limpieza normal del cabezal de la DCP-T220, pulsa Detener y Atajo copia a la vez. Cuando parpadee el LED de tinta, pulsa Inicio Negro para limpiar el negro o Inicio Color para los cuatro colores. El equipo imprimirá una hoja de comprobación.",
+      "conditions": "Sólo limpieza normal desde el panel; consume tinta. No toques el cabezal ni repitas limpiezas innecesariamente. No incluye limpieza especial ni diagnóstico de la causa del defecto.",
+      "sources": [
+        {
+          "filename": "DCP-T220_User_Guide_es-MX.pdf",
+          "sha256": "b75de486caa3f768ba3ab0c96dc229758cddb9afbf4aa6deb536fd88b199f678",
+          "page": 200,
+          "section": "Limpieza normal desde el equipo — pasos 1 y 2 (p. impresa 196)",
+          "anchors": [
+            "Inicio Color",
+            "Inicio Negro",
+            "NO toque el cabezal"
+          ]
+        }
+      ]
+    },
+    {
+      "intent_id": "paper_jam",
+      "description": "Locate model-specific jam instructions.",
+      "text": "Para un atasco dentro de la DCP-T220, consulta el procedimiento ilustrado que comienza en la página física 170 del PDF (página impresa 166). Ese procedimiento comienza desenchufando el equipo antes de retirar la bandeja.",
+      "conditions": "Orientación para localizar el procedimiento completo, no una secuencia completa de extracción. Sigue todas sus ilustraciones; no uses las instrucciones de atasco de Canon o de otra Brother.",
+      "sources": [
+        {
+          "filename": "DCP-T220_User_Guide_es-MX.pdf",
+          "sha256": "b75de486caa3f768ba3ab0c96dc229758cddb9afbf4aa6deb536fd88b199f678",
+          "page": 170,
+          "section": "Papel atascado dentro del equipo — inicio (p. impresa 166)",
+          "anchors": [
+            "Desenchufe el equipo",
+            "Papel atascado dentro del equipo"
+          ]
+        }
+      ]
+    },
+    {
+      "intent_id": "manual_location",
+      "description": "Locate the official model-specific manual.",
+      "text": "El manual revisado de la DCP-T220 es DCP-T220_User_Guide_es-MX.pdf. También está disponible en el catálogo oficial: https://support.brother.com/g/b/manualtop.aspx?c=mx&lang=es&prod=dcpt220_all",
+      "conditions": "La guía cubre varios modelos. La selección DCP-T220 no autoriza funciones de red ni procedimientos exclusivos de otros modelos.",
+      "sources": [
+        {
+          "filename": "DCP-T220_User_Guide_es-MX.pdf",
+          "sha256": "b75de486caa3f768ba3ab0c96dc229758cddb9afbf4aa6deb536fd88b199f678",
+          "page": 1,
+          "section": "Portada — modelos incluidos",
+          "anchors": [
+            "DCP-T220",
+            "Guía del usuario online"
+          ]
+        }
+      ]
+    },
+    {
+      "intent_id": "glass_cleaning",
+      "description": "Clean the scanner glass only.",
+      "text": "Para limpiar el cristal del escáner de la DCP-T220, desenchufa el equipo, levanta la cubierta de documentos y limpia el cristal y el plástico blanco con un paño suave sin pelusa humedecido en agua.",
+      "conditions": "Sólo cristal y plástico blanco accesibles; no limpieza interna ni de cabezales. Consulta la ilustración del manual y repite la limpieza si quedan restos.",
+      "sources": [
+        {
+          "filename": "DCP-T220_User_Guide_es-MX.pdf",
+          "sha256": "b75de486caa3f768ba3ab0c96dc229758cddb9afbf4aa6deb536fd88b199f678",
+          "page": 199,
+          "section": "Limpiar el escáner (p. impresa 195)",
+          "anchors": [
+            "Desenchufe",
+            "paño suave y sin pelusa",
+            "plástico blanco"
+          ]
+        }
+      ]
+    }
+  ]
+}

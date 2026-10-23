@@ -1,8 +1,8 @@
 {
   "kind": "agent_executed_streamlit_apptest_with_real_postgresql_and_sources",
-  "executed_at_utc": "2026-10-18T04:21:49.854194+00:00",
-  "base_git_commit": "84d0ed120f045ba5db6b37deb04c99490fb1d2f2",
-  "code_and_inputs_sha256": "07d269d0e3b975d9677a22e3c20bd27c68363dc473ffd8389c082e7594d5304e",
+  "executed_at_utc": "2026-10-23T03:04:07.999269+00:00",
+  "base_git_commit": "bc9d2c90ca0b22b37dbc8feaa659b60ae726d3dd",
+  "code_and_inputs_sha256": "780573c001e32002141d80c023b39da81ff6a022dc3f3bcee5b5b0cd0ae5dc34",
   "environment": {
     "python": "3.12.14",
     "platform": "Windows-11-10.0.26200-SP0",
@@ -16,28 +16,30 @@
   },
   "scope": {
     "supported_equipment": [
-      "brother_dcp_t430w"
+      "brother_dcp_t220",
+      "brother_dcp_t430w",
+      "canon_c3935i"
     ],
-    "other_two_models": "pending",
+    "other_two_models": "integrated with bounded reviewed knowledge",
     "owner_validation": "pending",
     "test_schema": "fresh migrated schema, removed after run"
   },
   "setup": {
     "schema_revision": "0002",
     "postgresql_version": "18.3",
-    "documents": 10,
-    "pages": 169,
-    "approved_answers": 7,
-    "setup_elapsed_ms": 4440.38
+    "documents": 16,
+    "pages": 2197,
+    "approved_answers": 19,
+    "setup_elapsed_ms": 67854.07
   },
   "summary": {
-    "conversations": 22,
-    "passed_conversations": 22,
-    "turns": 50,
-    "passed_turns": 50,
-    "mean_ui_test_ms": 346.72,
-    "minimum_ui_test_ms": 96.89,
-    "maximum_ui_test_ms": 9012.88
+    "conversations": 38,
+    "passed_conversations": 38,
+    "turns": 97,
+    "passed_turns": 97,
+    "mean_ui_test_ms": 305.8,
+    "minimum_ui_test_ms": 86.84,
+    "maximum_ui_test_ms": 9048.19
   },
   "cases": [
     {
@@ -60,7 +62,7 @@
             "equipment": null,
             "references": []
           },
-          "ui_test_elapsed_ms": 107.06,
+          "ui_test_elapsed_ms": 121.28,
           "simulated_database_failure": false,
           "checks": {
             "no_ui_exception": true,
@@ -68,7 +70,8 @@
             "intent": true,
             "source_pages": true,
             "equipment": true,
-            "visible_references": true
+            "visible_references": true,
+            "model_specific_text": true
           },
           "passed": true
         },
@@ -84,11 +87,11 @@
           "actual": {
             "status": "answer",
             "intent": "help",
-            "response": "Puedo orientar sobre nivel de tinta, pasos posteriores al rellenado, falta de papel, bandeja no detectada, limpieza normal del cabezal y dónde consultar el manual o los diagramas de atasco. Modelo admitido: Brother DCP-T430W. Escribe «cambiar impresora» o «reiniciar» para descartar el contexto.",
+            "response": "Selecciona un modelo y consulta sus opciones guiadas. Las Brother tienen orientación revisada sobre tinta, papel y limpieza normal del cabezal; Canon sobre nivel de tóner, cristal de copia y orientación ante atascos. Cada consulta requiere respaldo propio del modelo. Escribe «cambiar impresora» o «reiniciar» para descartar el contexto.",
             "equipment": null,
             "references": []
           },
-          "ui_test_elapsed_ms": 106.62,
+          "ui_test_elapsed_ms": 116.75,
           "simulated_database_failure": false,
           "checks": {
             "no_ui_exception": true,
@@ -96,7 +99,8 @@
             "intent": true,
             "source_pages": true,
             "equipment": true,
-            "visible_references": true
+            "visible_references": true,
+            "model_specific_text": true
           },
           "passed": true
         },
@@ -112,11 +116,11 @@
           "actual": {
             "status": "answer",
             "intent": "select_equipment",
-            "response": "Equipo seleccionado: Brother DCP-T430W. ¿Qué consulta de mantenimiento tienes?",
+            "response": "Equipo seleccionado: Brother DCP-T430W. Se inició un contexto nuevo. ¿Qué consulta de mantenimiento tienes?",
             "equipment": "brother_dcp_t430w",
             "references": []
           },
-          "ui_test_elapsed_ms": 119.56,
+          "ui_test_elapsed_ms": 139.88,
           "simulated_database_failure": false,
           "checks": {
             "no_ui_exception": true,
@@ -124,7 +128,8 @@
             "intent": true,
             "source_pages": true,
             "equipment": true,
-            "visible_references": true
+            "visible_references": true,
+            "model_specific_text": true
           },
           "passed": true
         }
@@ -147,11 +152,11 @@
           "actual": {
             "status": "clarification",
             "intent": "select_equipment",
-            "response": "¿Qué marca y modelo utilizas? Por ahora sólo está disponible Brother DCP-T430W.",
+            "response": "¿Qué marca y modelo utilizas? Elige Brother DCP-T430W, Brother DCP-T220 o Canon imageRUNNER ADVANCE DX C3935i.",
             "equipment": null,
             "references": []
           },
-          "ui_test_elapsed_ms": 99.25,
+          "ui_test_elapsed_ms": 130.03,
           "simulated_database_failure": false,
           "checks": {
             "no_ui_exception": true,
@@ -159,7 +164,8 @@
             "intent": true,
             "source_pages": true,
             "equipment": true,
-            "visible_references": true
+            "visible_references": true,
+            "model_specific_text": true
           },
           "passed": true
         },
@@ -188,7 +194,7 @@
               }
             ]
           },
-          "ui_test_elapsed_ms": 265.88,
+          "ui_test_elapsed_ms": 183.12,
           "simulated_database_failure": false,
           "checks": {
             "no_ui_exception": true,
@@ -196,7 +202,8 @@
             "intent": true,
             "source_pages": true,
             "equipment": true,
-            "visible_references": true
+            "visible_references": true,
+            "model_specific_text": true
           },
           "passed": true
         }
@@ -219,11 +226,11 @@
           "actual": {
             "status": "answer",
             "intent": "select_equipment",
-            "response": "Equipo seleccionado: Brother DCP-T430W. ¿Qué consulta de mantenimiento tienes?",
+            "response": "Equipo seleccionado: Brother DCP-T430W. Se inició un contexto nuevo. ¿Qué consulta de mantenimiento tienes?",
             "equipment": "brother_dcp_t430w",
             "references": []
           },
-          "ui_test_elapsed_ms": 119.36,
+          "ui_test_elapsed_ms": 196.32,
           "simulated_database_failure": false,
           "checks": {
             "no_ui_exception": true,
@@ -231,7 +238,8 @@
             "intent": true,
             "source_pages": true,
             "equipment": true,
-            "visible_references": true
+            "visible_references": true,
+            "model_specific_text": true
           },
           "passed": true
         },
@@ -260,7 +268,7 @@
               }
             ]
           },
-          "ui_test_elapsed_ms": 185.99,
+          "ui_test_elapsed_ms": 225.37,
           "simulated_database_failure": false,
           "checks": {
             "no_ui_exception": true,
@@ -268,7 +276,8 @@
             "intent": true,
             "source_pages": true,
             "equipment": true,
-            "visible_references": true
+            "visible_references": true,
+            "model_specific_text": true
           },
           "passed": true
         }
@@ -291,11 +300,11 @@
           "actual": {
             "status": "answer",
             "intent": "select_equipment",
-            "response": "Equipo seleccionado: Brother DCP-T430W. ¿Qué consulta de mantenimiento tienes?",
+            "response": "Equipo seleccionado: Brother DCP-T430W. Se inició un contexto nuevo. ¿Qué consulta de mantenimiento tienes?",
             "equipment": "brother_dcp_t430w",
             "references": []
           },
-          "ui_test_elapsed_ms": 112.69,
+          "ui_test_elapsed_ms": 143.42,
           "simulated_database_failure": false,
           "checks": {
             "no_ui_exception": true,
@@ -303,7 +312,8 @@
             "intent": true,
             "source_pages": true,
             "equipment": true,
-            "visible_references": true
+            "visible_references": true,
+            "model_specific_text": true
           },
           "passed": true
         },
@@ -332,7 +342,7 @@
               }
             ]
           },
-          "ui_test_elapsed_ms": 185.86,
+          "ui_test_elapsed_ms": 211.47,
           "simulated_database_failure": false,
           "checks": {
             "no_ui_exception": true,
@@ -340,7 +350,8 @@
             "intent": true,
             "source_pages": true,
             "equipment": true,
-            "visible_references": true
+            "visible_references": true,
+            "model_specific_text": true
           },
           "passed": true
         }
@@ -363,11 +374,11 @@
           "actual": {
             "status": "answer",
             "intent": "select_equipment",
-            "response": "Equipo seleccionado: Brother DCP-T430W. ¿Qué consulta de mantenimiento tienes?",
+            "response": "Equipo seleccionado: Brother DCP-T430W. Se inició un contexto nuevo. ¿Qué consulta de mantenimiento tienes?",
             "equipment": "brother_dcp_t430w",
             "references": []
           },
-          "ui_test_elapsed_ms": 117.36,
+          "ui_test_elapsed_ms": 136.53,
           "simulated_database_failure": false,
           "checks": {
             "no_ui_exception": true,
@@ -375,7 +386,8 @@
             "intent": true,
             "source_pages": true,
             "equipment": true,
-            "visible_references": true
+            "visible_references": true,
+            "model_specific_text": true
           },
           "passed": true
         },
@@ -404,7 +416,7 @@
               }
             ]
           },
-          "ui_test_elapsed_ms": 184.02,
+          "ui_test_elapsed_ms": 213.72,
           "simulated_database_failure": false,
           "checks": {
             "no_ui_exception": true,
@@ -412,7 +424,8 @@
             "intent": true,
             "source_pages": true,
             "equipment": true,
-            "visible_references": true
+            "visible_references": true,
+            "model_specific_text": true
           },
           "passed": true
         }
@@ -435,11 +448,11 @@
           "actual": {
             "status": "answer",
             "intent": "select_equipment",
-            "response": "Equipo seleccionado: Brother DCP-T430W. ¿Qué consulta de mantenimiento tienes?",
+            "response": "Equipo seleccionado: Brother DCP-T430W. Se inició un contexto nuevo. ¿Qué consulta de mantenimiento tienes?",
             "equipment": "brother_dcp_t430w",
             "references": []
           },
-          "ui_test_elapsed_ms": 114.6,
+          "ui_test_elapsed_ms": 138.88,
           "simulated_database_failure": false,
           "checks": {
             "no_ui_exception": true,
@@ -447,7 +460,8 @@
             "intent": true,
             "source_pages": true,
             "equipment": true,
-            "visible_references": true
+            "visible_references": true,
+            "model_specific_text": true
           },
           "passed": true
         },
@@ -476,7 +490,7 @@
               }
             ]
           },
-          "ui_test_elapsed_ms": 177.83,
+          "ui_test_elapsed_ms": 212.78,
           "simulated_database_failure": false,
           "checks": {
             "no_ui_exception": true,
@@ -484,7 +498,8 @@
             "intent": true,
             "source_pages": true,
             "equipment": true,
-            "visible_references": true
+            "visible_references": true,
+            "model_specific_text": true
           },
           "passed": true
         }
@@ -507,11 +522,11 @@
           "actual": {
             "status": "answer",
             "intent": "select_equipment",
-            "response": "Equipo seleccionado: Brother DCP-T430W. ¿Qué consulta de mantenimiento tienes?",
+            "response": "Equipo seleccionado: Brother DCP-T430W. Se inició un contexto nuevo. ¿Qué consulta de mantenimiento tienes?",
             "equipment": "brother_dcp_t430w",
             "references": []
           },
-          "ui_test_elapsed_ms": 117.4,
+          "ui_test_elapsed_ms": 137.09,
           "simulated_database_failure": false,
           "checks": {
             "no_ui_exception": true,
@@ -519,7 +534,8 @@
             "intent": true,
             "source_pages": true,
             "equipment": true,
-            "visible_references": true
+            "visible_references": true,
+            "model_specific_text": true
           },
           "passed": true
         },
@@ -548,7 +564,7 @@
               }
             ]
           },
-          "ui_test_elapsed_ms": 257.59,
+          "ui_test_elapsed_ms": 209.12,
           "simulated_database_failure": false,
           "checks": {
             "no_ui_exception": true,
@@ -556,7 +572,8 @@
             "intent": true,
             "source_pages": true,
             "equipment": true,
-            "visible_references": true
+            "visible_references": true,
+            "model_specific_text": true
           },
           "passed": true
         }
@@ -579,11 +596,11 @@
           "actual": {
             "status": "answer",
             "intent": "select_equipment",
-            "response": "Equipo seleccionado: Brother DCP-T430W. ¿Qué consulta de mantenimiento tienes?",
+            "response": "Equipo seleccionado: Brother DCP-T430W. Se inició un contexto nuevo. ¿Qué consulta de mantenimiento tienes?",
             "equipment": "brother_dcp_t430w",
             "references": []
           },
-          "ui_test_elapsed_ms": 117.12,
+          "ui_test_elapsed_ms": 138.04,
           "simulated_database_failure": false,
           "checks": {
             "no_ui_exception": true,
@@ -591,7 +608,8 @@
             "intent": true,
             "source_pages": true,
             "equipment": true,
-            "visible_references": true
+            "visible_references": true,
+            "model_specific_text": true
           },
           "passed": true
         },
@@ -620,7 +638,7 @@
               }
             ]
           },
-          "ui_test_elapsed_ms": 176.8,
+          "ui_test_elapsed_ms": 242.87,
           "simulated_database_failure": false,
           "checks": {
             "no_ui_exception": true,
@@ -628,7 +646,8 @@
             "intent": true,
             "source_pages": true,
             "equipment": true,
-            "visible_references": true
+            "visible_references": true,
+            "model_specific_text": true
           },
           "passed": true
         }
@@ -651,11 +670,11 @@
           "actual": {
             "status": "answer",
             "intent": "select_equipment",
-            "response": "Equipo seleccionado: Brother DCP-T430W. ¿Qué consulta de mantenimiento tienes?",
+            "response": "Equipo seleccionado: Brother DCP-T430W. Se inició un contexto nuevo. ¿Qué consulta de mantenimiento tienes?",
             "equipment": "brother_dcp_t430w",
             "references": []
           },
-          "ui_test_elapsed_ms": 118.49,
+          "ui_test_elapsed_ms": 140.36,
           "simulated_database_failure": false,
           "checks": {
             "no_ui_exception": true,
@@ -663,7 +682,8 @@
             "intent": true,
             "source_pages": true,
             "equipment": true,
-            "visible_references": true
+            "visible_references": true,
+            "model_specific_text": true
           },
           "passed": true
         },
@@ -683,7 +703,7 @@
             "equipment": "brother_dcp_t430w",
             "references": []
           },
-          "ui_test_elapsed_ms": 248.53,
+          "ui_test_elapsed_ms": 170.59,
           "simulated_database_failure": false,
           "checks": {
             "no_ui_exception": true,
@@ -691,7 +711,8 @@
             "intent": true,
             "source_pages": true,
             "equipment": true,
-            "visible_references": true
+            "visible_references": true,
+            "model_specific_text": true
           },
           "passed": true
         }
@@ -714,11 +735,11 @@
           "actual": {
             "status": "answer",
             "intent": "select_equipment",
-            "response": "Equipo seleccionado: Brother DCP-T430W. ¿Qué consulta de mantenimiento tienes?",
+            "response": "Equipo seleccionado: Brother DCP-T430W. Se inició un contexto nuevo. ¿Qué consulta de mantenimiento tienes?",
             "equipment": "brother_dcp_t430w",
             "references": []
           },
-          "ui_test_elapsed_ms": 114.8,
+          "ui_test_elapsed_ms": 140.89,
           "simulated_database_failure": false,
           "checks": {
             "no_ui_exception": true,
@@ -726,7 +747,8 @@
             "intent": true,
             "source_pages": true,
             "equipment": true,
-            "visible_references": true
+            "visible_references": true,
+            "model_specific_text": true
           },
           "passed": true
         },
@@ -746,7 +768,7 @@
             "equipment": "brother_dcp_t430w",
             "references": []
           },
-          "ui_test_elapsed_ms": 268.46,
+          "ui_test_elapsed_ms": 156.96,
           "simulated_database_failure": false,
           "checks": {
             "no_ui_exception": true,
@@ -754,7 +776,8 @@
             "intent": true,
             "source_pages": true,
             "equipment": true,
-            "visible_references": true
+            "visible_references": true,
+            "model_specific_text": true
           },
           "passed": true
         }
@@ -777,11 +800,11 @@
           "actual": {
             "status": "answer",
             "intent": "select_equipment",
-            "response": "Equipo seleccionado: Brother DCP-T430W. ¿Qué consulta de mantenimiento tienes?",
+            "response": "Equipo seleccionado: Brother DCP-T430W. Se inició un contexto nuevo. ¿Qué consulta de mantenimiento tienes?",
             "equipment": "brother_dcp_t430w",
             "references": []
           },
-          "ui_test_elapsed_ms": 116.77,
+          "ui_test_elapsed_ms": 146.34,
           "simulated_database_failure": false,
           "checks": {
             "no_ui_exception": true,
@@ -789,7 +812,8 @@
             "intent": true,
             "source_pages": true,
             "equipment": true,
-            "visible_references": true
+            "visible_references": true,
+            "model_specific_text": true
           },
           "passed": true
         },
@@ -805,11 +829,11 @@
           "actual": {
             "status": "out_of_scope",
             "intent": "unsupported_equipment",
-            "response": "Ese equipo no está admitido o la consulta mezcla modelos. He descartado el contexto técnico anterior. Por ahora sólo está disponible Brother DCP-T430W.",
+            "response": "Ese equipo no está admitido o la consulta mezcla modelos o marcas. He descartado el contexto técnico anterior. Selecciona una de las tres impresoras disponibles.",
             "equipment": null,
             "references": []
           },
-          "ui_test_elapsed_ms": 118.72,
+          "ui_test_elapsed_ms": 173.36,
           "simulated_database_failure": false,
           "checks": {
             "no_ui_exception": true,
@@ -817,7 +841,8 @@
             "intent": true,
             "source_pages": true,
             "equipment": true,
-            "visible_references": true
+            "visible_references": true,
+            "model_specific_text": true
           },
           "passed": true
         },
@@ -833,11 +858,11 @@
           "actual": {
             "status": "clarification",
             "intent": "select_equipment",
-            "response": "¿Qué marca y modelo utilizas? Por ahora sólo está disponible Brother DCP-T430W.",
+            "response": "¿Qué marca y modelo utilizas? Elige Brother DCP-T430W, Brother DCP-T220 o Canon imageRUNNER ADVANCE DX C3935i.",
             "equipment": null,
             "references": []
           },
-          "ui_test_elapsed_ms": 96.89,
+          "ui_test_elapsed_ms": 143.58,
           "simulated_database_failure": false,
           "checks": {
             "no_ui_exception": true,
@@ -845,7 +870,8 @@
             "intent": true,
             "source_pages": true,
             "equipment": true,
-            "visible_references": true
+            "visible_references": true,
+            "model_specific_text": true
           },
           "passed": true
         }
@@ -868,11 +894,11 @@
           "actual": {
             "status": "answer",
             "intent": "select_equipment",
-            "response": "Equipo seleccionado: Brother DCP-T430W. ¿Qué consulta de mantenimiento tienes?",
+            "response": "Equipo seleccionado: Brother DCP-T430W. Se inició un contexto nuevo. ¿Qué consulta de mantenimiento tienes?",
             "equipment": "brother_dcp_t430w",
             "references": []
           },
-          "ui_test_elapsed_ms": 124.52,
+          "ui_test_elapsed_ms": 167.34,
           "simulated_database_failure": false,
           "checks": {
             "no_ui_exception": true,
@@ -880,7 +906,8 @@
             "intent": true,
             "source_pages": true,
             "equipment": true,
-            "visible_references": true
+            "visible_references": true,
+            "model_specific_text": true
           },
           "passed": true
         },
@@ -900,7 +927,7 @@
             "equipment": "brother_dcp_t430w",
             "references": []
           },
-          "ui_test_elapsed_ms": 239.35,
+          "ui_test_elapsed_ms": 193.43,
           "simulated_database_failure": false,
           "checks": {
             "no_ui_exception": true,
@@ -908,7 +935,8 @@
             "intent": true,
             "source_pages": true,
             "equipment": true,
-            "visible_references": true
+            "visible_references": true,
+            "model_specific_text": true
           },
           "passed": true
         },
@@ -928,7 +956,7 @@
             "equipment": "brother_dcp_t430w",
             "references": []
           },
-          "ui_test_elapsed_ms": 141.51,
+          "ui_test_elapsed_ms": 191.08,
           "simulated_database_failure": false,
           "checks": {
             "no_ui_exception": true,
@@ -936,7 +964,8 @@
             "intent": true,
             "source_pages": true,
             "equipment": true,
-            "visible_references": true
+            "visible_references": true,
+            "model_specific_text": true
           },
           "passed": true
         }
@@ -959,11 +988,11 @@
           "actual": {
             "status": "answer",
             "intent": "select_equipment",
-            "response": "Equipo seleccionado: Brother DCP-T430W. ¿Qué consulta de mantenimiento tienes?",
+            "response": "Equipo seleccionado: Brother DCP-T430W. Se inició un contexto nuevo. ¿Qué consulta de mantenimiento tienes?",
             "equipment": "brother_dcp_t430w",
             "references": []
           },
-          "ui_test_elapsed_ms": 121.33,
+          "ui_test_elapsed_ms": 189.99,
           "simulated_database_failure": false,
           "checks": {
             "no_ui_exception": true,
@@ -971,7 +1000,8 @@
             "intent": true,
             "source_pages": true,
             "equipment": true,
-            "visible_references": true
+            "visible_references": true,
+            "model_specific_text": true
           },
           "passed": true
         },
@@ -991,7 +1021,7 @@
             "equipment": "brother_dcp_t430w",
             "references": []
           },
-          "ui_test_elapsed_ms": 142.35,
+          "ui_test_elapsed_ms": 205.43,
           "simulated_database_failure": false,
           "checks": {
             "no_ui_exception": true,
@@ -999,7 +1029,8 @@
             "intent": true,
             "source_pages": true,
             "equipment": true,
-            "visible_references": true
+            "visible_references": true,
+            "model_specific_text": true
           },
           "passed": true
         }
@@ -1022,11 +1053,11 @@
           "actual": {
             "status": "answer",
             "intent": "select_equipment",
-            "response": "Equipo seleccionado: Brother DCP-T430W. ¿Qué consulta de mantenimiento tienes?",
+            "response": "Equipo seleccionado: Brother DCP-T430W. Se inició un contexto nuevo. ¿Qué consulta de mantenimiento tienes?",
             "equipment": "brother_dcp_t430w",
             "references": []
           },
-          "ui_test_elapsed_ms": 219.97,
+          "ui_test_elapsed_ms": 165.11,
           "simulated_database_failure": false,
           "checks": {
             "no_ui_exception": true,
@@ -1034,7 +1065,8 @@
             "intent": true,
             "source_pages": true,
             "equipment": true,
-            "visible_references": true
+            "visible_references": true,
+            "model_specific_text": true
           },
           "passed": true
         },
@@ -1054,7 +1086,7 @@
             "equipment": null,
             "references": []
           },
-          "ui_test_elapsed_ms": 126.88,
+          "ui_test_elapsed_ms": 161.2,
           "simulated_database_failure": false,
           "checks": {
             "no_ui_exception": true,
@@ -1062,7 +1094,8 @@
             "intent": true,
             "source_pages": true,
             "equipment": true,
-            "visible_references": true
+            "visible_references": true,
+            "model_specific_text": true
           },
           "passed": true
         },
@@ -1078,11 +1111,11 @@
           "actual": {
             "status": "clarification",
             "intent": "select_equipment",
-            "response": "¿Qué marca y modelo utilizas? Por ahora sólo está disponible Brother DCP-T430W.",
+            "response": "¿Qué marca y modelo utilizas? Elige Brother DCP-T430W, Brother DCP-T220 o Canon imageRUNNER ADVANCE DX C3935i.",
             "equipment": null,
             "references": []
           },
-          "ui_test_elapsed_ms": 112.34,
+          "ui_test_elapsed_ms": 139.01,
           "simulated_database_failure": false,
           "checks": {
             "no_ui_exception": true,
@@ -1090,7 +1123,8 @@
             "intent": true,
             "source_pages": true,
             "equipment": true,
-            "visible_references": true
+            "visible_references": true,
+            "model_specific_text": true
           },
           "passed": true
         }
@@ -1113,11 +1147,11 @@
           "actual": {
             "status": "answer",
             "intent": "select_equipment",
-            "response": "Equipo seleccionado: Brother DCP-T430W. ¿Qué consulta de mantenimiento tienes?",
+            "response": "Equipo seleccionado: Brother DCP-T430W. Se inició un contexto nuevo. ¿Qué consulta de mantenimiento tienes?",
             "equipment": "brother_dcp_t430w",
             "references": []
           },
-          "ui_test_elapsed_ms": 119.85,
+          "ui_test_elapsed_ms": 195.0,
           "simulated_database_failure": false,
           "checks": {
             "no_ui_exception": true,
@@ -1125,7 +1159,8 @@
             "intent": true,
             "source_pages": true,
             "equipment": true,
-            "visible_references": true
+            "visible_references": true,
+            "model_specific_text": true
           },
           "passed": true
         },
@@ -1141,11 +1176,11 @@
           "actual": {
             "status": "no_evidence",
             "intent": "service_escalation",
-            "response": "Ese procedimiento no está incluido en el conocimiento revisado para usuarios. Consulta el manual específico o soporte Brother; no daré instrucciones de reparación interna ni limpieza especial.",
+            "response": "Ese procedimiento no está incluido en el conocimiento revisado para usuarios. Consulta el manual específico o soporte del fabricante; no daré instrucciones de reparación interna ni limpieza especial.",
             "equipment": "brother_dcp_t430w",
             "references": []
           },
-          "ui_test_elapsed_ms": 136.98,
+          "ui_test_elapsed_ms": 305.78,
           "simulated_database_failure": false,
           "checks": {
             "no_ui_exception": true,
@@ -1153,7 +1188,8 @@
             "intent": true,
             "source_pages": true,
             "equipment": true,
-            "visible_references": true
+            "visible_references": true,
+            "model_specific_text": true
           },
           "passed": true
         },
@@ -1173,7 +1209,7 @@
             "equipment": null,
             "references": []
           },
-          "ui_test_elapsed_ms": 119.66,
+          "ui_test_elapsed_ms": 180.01,
           "simulated_database_failure": false,
           "checks": {
             "no_ui_exception": true,
@@ -1181,7 +1217,8 @@
             "intent": true,
             "source_pages": true,
             "equipment": true,
-            "visible_references": true
+            "visible_references": true,
+            "model_specific_text": true
           },
           "passed": true
         }
@@ -1204,11 +1241,11 @@
           "actual": {
             "status": "answer",
             "intent": "select_equipment",
-            "response": "Equipo seleccionado: Brother DCP-T430W. ¿Qué consulta de mantenimiento tienes?",
+            "response": "Equipo seleccionado: Brother DCP-T430W. Se inició un contexto nuevo. ¿Qué consulta de mantenimiento tienes?",
             "equipment": "brother_dcp_t430w",
             "references": []
           },
-          "ui_test_elapsed_ms": 222.54,
+          "ui_test_elapsed_ms": 205.53,
           "simulated_database_failure": false,
           "checks": {
             "no_ui_exception": true,
@@ -1216,7 +1253,8 @@
             "intent": true,
             "source_pages": true,
             "equipment": true,
-            "visible_references": true
+            "visible_references": true,
+            "model_specific_text": true
           },
           "passed": true
         },
@@ -1236,7 +1274,7 @@
             "equipment": "brother_dcp_t430w",
             "references": []
           },
-          "ui_test_elapsed_ms": 140.04,
+          "ui_test_elapsed_ms": 234.14,
           "simulated_database_failure": false,
           "checks": {
             "no_ui_exception": true,
@@ -1244,7 +1282,8 @@
             "intent": true,
             "source_pages": true,
             "equipment": true,
-            "visible_references": true
+            "visible_references": true,
+            "model_specific_text": true
           },
           "passed": true
         }
@@ -1267,11 +1306,11 @@
           "actual": {
             "status": "answer",
             "intent": "select_equipment",
-            "response": "Equipo seleccionado: Brother DCP-T430W. ¿Qué consulta de mantenimiento tienes?",
+            "response": "Equipo seleccionado: Brother DCP-T430W. Se inició un contexto nuevo. ¿Qué consulta de mantenimiento tienes?",
             "equipment": "brother_dcp_t430w",
             "references": []
           },
-          "ui_test_elapsed_ms": 118.06,
+          "ui_test_elapsed_ms": 200.47,
           "simulated_database_failure": false,
           "checks": {
             "no_ui_exception": true,
@@ -1279,7 +1318,8 @@
             "intent": true,
             "source_pages": true,
             "equipment": true,
-            "visible_references": true
+            "visible_references": true,
+            "model_specific_text": true
           },
           "passed": true
         },
@@ -1299,7 +1339,7 @@
             "equipment": "brother_dcp_t430w",
             "references": []
           },
-          "ui_test_elapsed_ms": 9012.88,
+          "ui_test_elapsed_ms": 9048.19,
           "simulated_database_failure": true,
           "checks": {
             "no_ui_exception": true,
@@ -1307,7 +1347,8 @@
             "intent": true,
             "source_pages": true,
             "equipment": true,
-            "visible_references": true
+            "visible_references": true,
+            "model_specific_text": true
           },
           "passed": true
         },
@@ -1336,7 +1377,7 @@
               }
             ]
           },
-          "ui_test_elapsed_ms": 176.75,
+          "ui_test_elapsed_ms": 231.52,
           "simulated_database_failure": false,
           "checks": {
             "no_ui_exception": true,
@@ -1344,7 +1385,8 @@
             "intent": true,
             "source_pages": true,
             "equipment": true,
-            "visible_references": true
+            "visible_references": true,
+            "model_specific_text": true
           },
           "passed": true
         }
@@ -1367,11 +1409,11 @@
           "actual": {
             "status": "answer",
             "intent": "select_equipment",
-            "response": "Equipo seleccionado: Brother DCP-T430W. ¿Qué consulta de mantenimiento tienes?",
+            "response": "Equipo seleccionado: Brother DCP-T430W. Se inició un contexto nuevo. ¿Qué consulta de mantenimiento tienes?",
             "equipment": "brother_dcp_t430w",
             "references": []
           },
-          "ui_test_elapsed_ms": 116.76,
+          "ui_test_elapsed_ms": 146.54,
           "simulated_database_failure": false,
           "checks": {
             "no_ui_exception": true,
@@ -1379,7 +1421,8 @@
             "intent": true,
             "source_pages": true,
             "equipment": true,
-            "visible_references": true
+            "visible_references": true,
+            "model_specific_text": true
           },
           "passed": true
         },
@@ -1408,7 +1451,7 @@
               }
             ]
           },
-          "ui_test_elapsed_ms": 174.6,
+          "ui_test_elapsed_ms": 223.55,
           "simulated_database_failure": false,
           "checks": {
             "no_ui_exception": true,
@@ -1416,7 +1459,8 @@
             "intent": true,
             "source_pages": true,
             "equipment": true,
-            "visible_references": true
+            "visible_references": true,
+            "model_specific_text": true
           },
           "passed": true
         }
@@ -1439,11 +1483,11 @@
           "actual": {
             "status": "answer",
             "intent": "select_equipment",
-            "response": "Equipo seleccionado: Brother DCP-T430W. ¿Qué consulta de mantenimiento tienes?",
+            "response": "Equipo seleccionado: Brother DCP-T430W. Se inició un contexto nuevo. ¿Qué consulta de mantenimiento tienes?",
             "equipment": "brother_dcp_t430w",
             "references": []
           },
-          "ui_test_elapsed_ms": 119.4,
+          "ui_test_elapsed_ms": 145.08,
           "simulated_database_failure": false,
           "checks": {
             "no_ui_exception": true,
@@ -1451,7 +1495,8 @@
             "intent": true,
             "source_pages": true,
             "equipment": true,
-            "visible_references": true
+            "visible_references": true,
+            "model_specific_text": true
           },
           "passed": true
         },
@@ -1480,7 +1525,7 @@
               }
             ]
           },
-          "ui_test_elapsed_ms": 428.95,
+          "ui_test_elapsed_ms": 388.62,
           "simulated_database_failure": false,
           "checks": {
             "no_ui_exception": true,
@@ -1488,7 +1533,8 @@
             "intent": true,
             "source_pages": true,
             "equipment": true,
-            "visible_references": true
+            "visible_references": true,
+            "model_specific_text": true
           },
           "passed": true
         }
@@ -1511,11 +1557,11 @@
           "actual": {
             "status": "answer",
             "intent": "select_equipment",
-            "response": "Equipo seleccionado: Brother DCP-T430W. ¿Qué consulta de mantenimiento tienes?",
+            "response": "Equipo seleccionado: Brother DCP-T430W. Se inició un contexto nuevo. ¿Qué consulta de mantenimiento tienes?",
             "equipment": "brother_dcp_t430w",
             "references": []
           },
-          "ui_test_elapsed_ms": 221.59,
+          "ui_test_elapsed_ms": 139.6,
           "simulated_database_failure": false,
           "checks": {
             "no_ui_exception": true,
@@ -1523,7 +1569,8 @@
             "intent": true,
             "source_pages": true,
             "equipment": true,
-            "visible_references": true
+            "visible_references": true,
+            "model_specific_text": true
           },
           "passed": true
         },
@@ -1552,7 +1599,7 @@
               }
             ]
           },
-          "ui_test_elapsed_ms": 333.6,
+          "ui_test_elapsed_ms": 385.3,
           "simulated_database_failure": false,
           "checks": {
             "no_ui_exception": true,
@@ -1560,7 +1607,8 @@
             "intent": true,
             "source_pages": true,
             "equipment": true,
-            "visible_references": true
+            "visible_references": true,
+            "model_specific_text": true
           },
           "passed": true
         }
@@ -1583,11 +1631,11 @@
           "actual": {
             "status": "answer",
             "intent": "select_equipment",
-            "response": "Equipo seleccionado: Brother DCP-T430W. ¿Qué consulta de mantenimiento tienes?",
+            "response": "Equipo seleccionado: Brother DCP-T430W. Se inició un contexto nuevo. ¿Qué consulta de mantenimiento tienes?",
             "equipment": "brother_dcp_t430w",
             "references": []
           },
-          "ui_test_elapsed_ms": 128.37,
+          "ui_test_elapsed_ms": 198.63,
           "simulated_database_failure": false,
           "checks": {
             "no_ui_exception": true,
@@ -1595,7 +1643,8 @@
             "intent": true,
             "source_pages": true,
             "equipment": true,
-            "visible_references": true
+            "visible_references": true,
+            "model_specific_text": true
           },
           "passed": true
         },
@@ -1624,7 +1673,7 @@
               }
             ]
           },
-          "ui_test_elapsed_ms": 342.28,
+          "ui_test_elapsed_ms": 442.18,
           "simulated_database_failure": false,
           "checks": {
             "no_ui_exception": true,
@@ -1632,7 +1681,8 @@
             "intent": true,
             "source_pages": true,
             "equipment": true,
-            "visible_references": true
+            "visible_references": true,
+            "model_specific_text": true
           },
           "passed": true
         }
@@ -1655,11 +1705,11 @@
           "actual": {
             "status": "answer",
             "intent": "select_equipment",
-            "response": "Equipo seleccionado: Brother DCP-T430W. ¿Qué consulta de mantenimiento tienes?",
+            "response": "Equipo seleccionado: Brother DCP-T430W. Se inició un contexto nuevo. ¿Qué consulta de mantenimiento tienes?",
             "equipment": "brother_dcp_t430w",
             "references": []
           },
-          "ui_test_elapsed_ms": 141.71,
+          "ui_test_elapsed_ms": 172.25,
           "simulated_database_failure": false,
           "checks": {
             "no_ui_exception": true,
@@ -1667,7 +1717,8 @@
             "intent": true,
             "source_pages": true,
             "equipment": true,
-            "visible_references": true
+            "visible_references": true,
+            "model_specific_text": true
           },
           "passed": true
         },
@@ -1696,7 +1747,7 @@
               }
             ]
           },
-          "ui_test_elapsed_ms": 406.11,
+          "ui_test_elapsed_ms": 425.99,
           "simulated_database_failure": false,
           "checks": {
             "no_ui_exception": true,
@@ -1704,7 +1755,1674 @@
             "intent": true,
             "source_pages": true,
             "equipment": true,
-            "visible_references": true
+            "visible_references": true,
+            "model_specific_text": true
+          },
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "id": "C23",
+      "user_need": "DCP-T220 scoped ink_level",
+      "turns": [
+        {
+          "input": "Brother DCP-T220",
+          "route": "free_text",
+          "expected": {
+            "intent": "select_equipment",
+            "status": "answer",
+            "pages": [],
+            "equipment": "brother_dcp_t220"
+          },
+          "actual": {
+            "status": "answer",
+            "intent": "select_equipment",
+            "response": "Equipo seleccionado: Brother DCP-T220. Se inició un contexto nuevo. ¿Qué consulta de mantenimiento tienes?",
+            "equipment": "brother_dcp_t220",
+            "references": []
+          },
+          "ui_test_elapsed_ms": 139.12,
+          "simulated_database_failure": false,
+          "checks": {
+            "no_ui_exception": true,
+            "status": true,
+            "intent": true,
+            "source_pages": true,
+            "equipment": true,
+            "visible_references": true,
+            "model_specific_text": true
+          },
+          "passed": true
+        },
+        {
+          "input": "Nivel de tinta",
+          "route": "guided",
+          "expected": {
+            "intent": "ink_level",
+            "status": "answer",
+            "pages": [
+              193
+            ],
+            "equipment": "brother_dcp_t220"
+          },
+          "actual": {
+            "status": "answer",
+            "intent": "ink_level",
+            "response": "En la DCP-T220, mira el nivel real por la ventana de cada tanque. Si está en la línea inferior o por debajo, corresponde rellenar según el procedimiento del manual.\n\nAlcance y condiciones: Comprobación visual; no es una estimación por software ni el procedimiento completo de llenado.",
+            "equipment": "brother_dcp_t220",
+            "references": [
+              {
+                "file": "DCP-T220_User_Guide_es-MX.pdf",
+                "document_sha256": "b75de486caa3f768ba3ab0c96dc229758cddb9afbf4aa6deb536fd88b199f678",
+                "page": 193,
+                "section": "Rellene los tanques de tinta — comprobación visual (p. impresa 189)"
+              }
+            ]
+          },
+          "ui_test_elapsed_ms": 445.33,
+          "simulated_database_failure": false,
+          "checks": {
+            "no_ui_exception": true,
+            "status": true,
+            "intent": true,
+            "source_pages": true,
+            "equipment": true,
+            "visible_references": true,
+            "model_specific_text": true
+          },
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "id": "C24",
+      "user_need": "DCP-T220 scoped after_refill",
+      "turns": [
+        {
+          "input": "Brother DCP-T220",
+          "route": "free_text",
+          "expected": {
+            "intent": "select_equipment",
+            "status": "answer",
+            "pages": [],
+            "equipment": "brother_dcp_t220"
+          },
+          "actual": {
+            "status": "answer",
+            "intent": "select_equipment",
+            "response": "Equipo seleccionado: Brother DCP-T220. Se inició un contexto nuevo. ¿Qué consulta de mantenimiento tienes?",
+            "equipment": "brother_dcp_t220",
+            "references": []
+          },
+          "ui_test_elapsed_ms": 157.72,
+          "simulated_database_failure": false,
+          "checks": {
+            "no_ui_exception": true,
+            "status": true,
+            "intent": true,
+            "source_pages": true,
+            "equipment": true,
+            "visible_references": true,
+            "model_specific_text": true
+          },
+          "passed": true
+        },
+        {
+          "input": "Ya rellené la tinta",
+          "route": "guided",
+          "expected": {
+            "intent": "after_refill",
+            "status": "answer",
+            "pages": [
+              196
+            ],
+            "equipment": "brother_dcp_t220"
+          },
+          "actual": {
+            "status": "answer",
+            "intent": "after_refill",
+            "response": "Después de terminar el rellenado en la DCP-T220, coloca el tapón del tanque y cierra su cubierta. Si el LED de tinta parpadea, pulsa Detener.\n\nAlcance y condiciones: Sólo después de completar el procedimiento de llenado. Si mezclaste colores en el tanque equivocado, contacta con Brother. No se aplica la combinación de botones de la DCP-T430W.",
+            "equipment": "brother_dcp_t220",
+            "references": [
+              {
+                "file": "DCP-T220_User_Guide_es-MX.pdf",
+                "document_sha256": "b75de486caa3f768ba3ab0c96dc229758cddb9afbf4aa6deb536fd88b199f678",
+                "page": 196,
+                "section": "Rellene los tanques de tinta — pasos finales (p. impresa 192)"
+              }
+            ]
+          },
+          "ui_test_elapsed_ms": 552.18,
+          "simulated_database_failure": false,
+          "checks": {
+            "no_ui_exception": true,
+            "status": true,
+            "intent": true,
+            "source_pages": true,
+            "equipment": true,
+            "visible_references": true,
+            "model_specific_text": true
+          },
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "id": "C25",
+      "user_need": "DCP-T220 scoped no_paper",
+      "turns": [
+        {
+          "input": "Brother DCP-T220",
+          "route": "free_text",
+          "expected": {
+            "intent": "select_equipment",
+            "status": "answer",
+            "pages": [],
+            "equipment": "brother_dcp_t220"
+          },
+          "actual": {
+            "status": "answer",
+            "intent": "select_equipment",
+            "response": "Equipo seleccionado: Brother DCP-T220. Se inició un contexto nuevo. ¿Qué consulta de mantenimiento tienes?",
+            "equipment": "brother_dcp_t220",
+            "references": []
+          },
+          "ui_test_elapsed_ms": 223.14,
+          "simulated_database_failure": false,
+          "checks": {
+            "no_ui_exception": true,
+            "status": true,
+            "intent": true,
+            "source_pages": true,
+            "equipment": true,
+            "visible_references": true,
+            "model_specific_text": true
+          },
+          "passed": true
+        },
+        {
+          "input": "No hay papel",
+          "route": "guided",
+          "expected": {
+            "intent": "no_paper",
+            "status": "answer",
+            "pages": [
+              165
+            ],
+            "equipment": "brother_dcp_t220"
+          },
+          "actual": {
+            "status": "answer",
+            "intent": "no_paper",
+            "response": "Si confirmaste que falta papel en la bandeja de la DCP-T220, carga papel y pulsa Inicio Negro o Inicio Color.\n\nAlcance y condiciones: Para la condición Sin papel en la bandeja. No interpreta patrones LED ni diagnostica fallos de alimentación con papel cargado.",
+            "equipment": "brother_dcp_t220",
+            "references": [
+              {
+                "file": "DCP-T220_User_Guide_es-MX.pdf",
+                "document_sha256": "b75de486caa3f768ba3ab0c96dc229758cddb9afbf4aa6deb536fd88b199f678",
+                "page": 165,
+                "section": "Indicaciones LED — Sin papel (p. impresa 161)"
+              }
+            ]
+          },
+          "ui_test_elapsed_ms": 526.52,
+          "simulated_database_failure": false,
+          "checks": {
+            "no_ui_exception": true,
+            "status": true,
+            "intent": true,
+            "source_pages": true,
+            "equipment": true,
+            "visible_references": true,
+            "model_specific_text": true
+          },
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "id": "C26",
+      "user_need": "DCP-T220 scoped tray_not_detected",
+      "turns": [
+        {
+          "input": "Brother DCP-T220",
+          "route": "free_text",
+          "expected": {
+            "intent": "select_equipment",
+            "status": "answer",
+            "pages": [],
+            "equipment": "brother_dcp_t220"
+          },
+          "actual": {
+            "status": "answer",
+            "intent": "select_equipment",
+            "response": "Equipo seleccionado: Brother DCP-T220. Se inició un contexto nuevo. ¿Qué consulta de mantenimiento tienes?",
+            "equipment": "brother_dcp_t220",
+            "references": []
+          },
+          "ui_test_elapsed_ms": 137.4,
+          "simulated_database_failure": false,
+          "checks": {
+            "no_ui_exception": true,
+            "status": true,
+            "intent": true,
+            "source_pages": true,
+            "equipment": true,
+            "visible_references": true,
+            "model_specific_text": true
+          },
+          "passed": true
+        },
+        {
+          "input": "Bandeja no detectada",
+          "route": "guided",
+          "expected": {
+            "intent": "tray_not_detected",
+            "status": "answer",
+            "pages": [
+              165
+            ],
+            "equipment": "brother_dcp_t220"
+          },
+          "actual": {
+            "status": "answer",
+            "intent": "tray_not_detected",
+            "response": "En la DCP-T220, vuelve a introducir la bandeja lentamente y por completo.\n\nAlcance y condiciones: Sólo para una bandeja que no se introdujo completamente. Si hay resistencia u obstrucción, no la fuerces; consulta el apartado de atascos o soporte.",
+            "equipment": "brother_dcp_t220",
+            "references": [
+              {
+                "file": "DCP-T220_User_Guide_es-MX.pdf",
+                "document_sha256": "b75de486caa3f768ba3ab0c96dc229758cddb9afbf4aa6deb536fd88b199f678",
+                "page": 165,
+                "section": "Indicaciones LED — Bandeja no detectada (p. impresa 161)"
+              }
+            ]
+          },
+          "ui_test_elapsed_ms": 387.71,
+          "simulated_database_failure": false,
+          "checks": {
+            "no_ui_exception": true,
+            "status": true,
+            "intent": true,
+            "source_pages": true,
+            "equipment": true,
+            "visible_references": true,
+            "model_specific_text": true
+          },
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "id": "C27",
+      "user_need": "DCP-T220 scoped print_quality",
+      "turns": [
+        {
+          "input": "Brother DCP-T220",
+          "route": "free_text",
+          "expected": {
+            "intent": "select_equipment",
+            "status": "answer",
+            "pages": [],
+            "equipment": "brother_dcp_t220"
+          },
+          "actual": {
+            "status": "answer",
+            "intent": "select_equipment",
+            "response": "Equipo seleccionado: Brother DCP-T220. Se inició un contexto nuevo. ¿Qué consulta de mantenimiento tienes?",
+            "equipment": "brother_dcp_t220",
+            "references": []
+          },
+          "ui_test_elapsed_ms": 164.0,
+          "simulated_database_failure": false,
+          "checks": {
+            "no_ui_exception": true,
+            "status": true,
+            "intent": true,
+            "source_pages": true,
+            "equipment": true,
+            "visible_references": true,
+            "model_specific_text": true
+          },
+          "passed": true
+        },
+        {
+          "input": "Limpieza normal del cabezal",
+          "route": "guided",
+          "expected": {
+            "intent": "print_quality",
+            "status": "answer",
+            "pages": [
+              200
+            ],
+            "equipment": "brother_dcp_t220"
+          },
+          "actual": {
+            "status": "answer",
+            "intent": "print_quality",
+            "response": "Para la limpieza normal del cabezal de la DCP-T220, pulsa Detener y Atajo copia a la vez. Cuando parpadee el LED de tinta, pulsa Inicio Negro para limpiar el negro o Inicio Color para los cuatro colores. El equipo imprimirá una hoja de comprobación.\n\nAlcance y condiciones: Sólo limpieza normal desde el panel; consume tinta. No toques el cabezal ni repitas limpiezas innecesariamente. No incluye limpieza especial ni diagnóstico de la causa del defecto.",
+            "equipment": "brother_dcp_t220",
+            "references": [
+              {
+                "file": "DCP-T220_User_Guide_es-MX.pdf",
+                "document_sha256": "b75de486caa3f768ba3ab0c96dc229758cddb9afbf4aa6deb536fd88b199f678",
+                "page": 200,
+                "section": "Limpieza normal desde el equipo — pasos 1 y 2 (p. impresa 196)"
+              }
+            ]
+          },
+          "ui_test_elapsed_ms": 422.26,
+          "simulated_database_failure": false,
+          "checks": {
+            "no_ui_exception": true,
+            "status": true,
+            "intent": true,
+            "source_pages": true,
+            "equipment": true,
+            "visible_references": true,
+            "model_specific_text": true
+          },
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "id": "C28",
+      "user_need": "DCP-T220 scoped paper_jam",
+      "turns": [
+        {
+          "input": "Brother DCP-T220",
+          "route": "free_text",
+          "expected": {
+            "intent": "select_equipment",
+            "status": "answer",
+            "pages": [],
+            "equipment": "brother_dcp_t220"
+          },
+          "actual": {
+            "status": "answer",
+            "intent": "select_equipment",
+            "response": "Equipo seleccionado: Brother DCP-T220. Se inició un contexto nuevo. ¿Qué consulta de mantenimiento tienes?",
+            "equipment": "brother_dcp_t220",
+            "references": []
+          },
+          "ui_test_elapsed_ms": 140.63,
+          "simulated_database_failure": false,
+          "checks": {
+            "no_ui_exception": true,
+            "status": true,
+            "intent": true,
+            "source_pages": true,
+            "equipment": true,
+            "visible_references": true,
+            "model_specific_text": true
+          },
+          "passed": true
+        },
+        {
+          "input": "Atasco de papel",
+          "route": "guided",
+          "expected": {
+            "intent": "paper_jam",
+            "status": "answer",
+            "pages": [
+              170
+            ],
+            "equipment": "brother_dcp_t220"
+          },
+          "actual": {
+            "status": "answer",
+            "intent": "paper_jam",
+            "response": "Para un atasco dentro de la DCP-T220, consulta el procedimiento ilustrado que comienza en la página física 170 del PDF (página impresa 166). Ese procedimiento comienza desenchufando el equipo antes de retirar la bandeja.\n\nAlcance y condiciones: Orientación para localizar el procedimiento completo, no una secuencia completa de extracción. Sigue todas sus ilustraciones; no uses las instrucciones de atasco de Canon o de otra Brother.",
+            "equipment": "brother_dcp_t220",
+            "references": [
+              {
+                "file": "DCP-T220_User_Guide_es-MX.pdf",
+                "document_sha256": "b75de486caa3f768ba3ab0c96dc229758cddb9afbf4aa6deb536fd88b199f678",
+                "page": 170,
+                "section": "Papel atascado dentro del equipo — inicio (p. impresa 166)"
+              }
+            ]
+          },
+          "ui_test_elapsed_ms": 412.3,
+          "simulated_database_failure": false,
+          "checks": {
+            "no_ui_exception": true,
+            "status": true,
+            "intent": true,
+            "source_pages": true,
+            "equipment": true,
+            "visible_references": true,
+            "model_specific_text": true
+          },
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "id": "C29",
+      "user_need": "DCP-T220 scoped manual_location",
+      "turns": [
+        {
+          "input": "Brother DCP-T220",
+          "route": "free_text",
+          "expected": {
+            "intent": "select_equipment",
+            "status": "answer",
+            "pages": [],
+            "equipment": "brother_dcp_t220"
+          },
+          "actual": {
+            "status": "answer",
+            "intent": "select_equipment",
+            "response": "Equipo seleccionado: Brother DCP-T220. Se inició un contexto nuevo. ¿Qué consulta de mantenimiento tienes?",
+            "equipment": "brother_dcp_t220",
+            "references": []
+          },
+          "ui_test_elapsed_ms": 141.54,
+          "simulated_database_failure": false,
+          "checks": {
+            "no_ui_exception": true,
+            "status": true,
+            "intent": true,
+            "source_pages": true,
+            "equipment": true,
+            "visible_references": true,
+            "model_specific_text": true
+          },
+          "passed": true
+        },
+        {
+          "input": "Dónde consultar el manual",
+          "route": "guided",
+          "expected": {
+            "intent": "manual_location",
+            "status": "answer",
+            "pages": [
+              1
+            ],
+            "equipment": "brother_dcp_t220"
+          },
+          "actual": {
+            "status": "answer",
+            "intent": "manual_location",
+            "response": "El manual revisado de la DCP-T220 es DCP-T220_User_Guide_es-MX.pdf. También está disponible en el catálogo oficial: https://support.brother.com/g/b/manualtop.aspx?c=mx&lang=es&prod=dcpt220_all\n\nAlcance y condiciones: La guía cubre varios modelos. La selección DCP-T220 no autoriza funciones de red ni procedimientos exclusivos de otros modelos.",
+            "equipment": "brother_dcp_t220",
+            "references": [
+              {
+                "file": "DCP-T220_User_Guide_es-MX.pdf",
+                "document_sha256": "b75de486caa3f768ba3ab0c96dc229758cddb9afbf4aa6deb536fd88b199f678",
+                "page": 1,
+                "section": "Portada — modelos incluidos"
+              }
+            ]
+          },
+          "ui_test_elapsed_ms": 382.63,
+          "simulated_database_failure": false,
+          "checks": {
+            "no_ui_exception": true,
+            "status": true,
+            "intent": true,
+            "source_pages": true,
+            "equipment": true,
+            "visible_references": true,
+            "model_specific_text": true
+          },
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "id": "C30",
+      "user_need": "DCP-T220 scoped glass_cleaning",
+      "turns": [
+        {
+          "input": "Brother DCP-T220",
+          "route": "free_text",
+          "expected": {
+            "intent": "select_equipment",
+            "status": "answer",
+            "pages": [],
+            "equipment": "brother_dcp_t220"
+          },
+          "actual": {
+            "status": "answer",
+            "intent": "select_equipment",
+            "response": "Equipo seleccionado: Brother DCP-T220. Se inició un contexto nuevo. ¿Qué consulta de mantenimiento tienes?",
+            "equipment": "brother_dcp_t220",
+            "references": []
+          },
+          "ui_test_elapsed_ms": 153.79,
+          "simulated_database_failure": false,
+          "checks": {
+            "no_ui_exception": true,
+            "status": true,
+            "intent": true,
+            "source_pages": true,
+            "equipment": true,
+            "visible_references": true,
+            "model_specific_text": true
+          },
+          "passed": true
+        },
+        {
+          "input": "Limpiar el cristal del escáner",
+          "route": "guided",
+          "expected": {
+            "intent": "glass_cleaning",
+            "status": "answer",
+            "pages": [
+              199
+            ],
+            "equipment": "brother_dcp_t220"
+          },
+          "actual": {
+            "status": "answer",
+            "intent": "glass_cleaning",
+            "response": "Para limpiar el cristal del escáner de la DCP-T220, desenchufa el equipo, levanta la cubierta de documentos y limpia el cristal y el plástico blanco con un paño suave sin pelusa humedecido en agua.\n\nAlcance y condiciones: Sólo cristal y plástico blanco accesibles; no limpieza interna ni de cabezales. Consulta la ilustración del manual y repite la limpieza si quedan restos.",
+            "equipment": "brother_dcp_t220",
+            "references": [
+              {
+                "file": "DCP-T220_User_Guide_es-MX.pdf",
+                "document_sha256": "b75de486caa3f768ba3ab0c96dc229758cddb9afbf4aa6deb536fd88b199f678",
+                "page": 199,
+                "section": "Limpiar el escáner (p. impresa 195)"
+              }
+            ]
+          },
+          "ui_test_elapsed_ms": 381.26,
+          "simulated_database_failure": false,
+          "checks": {
+            "no_ui_exception": true,
+            "status": true,
+            "intent": true,
+            "source_pages": true,
+            "equipment": true,
+            "visible_references": true,
+            "model_specific_text": true
+          },
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "id": "C31",
+      "user_need": "Canon C3935i scoped toner_level",
+      "turns": [
+        {
+          "input": "Canon imageRUNNER ADVANCE DX C3935i",
+          "route": "free_text",
+          "expected": {
+            "intent": "select_equipment",
+            "status": "answer",
+            "pages": [],
+            "equipment": "canon_c3935i"
+          },
+          "actual": {
+            "status": "answer",
+            "intent": "select_equipment",
+            "response": "Equipo seleccionado: Canon imageRUNNER ADVANCE DX C3935i. Se inició un contexto nuevo. ¿Qué consulta de mantenimiento tienes?",
+            "equipment": "canon_c3935i",
+            "references": []
+          },
+          "ui_test_elapsed_ms": 148.97,
+          "simulated_database_failure": false,
+          "checks": {
+            "no_ui_exception": true,
+            "status": true,
+            "intent": true,
+            "source_pages": true,
+            "equipment": true,
+            "visible_references": true,
+            "model_specific_text": true
+          },
+          "passed": true
+        },
+        {
+          "input": "Nivel de tóner",
+          "route": "guided",
+          "expected": {
+            "intent": "toner_level",
+            "status": "answer",
+            "pages": [
+              145
+            ],
+            "equipment": "canon_c3935i"
+          },
+          "actual": {
+            "status": "answer",
+            "intent": "toner_level",
+            "response": "En la Canon C3935i, abre Monitor estado/Cancelar y selecciona Consumibl./Otros para consultar el nivel de tóner restante.\n\nAlcance y condiciones: Consulta del indicador del equipo, no sustitución ni selección de cartucho. No se aplican instrucciones para tanques de tinta.",
+            "equipment": "canon_c3935i",
+            "references": [
+              {
+                "file": "Canon_C3935i_User_Guide_es-ES.pdf",
+                "document_sha256": "89caa53ef13e0217657e33c41eb605a51d09746e2cc25aa4a46805b57c2baa52",
+                "page": 145,
+                "section": "Comprobación del nivel de tóner restante (p. impresa 131)"
+              }
+            ]
+          },
+          "ui_test_elapsed_ms": 383.48,
+          "simulated_database_failure": false,
+          "checks": {
+            "no_ui_exception": true,
+            "status": true,
+            "intent": true,
+            "source_pages": true,
+            "equipment": true,
+            "visible_references": true,
+            "model_specific_text": true
+          },
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "id": "C32",
+      "user_need": "Canon C3935i scoped glass_cleaning",
+      "turns": [
+        {
+          "input": "Canon imageRUNNER ADVANCE DX C3935i",
+          "route": "free_text",
+          "expected": {
+            "intent": "select_equipment",
+            "status": "answer",
+            "pages": [],
+            "equipment": "canon_c3935i"
+          },
+          "actual": {
+            "status": "answer",
+            "intent": "select_equipment",
+            "response": "Equipo seleccionado: Canon imageRUNNER ADVANCE DX C3935i. Se inició un contexto nuevo. ¿Qué consulta de mantenimiento tienes?",
+            "equipment": "canon_c3935i",
+            "references": []
+          },
+          "ui_test_elapsed_ms": 133.07,
+          "simulated_database_failure": false,
+          "checks": {
+            "no_ui_exception": true,
+            "status": true,
+            "intent": true,
+            "source_pages": true,
+            "equipment": true,
+            "visible_references": true,
+            "model_specific_text": true
+          },
+          "passed": true
+        },
+        {
+          "input": "Limpiar el cristal del escáner",
+          "route": "guided",
+          "expected": {
+            "intent": "glass_cleaning",
+            "status": "answer",
+            "pages": [
+              103,
+              104
+            ],
+            "equipment": "canon_c3935i"
+          },
+          "actual": {
+            "status": "answer",
+            "intent": "glass_cleaning",
+            "response": "En la Canon C3935i, comprueba que puedes detener los trabajos, apaga el equipo y desenchúfalo. Abre el alimentador y limpia el cristal de copia con el paño suministrado, limpio y seco. Para la parte opuesta del alimentador, usa un paño suave ligeramente humedecido y bien escurrido si hace falta, y luego uno seco. Espera a que todo se seque, cierra el alimentador con cuidado, conecta el equipo y enciéndelo.\n\nAlcance y condiciones: Sólo cristal de copia y parte opuesta del alimentador, siguiendo las ilustraciones. Apagar durante un trabajo puede interrumpirlo o dañar datos. No incluye rodillos, cristal antipolvo ni desmontaje; consulta soporte si la suciedad persiste.",
+            "equipment": "canon_c3935i",
+            "references": [
+              {
+                "file": "Canon_C3935i_User_Guide_es-ES.pdf",
+                "document_sha256": "89caa53ef13e0217657e33c41eb605a51d09746e2cc25aa4a46805b57c2baa52",
+                "page": 103,
+                "section": "Limpiar el cristal de copia — pasos 1–3 (p. impresa 89)"
+              },
+              {
+                "file": "Canon_C3935i_User_Guide_es-ES.pdf",
+                "document_sha256": "89caa53ef13e0217657e33c41eb605a51d09746e2cc25aa4a46805b57c2baa52",
+                "page": 104,
+                "section": "Limpiar el cristal de copia — secado y cierre (p. impresa 90)"
+              }
+            ]
+          },
+          "ui_test_elapsed_ms": 370.67,
+          "simulated_database_failure": false,
+          "checks": {
+            "no_ui_exception": true,
+            "status": true,
+            "intent": true,
+            "source_pages": true,
+            "equipment": true,
+            "visible_references": true,
+            "model_specific_text": true
+          },
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "id": "C33",
+      "user_need": "Canon C3935i scoped paper_jam",
+      "turns": [
+        {
+          "input": "Canon imageRUNNER ADVANCE DX C3935i",
+          "route": "free_text",
+          "expected": {
+            "intent": "select_equipment",
+            "status": "answer",
+            "pages": [],
+            "equipment": "canon_c3935i"
+          },
+          "actual": {
+            "status": "answer",
+            "intent": "select_equipment",
+            "response": "Equipo seleccionado: Canon imageRUNNER ADVANCE DX C3935i. Se inició un contexto nuevo. ¿Qué consulta de mantenimiento tienes?",
+            "equipment": "canon_c3935i",
+            "references": []
+          },
+          "ui_test_elapsed_ms": 152.78,
+          "simulated_database_failure": false,
+          "checks": {
+            "no_ui_exception": true,
+            "status": true,
+            "intent": true,
+            "source_pages": true,
+            "equipment": true,
+            "visible_references": true,
+            "model_specific_text": true
+          },
+          "passed": true
+        },
+        {
+          "input": "Atasco de papel",
+          "route": "guided",
+          "expected": {
+            "intent": "paper_jam",
+            "status": "answer",
+            "pages": [
+              148
+            ],
+            "equipment": "canon_c3935i"
+          },
+          "actual": {
+            "status": "answer",
+            "intent": "paper_jam",
+            "response": "En la Canon C3935i, sigue el mensaje, la ubicación y el procedimiento de atasco que muestra la pantalla. No apagues el equipo para retirar el atasco: el manual advierte que se perderían los datos en impresión. No tires del papel a la fuerza; si no puedes retirarlo, contacta con el distribuidor o servicio técnico.\n\nAlcance y condiciones: Orientación general, no instrucciones de apertura ni extracción de una ubicación concreta. Consulta las instrucciones de seguridad y los accesorios instalados. La indicación de desenchufar la Brother DCP-T220 no se aplica a este caso Canon.",
+            "equipment": "canon_c3935i",
+            "references": [
+              {
+                "file": "Canon_C3935i_User_Guide_es-ES.pdf",
+                "document_sha256": "89caa53ef13e0217657e33c41eb605a51d09746e2cc25aa4a46805b57c2baa52",
+                "page": 148,
+                "section": "Eliminar atascos de papel — precauciones (p. impresa 134)"
+              }
+            ]
+          },
+          "ui_test_elapsed_ms": 417.01,
+          "simulated_database_failure": false,
+          "checks": {
+            "no_ui_exception": true,
+            "status": true,
+            "intent": true,
+            "source_pages": true,
+            "equipment": true,
+            "visible_references": true,
+            "model_specific_text": true
+          },
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "id": "C34",
+      "user_need": "Canon C3935i scoped manual_location",
+      "turns": [
+        {
+          "input": "Canon imageRUNNER ADVANCE DX C3935i",
+          "route": "free_text",
+          "expected": {
+            "intent": "select_equipment",
+            "status": "answer",
+            "pages": [],
+            "equipment": "canon_c3935i"
+          },
+          "actual": {
+            "status": "answer",
+            "intent": "select_equipment",
+            "response": "Equipo seleccionado: Canon imageRUNNER ADVANCE DX C3935i. Se inició un contexto nuevo. ¿Qué consulta de mantenimiento tienes?",
+            "equipment": "canon_c3935i",
+            "references": []
+          },
+          "ui_test_elapsed_ms": 142.64,
+          "simulated_database_failure": false,
+          "checks": {
+            "no_ui_exception": true,
+            "status": true,
+            "intent": true,
+            "source_pages": true,
+            "equipment": true,
+            "visible_references": true,
+            "model_specific_text": true
+          },
+          "passed": true
+        },
+        {
+          "input": "Dónde consultar el manual",
+          "route": "guided",
+          "expected": {
+            "intent": "manual_location",
+            "status": "answer",
+            "pages": [
+              1
+            ],
+            "equipment": "canon_c3935i"
+          },
+          "actual": {
+            "status": "answer",
+            "intent": "manual_location",
+            "response": "El PDF revisado de Canon es Canon_C3935i_User_Guide_es-ES.pdf, edición europea USRMA-8188-03. Para Latinoamérica consulta el manual oficial USRMA-8189-03: https://oip.manual.canon/USRMA-8189-zz-CS-3900-esLN/\n\nAlcance y condiciones: Las tres secciones de mantenimiento habilitadas se contrastaron con la edición latinoamericana. Esto no autoriza normas, accesorios, configuraciones regionales ni otros capítulos.",
+            "equipment": "canon_c3935i",
+            "references": [
+              {
+                "file": "Canon_C3935i_User_Guide_es-ES.pdf",
+                "document_sha256": "89caa53ef13e0217657e33c41eb605a51d09746e2cc25aa4a46805b57c2baa52",
+                "page": 1,
+                "section": "Portada — C3935i y edición"
+              }
+            ]
+          },
+          "ui_test_elapsed_ms": 416.25,
+          "simulated_database_failure": false,
+          "checks": {
+            "no_ui_exception": true,
+            "status": true,
+            "intent": true,
+            "source_pages": true,
+            "equipment": true,
+            "visible_references": true,
+            "model_specific_text": true
+          },
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "id": "C35",
+      "user_need": "Switch supported printers without transplanting jam and refill precautions",
+      "turns": [
+        {
+          "input": "Seleccionar brother_dcp_t220",
+          "route": "equipment_selector",
+          "expected": {
+            "intent": "select_equipment",
+            "status": "answer",
+            "pages": [],
+            "equipment": "brother_dcp_t220"
+          },
+          "actual": {
+            "status": "answer",
+            "intent": "select_equipment",
+            "response": "Equipo seleccionado: Brother DCP-T220. Se inició un contexto nuevo para no mezclar procedimientos.",
+            "equipment": "brother_dcp_t220",
+            "references": []
+          },
+          "ui_test_elapsed_ms": 102.16,
+          "simulated_database_failure": false,
+          "checks": {
+            "no_ui_exception": true,
+            "status": true,
+            "intent": true,
+            "source_pages": true,
+            "equipment": true,
+            "visible_references": true,
+            "model_specific_text": true
+          },
+          "passed": true
+        },
+        {
+          "input": "Atasco de papel",
+          "route": "free_text",
+          "expected": {
+            "intent": "paper_jam",
+            "status": "answer",
+            "pages": [
+              170
+            ],
+            "equipment": "brother_dcp_t220",
+            "text_contains": [
+              "desenchufando"
+            ]
+          },
+          "actual": {
+            "status": "answer",
+            "intent": "paper_jam",
+            "response": "Para un atasco dentro de la DCP-T220, consulta el procedimiento ilustrado que comienza en la página física 170 del PDF (página impresa 166). Ese procedimiento comienza desenchufando el equipo antes de retirar la bandeja.\n\nAlcance y condiciones: Orientación para localizar el procedimiento completo, no una secuencia completa de extracción. Sigue todas sus ilustraciones; no uses las instrucciones de atasco de Canon o de otra Brother.",
+            "equipment": "brother_dcp_t220",
+            "references": [
+              {
+                "file": "DCP-T220_User_Guide_es-MX.pdf",
+                "document_sha256": "b75de486caa3f768ba3ab0c96dc229758cddb9afbf4aa6deb536fd88b199f678",
+                "page": 170,
+                "section": "Papel atascado dentro del equipo — inicio (p. impresa 166)"
+              }
+            ]
+          },
+          "ui_test_elapsed_ms": 264.73,
+          "simulated_database_failure": false,
+          "checks": {
+            "no_ui_exception": true,
+            "status": true,
+            "intent": true,
+            "source_pages": true,
+            "equipment": true,
+            "visible_references": true,
+            "model_specific_text": true
+          },
+          "passed": true
+        },
+        {
+          "input": "Seleccionar canon_c3935i",
+          "route": "equipment_selector",
+          "expected": {
+            "intent": "select_equipment",
+            "status": "answer",
+            "pages": [],
+            "equipment": "canon_c3935i"
+          },
+          "actual": {
+            "status": "answer",
+            "intent": "select_equipment",
+            "response": "Equipo seleccionado: Canon imageRUNNER ADVANCE DX C3935i. Se inició un contexto nuevo para no mezclar procedimientos.",
+            "equipment": "canon_c3935i",
+            "references": []
+          },
+          "ui_test_elapsed_ms": 90.32,
+          "simulated_database_failure": false,
+          "checks": {
+            "no_ui_exception": true,
+            "status": true,
+            "intent": true,
+            "source_pages": true,
+            "equipment": true,
+            "visible_references": true,
+            "model_specific_text": true
+          },
+          "passed": true
+        },
+        {
+          "input": "Atasco de papel",
+          "route": "free_text",
+          "expected": {
+            "intent": "paper_jam",
+            "status": "answer",
+            "pages": [
+              148
+            ],
+            "equipment": "canon_c3935i",
+            "text_contains": [
+              "No apagues"
+            ]
+          },
+          "actual": {
+            "status": "answer",
+            "intent": "paper_jam",
+            "response": "En la Canon C3935i, sigue el mensaje, la ubicación y el procedimiento de atasco que muestra la pantalla. No apagues el equipo para retirar el atasco: el manual advierte que se perderían los datos en impresión. No tires del papel a la fuerza; si no puedes retirarlo, contacta con el distribuidor o servicio técnico.\n\nAlcance y condiciones: Orientación general, no instrucciones de apertura ni extracción de una ubicación concreta. Consulta las instrucciones de seguridad y los accesorios instalados. La indicación de desenchufar la Brother DCP-T220 no se aplica a este caso Canon.",
+            "equipment": "canon_c3935i",
+            "references": [
+              {
+                "file": "Canon_C3935i_User_Guide_es-ES.pdf",
+                "document_sha256": "89caa53ef13e0217657e33c41eb605a51d09746e2cc25aa4a46805b57c2baa52",
+                "page": 148,
+                "section": "Eliminar atascos de papel — precauciones (p. impresa 134)"
+              }
+            ]
+          },
+          "ui_test_elapsed_ms": 241.25,
+          "simulated_database_failure": false,
+          "checks": {
+            "no_ui_exception": true,
+            "status": true,
+            "intent": true,
+            "source_pages": true,
+            "equipment": true,
+            "visible_references": true,
+            "model_specific_text": true
+          },
+          "passed": true
+        },
+        {
+          "input": "Seleccionar brother_dcp_t430w",
+          "route": "equipment_selector",
+          "expected": {
+            "intent": "select_equipment",
+            "status": "answer",
+            "pages": [],
+            "equipment": "brother_dcp_t430w"
+          },
+          "actual": {
+            "status": "answer",
+            "intent": "select_equipment",
+            "response": "Equipo seleccionado: Brother DCP-T430W. Se inició un contexto nuevo para no mezclar procedimientos.",
+            "equipment": "brother_dcp_t430w",
+            "references": []
+          },
+          "ui_test_elapsed_ms": 101.57,
+          "simulated_database_failure": false,
+          "checks": {
+            "no_ui_exception": true,
+            "status": true,
+            "intent": true,
+            "source_pages": true,
+            "equipment": true,
+            "visible_references": true,
+            "model_specific_text": true
+          },
+          "passed": true
+        },
+        {
+          "input": "Ya rellené la tinta",
+          "route": "free_text",
+          "expected": {
+            "intent": "after_refill",
+            "status": "answer",
+            "pages": [
+              3
+            ],
+            "equipment": "brother_dcp_t430w",
+            "text_contains": [
+              "Papel y Atajo Copia",
+              "tres segundos"
+            ]
+          },
+          "actual": {
+            "status": "answer",
+            "intent": "after_refill",
+            "response": "Si ya terminaste de rellenar la tinta en la DCP-T430W, pulsa a la vez Papel y Atajo Copia durante tres segundos. Si el LED de tinta está encendido o parpadea, la guía indica pulsar Detener.\n\nAlcance y condiciones: Sólo aplica después del rellenado, no a la limpieza inicial de una impresora nueva. No sustituye las instrucciones de llenado.",
+            "equipment": "brother_dcp_t430w",
+            "references": [
+              {
+                "file": "DCP-T430W_1.pdf",
+                "document_sha256": "b89a37b5913d6181bb7354a79d3eaad601fa5e8f35fe07070cbe7611e0bf757a",
+                "page": 3,
+                "section": "Comprobar el volumen de tinta — después del rellenado"
+              }
+            ]
+          },
+          "ui_test_elapsed_ms": 239.15,
+          "simulated_database_failure": false,
+          "checks": {
+            "no_ui_exception": true,
+            "status": true,
+            "intent": true,
+            "source_pages": true,
+            "equipment": true,
+            "visible_references": true,
+            "model_specific_text": true
+          },
+          "passed": true
+        },
+        {
+          "input": "Seleccionar brother_dcp_t220",
+          "route": "equipment_selector",
+          "expected": {
+            "intent": "select_equipment",
+            "status": "answer",
+            "pages": [],
+            "equipment": "brother_dcp_t220"
+          },
+          "actual": {
+            "status": "answer",
+            "intent": "select_equipment",
+            "response": "Equipo seleccionado: Brother DCP-T220. Se inició un contexto nuevo para no mezclar procedimientos.",
+            "equipment": "brother_dcp_t220",
+            "references": []
+          },
+          "ui_test_elapsed_ms": 98.21,
+          "simulated_database_failure": false,
+          "checks": {
+            "no_ui_exception": true,
+            "status": true,
+            "intent": true,
+            "source_pages": true,
+            "equipment": true,
+            "visible_references": true,
+            "model_specific_text": true
+          },
+          "passed": true
+        },
+        {
+          "input": "Ya rellené la tinta",
+          "route": "free_text",
+          "expected": {
+            "intent": "after_refill",
+            "status": "answer",
+            "pages": [
+              196
+            ],
+            "equipment": "brother_dcp_t220",
+            "text_contains": [
+              "Detener"
+            ]
+          },
+          "actual": {
+            "status": "answer",
+            "intent": "after_refill",
+            "response": "Después de terminar el rellenado en la DCP-T220, coloca el tapón del tanque y cierra su cubierta. Si el LED de tinta parpadea, pulsa Detener.\n\nAlcance y condiciones: Sólo después de completar el procedimiento de llenado. Si mezclaste colores en el tanque equivocado, contacta con Brother. No se aplica la combinación de botones de la DCP-T430W.",
+            "equipment": "brother_dcp_t220",
+            "references": [
+              {
+                "file": "DCP-T220_User_Guide_es-MX.pdf",
+                "document_sha256": "b75de486caa3f768ba3ab0c96dc229758cddb9afbf4aa6deb536fd88b199f678",
+                "page": 196,
+                "section": "Rellene los tanques de tinta — pasos finales (p. impresa 192)"
+              }
+            ]
+          },
+          "ui_test_elapsed_ms": 246.26,
+          "simulated_database_failure": false,
+          "checks": {
+            "no_ui_exception": true,
+            "status": true,
+            "intent": true,
+            "source_pages": true,
+            "equipment": true,
+            "visible_references": true,
+            "model_specific_text": true
+          },
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "id": "C36",
+      "user_need": "Pending toner question and typed model changes use the selected scope",
+      "turns": [
+        {
+          "input": "Nivel de tóner",
+          "route": "free_text",
+          "expected": {
+            "intent": "select_equipment",
+            "status": "clarification",
+            "pages": [],
+            "equipment": null
+          },
+          "actual": {
+            "status": "clarification",
+            "intent": "select_equipment",
+            "response": "¿Qué marca y modelo utilizas? Elige Brother DCP-T430W, Brother DCP-T220 o Canon imageRUNNER ADVANCE DX C3935i.",
+            "equipment": null,
+            "references": []
+          },
+          "ui_test_elapsed_ms": 140.65,
+          "simulated_database_failure": false,
+          "checks": {
+            "no_ui_exception": true,
+            "status": true,
+            "intent": true,
+            "source_pages": true,
+            "equipment": true,
+            "visible_references": true,
+            "model_specific_text": true
+          },
+          "passed": true
+        },
+        {
+          "input": "Canon C3935i",
+          "route": "free_text",
+          "expected": {
+            "intent": "toner_level",
+            "status": "answer",
+            "pages": [
+              145
+            ],
+            "equipment": "canon_c3935i"
+          },
+          "actual": {
+            "status": "answer",
+            "intent": "toner_level",
+            "response": "En la Canon C3935i, abre Monitor estado/Cancelar y selecciona Consumibl./Otros para consultar el nivel de tóner restante.\n\nAlcance y condiciones: Consulta del indicador del equipo, no sustitución ni selección de cartucho. No se aplican instrucciones para tanques de tinta.",
+            "equipment": "canon_c3935i",
+            "references": [
+              {
+                "file": "Canon_C3935i_User_Guide_es-ES.pdf",
+                "document_sha256": "89caa53ef13e0217657e33c41eb605a51d09746e2cc25aa4a46805b57c2baa52",
+                "page": 145,
+                "section": "Comprobación del nivel de tóner restante (p. impresa 131)"
+              }
+            ]
+          },
+          "ui_test_elapsed_ms": 212.09,
+          "simulated_database_failure": false,
+          "checks": {
+            "no_ui_exception": true,
+            "status": true,
+            "intent": true,
+            "source_pages": true,
+            "equipment": true,
+            "visible_references": true,
+            "model_specific_text": true
+          },
+          "passed": true
+        },
+        {
+          "input": "Brother DCP-T220",
+          "route": "free_text",
+          "expected": {
+            "intent": "select_equipment",
+            "status": "answer",
+            "pages": [],
+            "equipment": "brother_dcp_t220"
+          },
+          "actual": {
+            "status": "answer",
+            "intent": "select_equipment",
+            "response": "Equipo seleccionado: Brother DCP-T220. Se inició un contexto nuevo. ¿Qué consulta de mantenimiento tienes?",
+            "equipment": "brother_dcp_t220",
+            "references": []
+          },
+          "ui_test_elapsed_ms": 185.2,
+          "simulated_database_failure": false,
+          "checks": {
+            "no_ui_exception": true,
+            "status": true,
+            "intent": true,
+            "source_pages": true,
+            "equipment": true,
+            "visible_references": true,
+            "model_specific_text": true
+          },
+          "passed": true
+        },
+        {
+          "input": "Nivel de tóner",
+          "route": "free_text",
+          "expected": {
+            "intent": "no_evidence",
+            "status": "no_evidence",
+            "pages": [],
+            "equipment": "brother_dcp_t220"
+          },
+          "actual": {
+            "status": "no_evidence",
+            "intent": "no_evidence",
+            "response": "No tengo una respuesta revisada para esa consulta. Puedes reformular un solo tema, consultar el manual del modelo o contactar a soporte.",
+            "equipment": "brother_dcp_t220",
+            "references": []
+          },
+          "ui_test_elapsed_ms": 293.88,
+          "simulated_database_failure": false,
+          "checks": {
+            "no_ui_exception": true,
+            "status": true,
+            "intent": true,
+            "source_pages": true,
+            "equipment": true,
+            "visible_references": true,
+            "model_specific_text": true
+          },
+          "passed": true
+        },
+        {
+          "input": "Nivel de tinta",
+          "route": "free_text",
+          "expected": {
+            "intent": "ink_level",
+            "status": "answer",
+            "pages": [
+              193
+            ],
+            "equipment": "brother_dcp_t220"
+          },
+          "actual": {
+            "status": "answer",
+            "intent": "ink_level",
+            "response": "En la DCP-T220, mira el nivel real por la ventana de cada tanque. Si está en la línea inferior o por debajo, corresponde rellenar según el procedimiento del manual.\n\nAlcance y condiciones: Comprobación visual; no es una estimación por software ni el procedimiento completo de llenado.",
+            "equipment": "brother_dcp_t220",
+            "references": [
+              {
+                "file": "DCP-T220_User_Guide_es-MX.pdf",
+                "document_sha256": "b75de486caa3f768ba3ab0c96dc229758cddb9afbf4aa6deb536fd88b199f678",
+                "page": 193,
+                "section": "Rellene los tanques de tinta — comprobación visual (p. impresa 189)"
+              }
+            ]
+          },
+          "ui_test_elapsed_ms": 254.08,
+          "simulated_database_failure": false,
+          "checks": {
+            "no_ui_exception": true,
+            "status": true,
+            "intent": true,
+            "source_pages": true,
+            "equipment": true,
+            "visible_references": true,
+            "model_specific_text": true
+          },
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "id": "C37",
+      "user_need": "Mixed admitted models clear context and require a new selection",
+      "turns": [
+        {
+          "input": "Seleccionar canon_c3935i",
+          "route": "equipment_selector",
+          "expected": {
+            "intent": "select_equipment",
+            "status": "answer",
+            "pages": [],
+            "equipment": "canon_c3935i"
+          },
+          "actual": {
+            "status": "answer",
+            "intent": "select_equipment",
+            "response": "Equipo seleccionado: Canon imageRUNNER ADVANCE DX C3935i. Se inició un contexto nuevo para no mezclar procedimientos.",
+            "equipment": "canon_c3935i",
+            "references": []
+          },
+          "ui_test_elapsed_ms": 86.84,
+          "simulated_database_failure": false,
+          "checks": {
+            "no_ui_exception": true,
+            "status": true,
+            "intent": true,
+            "source_pages": true,
+            "equipment": true,
+            "visible_references": true,
+            "model_specific_text": true
+          },
+          "passed": true
+        },
+        {
+          "input": "Compara DCP-T220 y C3935i",
+          "route": "free_text",
+          "expected": {
+            "intent": "unsupported_equipment",
+            "status": "out_of_scope",
+            "pages": [],
+            "equipment": null
+          },
+          "actual": {
+            "status": "out_of_scope",
+            "intent": "unsupported_equipment",
+            "response": "Ese equipo no está admitido o la consulta mezcla modelos o marcas. He descartado el contexto técnico anterior. Selecciona una de las tres impresoras disponibles.",
+            "equipment": null,
+            "references": []
+          },
+          "ui_test_elapsed_ms": 150.73,
+          "simulated_database_failure": false,
+          "checks": {
+            "no_ui_exception": true,
+            "status": true,
+            "intent": true,
+            "source_pages": true,
+            "equipment": true,
+            "visible_references": true,
+            "model_specific_text": true
+          },
+          "passed": true
+        },
+        {
+          "input": "Brother DCP-T220W nivel de tinta",
+          "route": "free_text",
+          "expected": {
+            "intent": "unsupported_equipment",
+            "status": "out_of_scope",
+            "pages": [],
+            "equipment": null
+          },
+          "actual": {
+            "status": "out_of_scope",
+            "intent": "unsupported_equipment",
+            "response": "Ese equipo no está admitido o la consulta mezcla modelos o marcas. He descartado el contexto técnico anterior. Selecciona una de las tres impresoras disponibles.",
+            "equipment": null,
+            "references": []
+          },
+          "ui_test_elapsed_ms": 121.52,
+          "simulated_database_failure": false,
+          "checks": {
+            "no_ui_exception": true,
+            "status": true,
+            "intent": true,
+            "source_pages": true,
+            "equipment": true,
+            "visible_references": true,
+            "model_specific_text": true
+          },
+          "passed": true
+        },
+        {
+          "input": "Nivel de tinta",
+          "route": "free_text",
+          "expected": {
+            "intent": "select_equipment",
+            "status": "clarification",
+            "pages": [],
+            "equipment": null
+          },
+          "actual": {
+            "status": "clarification",
+            "intent": "select_equipment",
+            "response": "¿Qué marca y modelo utilizas? Elige Brother DCP-T430W, Brother DCP-T220 o Canon imageRUNNER ADVANCE DX C3935i.",
+            "equipment": null,
+            "references": []
+          },
+          "ui_test_elapsed_ms": 135.35,
+          "simulated_database_failure": false,
+          "checks": {
+            "no_ui_exception": true,
+            "status": true,
+            "intent": true,
+            "source_pages": true,
+            "equipment": true,
+            "visible_references": true,
+            "model_specific_text": true
+          },
+          "passed": true
+        },
+        {
+          "input": "DCP-T220",
+          "route": "free_text",
+          "expected": {
+            "intent": "ink_level",
+            "status": "answer",
+            "pages": [
+              193
+            ],
+            "equipment": "brother_dcp_t220"
+          },
+          "actual": {
+            "status": "answer",
+            "intent": "ink_level",
+            "response": "En la DCP-T220, mira el nivel real por la ventana de cada tanque. Si está en la línea inferior o por debajo, corresponde rellenar según el procedimiento del manual.\n\nAlcance y condiciones: Comprobación visual; no es una estimación por software ni el procedimiento completo de llenado.",
+            "equipment": "brother_dcp_t220",
+            "references": [
+              {
+                "file": "DCP-T220_User_Guide_es-MX.pdf",
+                "document_sha256": "b75de486caa3f768ba3ab0c96dc229758cddb9afbf4aa6deb536fd88b199f678",
+                "page": 193,
+                "section": "Rellene los tanques de tinta — comprobación visual (p. impresa 189)"
+              }
+            ]
+          },
+          "ui_test_elapsed_ms": 221.29,
+          "simulated_database_failure": false,
+          "checks": {
+            "no_ui_exception": true,
+            "status": true,
+            "intent": true,
+            "source_pages": true,
+            "equipment": true,
+            "visible_references": true,
+            "model_specific_text": true
+          },
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "id": "C38",
+      "user_need": "Canon never inherits Brother ink or head cleaning and rejects unavailable norms",
+      "turns": [
+        {
+          "input": "Seleccionar canon_c3935i",
+          "route": "equipment_selector",
+          "expected": {
+            "intent": "select_equipment",
+            "status": "answer",
+            "pages": [],
+            "equipment": "canon_c3935i"
+          },
+          "actual": {
+            "status": "answer",
+            "intent": "select_equipment",
+            "response": "Equipo seleccionado: Canon imageRUNNER ADVANCE DX C3935i. Se inició un contexto nuevo para no mezclar procedimientos.",
+            "equipment": "canon_c3935i",
+            "references": []
+          },
+          "ui_test_elapsed_ms": 90.16,
+          "simulated_database_failure": false,
+          "checks": {
+            "no_ui_exception": true,
+            "status": true,
+            "intent": true,
+            "source_pages": true,
+            "equipment": true,
+            "visible_references": true,
+            "model_specific_text": true
+          },
+          "passed": true
+        },
+        {
+          "input": "Nivel de tinta",
+          "route": "free_text",
+          "expected": {
+            "intent": "no_evidence",
+            "status": "no_evidence",
+            "pages": [],
+            "equipment": "canon_c3935i"
+          },
+          "actual": {
+            "status": "no_evidence",
+            "intent": "no_evidence",
+            "response": "No tengo una respuesta revisada para esa consulta. Puedes reformular un solo tema, consultar el manual del modelo o contactar a soporte.",
+            "equipment": "canon_c3935i",
+            "references": []
+          },
+          "ui_test_elapsed_ms": 215.49,
+          "simulated_database_failure": false,
+          "checks": {
+            "no_ui_exception": true,
+            "status": true,
+            "intent": true,
+            "source_pages": true,
+            "equipment": true,
+            "visible_references": true,
+            "model_specific_text": true
+          },
+          "passed": true
+        },
+        {
+          "input": "Limpieza normal del cabezal",
+          "route": "free_text",
+          "expected": {
+            "intent": "no_evidence",
+            "status": "no_evidence",
+            "pages": [],
+            "equipment": "canon_c3935i"
+          },
+          "actual": {
+            "status": "no_evidence",
+            "intent": "no_evidence",
+            "response": "No tengo una respuesta revisada para esa consulta. Puedes reformular un solo tema, consultar el manual del modelo o contactar a soporte.",
+            "equipment": "canon_c3935i",
+            "references": []
+          },
+          "ui_test_elapsed_ms": 227.7,
+          "simulated_database_failure": false,
+          "checks": {
+            "no_ui_exception": true,
+            "status": true,
+            "intent": true,
+            "source_pages": true,
+            "equipment": true,
+            "visible_references": true,
+            "model_specific_text": true
+          },
+          "passed": true
+        },
+        {
+          "input": "Limpiar con alcohol el cristal",
+          "route": "free_text",
+          "expected": {
+            "intent": "service_escalation",
+            "status": "no_evidence",
+            "pages": [],
+            "equipment": "canon_c3935i"
+          },
+          "actual": {
+            "status": "no_evidence",
+            "intent": "service_escalation",
+            "response": "Ese procedimiento no está incluido en el conocimiento revisado para usuarios. Consulta el manual específico o soporte del fabricante; no daré instrucciones de reparación interna ni limpieza especial.",
+            "equipment": "canon_c3935i",
+            "references": []
+          },
+          "ui_test_elapsed_ms": 181.63,
+          "simulated_database_failure": false,
+          "checks": {
+            "no_ui_exception": true,
+            "status": true,
+            "intent": true,
+            "source_pages": true,
+            "equipment": true,
+            "visible_references": true,
+            "model_specific_text": true
+          },
+          "passed": true
+        },
+        {
+          "input": "Qué norma ISO aplica",
+          "route": "free_text",
+          "expected": {
+            "intent": "unavailable_regulation",
+            "status": "no_evidence",
+            "pages": [],
+            "equipment": "canon_c3935i"
+          },
+          "actual": {
+            "status": "no_evidence",
+            "intent": "unavailable_regulation",
+            "response": "No tengo normatividad autorizada para responder esa consulta. No aplicaré normas de otro equipo, industria o área.",
+            "equipment": "canon_c3935i",
+            "references": []
+          },
+          "ui_test_elapsed_ms": 179.84,
+          "simulated_database_failure": false,
+          "checks": {
+            "no_ui_exception": true,
+            "status": true,
+            "intent": true,
+            "source_pages": true,
+            "equipment": true,
+            "visible_references": true,
+            "model_specific_text": true
           },
           "passed": true
         }

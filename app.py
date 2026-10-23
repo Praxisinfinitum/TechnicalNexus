@@ -34,6 +34,9 @@ def change_equipment():
         st.session_state["equipment_choice"], respond_to_query)
 
 state = st.session_state.setdefault("conversation", ChatState())
+if st.session_state.get("guide_equipment") != state.context.equipment_id:
+    clear_guidance()
+st.session_state["guide_equipment"] = state.context.equipment_id
 # Sync typed model changes before widget creation, never after it in the same run.
 st.session_state["equipment_choice"] = state.context.equipment_id
 
@@ -57,7 +60,7 @@ guided = ()
 try:
     engine = engine_for(Settings.load().database_url)
     with Session(engine) as session:
-        rows = catalog_rows(session, INSTANCE_ID)
+        rows = catalog_rows(session, INSTANCE_ID, state.context.equipment_id)
         guided = available_options(KnowledgeRepository(session), state.context)
     st.success(t("db_ok"))
 except Exception:

@@ -23,8 +23,9 @@ from sqlalchemy.orm import Session
 from streamlit.testing.v1 import AppTest
 from technicalnexus.config import ROOT, Settings
 from technicalnexus.database import engine_for, seed_catalog
-from technicalnexus.documents import import_pdf
-from technicalnexus.knowledge import load_reviewed_knowledge
+from technicalnexus.documents import document_path, import_pdf
+from technicalnexus.knowledge import load_all_reviewed_knowledge, reviewed_manifest_paths
+from technicalnexus.scope import KNOWN_EQUIPMENT
 from technicalnexus.models import Answer, Document, Page
 
 CASES = ROOT / "data/validation/advance1-conversations.json"
@@ -35,6 +36,7 @@ def code_fingerprint():
     paths = [ROOT / "app.py", ROOT / "uv.lock", Path(__file__), CASES,
         ROOT / "data/reviewed_knowledge.json", ROOT / "data/document_manifest.json"]
     paths += sorted((ROOT / "src").rglob("*.py"))
+    paths += list(reviewed_manifest_paths(ROOT))
     paths += sorted((ROOT / "migrations").rglob("*.py"))
     digest = sha256()
     for path in sorted(set(paths)):
@@ -67,8 +69,8 @@ def fresh_reviewed_database():
             with Session(engine) as session:
                 seed_catalog(session)
                 for entry in json.loads((ROOT / "data/document_manifest.json").read_text(encoding="utf-8")):
-                    import_pdf(session, settings.manuals_path / entry["filename"], entry, ROOT)
-                load_reviewed_knowledge(session, ROOT / "data/reviewed_knowledge.json", ROOT)
+                    import_pdf(session, document_path(settings, entry, ROOT), entry, ROOT)
+                load_all_reviewed_knowledge(session, ROOT)
                 session.commit()
                 setup = {"schema_revision": "0002", "postgresql_version": session.scalar(text("SHOW server_version")),
                     "documents": session.scalar(select(func.count()).select_from(Document)),
@@ -98,7 +100,9 @@ def execute_case(case, scoped):
         if step.get("simulate_database_failure"):
             os.environ["DATABASE_URL"] = "postgresql+psycopg://test:unusable@127.0.0.1:1/missing"
         try:
-            if "guided_intent" in step:
+            if "select_equipment" in step:
+                ui.selectbox(key="equipment_choice").set_value(step["select_equipment"]).run(timeout=30)
+            elif "guided_intent" in step:
                 from technicalnexus.guidance import OPTIONS
                 option = next(option for option in OPTIONS if option.intent_id == step["guided_intent"])
                 ui.selectbox(key="guide_topic").set_value(option.topic).run(timeout=30)
@@ -119,8 +123,10 @@ def execute_case(case, scoped):
             "source_pages": pages == step["expected_pages"],
             "equipment": state.context.equipment_id == step["expected_equipment"],
             "visible_references": all(any(f"pág. {page}" in caption and "Fuente:" in caption for caption in captions) for page in pages),
+            "model_specific_text": all(part in actual.text for part in step.get("expected_text_contains", [])),
         }
-        records.append({"input": step["input"], "route": "guided" if "guided_intent" in step else "free_text", "expected": {k.removeprefix("expected_"): v for k, v in step.items() if k.startswith("expected_")},
+        route = "equipment_selector" if "select_equipment" in step else "guided" if "guided_intent" in step else "free_text"
+        records.append({"input": step["input"], "route": route, "expected": {k.removeprefix("expected_"): v for k, v in step.items() if k.startswith("expected_")},
             "actual": {"status": actual.status, "intent": actual.intent_id, "response": actual.text,
                 "equipment": state.context.equipment_id, "references": [
                     {"file": ref.filename, "document_sha256": ref.document_id, "page": ref.page_number,
@@ -140,7 +146,7 @@ def write_report(results, setup):
         "base_git_commit": git_commit, "code_and_inputs_sha256": code_fingerprint(),
         "environment": {"python": platform.python_version(), "platform": platform.platform(),
             "packages": {p: version(p) for p in ["streamlit", "nltk", "sqlalchemy", "psycopg", "pypdf"]}},
-        "scope": {"supported_equipment": ["brother_dcp_t430w"], "other_two_models": "pending",
+        "scope": {"supported_equipment": sorted(KNOWN_EQUIPMENT), "other_two_models": "integrated with bounded reviewed knowledge",
             "owner_validation": "pending", "test_schema": "fresh migrated schema, removed after run"},
         "setup": setup, "summary": {"conversations": len(results),
             "passed_conversations": sum(case["passed"] for case in results), "turns": len(turns),
@@ -149,7 +155,7 @@ def write_report(results, setup):
             "minimum_ui_test_ms": min(latencies), "maximum_ui_test_ms": max(latencies)},
         "cases": results}
     REPORT.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    lines = ["# Advance 1 — functional validation", "", "Status: executed for Brother DCP-T430W only. Two other models and owner package acceptance remain pending.", "",
+    lines = ["# Advance 1 — functional validation", "", "Status: executed for Brother DCP-T430W, Brother DCP-T220 and Canon C3935i. Owner acceptance of the expanded scope remains pending.", "",
         f"Execution (UTC): {report['executed_at_utc']}", f"Base code commit: `{git_commit}`. Exact code/input fingerprint: `{report['code_and_inputs_sha256']}`.", "",
         "This is real Streamlit AppTest execution against newly migrated PostgreSQL with the supplied PDF originals and reviewed knowledge. It is not a synthetic-answer fixture, physical printer trial or manual browser run.", "",
         f"Result: **{report['summary']['passed_conversations']}/{len(results)} conversations; {report['summary']['passed_turns']}/{len(turns)} turns passed the predefined checks.**", "",
@@ -162,7 +168,7 @@ def write_report(results, setup):
         f"Fresh schema reconstruction/import: {setup['documents']} documents, {setup['pages']} pages, {setup['approved_answers']} reviewed answers; PostgreSQL {setup['postgresql_version']}, revision {setup['schema_revision']}.",
         "Development data was not modified; the generated validation schema was removed after execution. No passwords or database URLs are included in the evidence.", "",
         f"Measured AppTest rerun duration: mean {report['summary']['mean_ui_test_ms']} ms, range {min(latencies)}–{max(latencies)} ms. This includes UI test/framework work and database requests; it is not isolated inference latency, a browser/network benchmark, or a load/scalability test.", "",
-        "Cases include seven reviewed technical/navigation topics, missing context, ambiguity/negation, another department, absent normative knowledge, unsupported models, reset and closure. C17 simulates an unavailable DB endpoint then restores the same test schema. Changing between two supported models remains untested because only Brother is supplied.", "",
+        "Cases include model-specific technical/navigation topics, missing context, ambiguity/negation, another department, absent normative knowledge, unsupported models, reset and closure. C17 simulates an unavailable DB endpoint then restores the same test schema. Expanded cases exercise all three printers and switches between supported models, including different jam precautions and intentionally unsupported ink/head-cleaning requests on Canon.", "",
         "Separate unit/integration regression covers unsupported contract languages and source-approval failures. Owner review and physical printer verification are not inferred from these executions.", ""]
     for case in results:
         lines += [f"## {case['id']} — {case['user_need']}", ""]
